@@ -7,6 +7,8 @@ import Dashboard from './Pages/Dashboard';
 import AuthMiddleware from './AuthMiddleware';
 import {Product} from "./Pages/Product/Product";
 import {ProductImage} from "./Pages/ProductImage/ProductImage";
+import { ProductInfo } from './Pages/ProductInfo/ProductInfo';
+import { ProductSuggest } from './Pages/ProductSuggest/ProductSuggest';
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/Product/create" element={<Product/>}/>
                         <Route path="/Product/image" element={<ProductImage/>}/>
+                        <Route path="/Product/info" element={<ProductInfo/>}/>
+                        <Route path="/Product/suggest" element={<ProductSuggest/>}/>
                     </Routes>
                 </div>
             </Router>

@@ -4,8 +4,8 @@ import {
     Bars3Icon,
     BellIcon,
     CalendarDaysIcon,
-    ChatBubbleBottomCenterTextIcon, DevicePhoneMobileIcon,
-    HandRaisedIcon, MusicalNoteIcon, PencilSquareIcon, UserCircleIcon, UserGroupIcon
+    ChatBubbleBottomCenterTextIcon, CubeIcon, DevicePhoneMobileIcon,
+    HandRaisedIcon, InformationCircleIcon, MusicalNoteIcon, PencilSquareIcon, PhotoIcon, UserCircleIcon, UserGroupIcon
 } from "@heroicons/react/24/solid";
 import {Squares2X2Icon} from "@heroicons/react/20/solid";
 import { Link, useLocation } from 'react-router-dom';
@@ -35,7 +35,20 @@ export default function Sidebar() {
                     title:"آپلود تصویر",
                     href:"/product/image",
                     current:pathName=="/product/image",
-                    icon:<PencilSquareIcon className={["h-6 w-6 " ,pathName=="/product/image"?"text-indigo-500":"text-gray-500" ].join(" ")} />,
+                    icon:<PhotoIcon className={["h-6 w-6 " ,pathName=="/product/image"?"text-indigo-500":"text-gray-500" ].join(" ")} />,
+                },
+                {
+                    title:"اطلاعات کالا",
+                    href:"/product/info",
+                    current:pathName=="/product/info",
+                    icon:<InformationCircleIcon className={["h-6 w-6 " ,pathName=="/product/info"?"text-indigo-500":"text-gray-500" ].join(" ")} />,
+                },
+                {
+                    title:" کالا پیشنهادی",
+                    href:"/product/suggest",
+                    current:pathName=="/product/suggest",
+                    icon:<CubeIcon className={["h-6 w-6 " ,pathName=="/product/suggest"?"text-indigo-500":"text-gray-500" ].join(" ")} />,
+
                 },
             ]
         }

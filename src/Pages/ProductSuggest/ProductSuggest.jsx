@@ -1,15 +1,12 @@
-import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
-import {ProductImageInsertPanel} from "../../Components/ProductImage/ProductImageInsertPanel";
+import withAuth from "../../AuthMiddleware";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {ProductImageTablePanel} from "../../Components/ProductImage/ProductImageTablePanel";
-import Modal from "../../Components/Modal/Modal";
-import ConfirmButton from "../../Components/Button/ConfirmButton";
-import CancelButton from "../../Components/Button/CancelButton";
-import {useState} from "react";
 import Pagination from "../../Components/Pagination";
+import { useState } from "react";
+import { ProductSuggestInsertPanel } from "../../Components/ProductSuggest/ProductSuggestInsertPanel";
+import { ProductSuggestTablePanel } from "../../Components/ProductSuggest/ProductSuggestTablePanel";
 
-export const ProductImage = withAuth(() => {
+export const ProductSuggest = withAuth(() => {
     const [search, setSearch] = useState("");
     function getData()
     {
@@ -17,11 +14,9 @@ export const ProductImage = withAuth(() => {
     }
     return (
         <>
-
-
             <AdminLayout>
                 <div className={"mb-10"}>
-                    <ProductImageInsertPanel/>
+                    <ProductSuggestInsertPanel/>
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -30,11 +25,12 @@ export const ProductImage = withAuth(() => {
                 <SearchBox searchSubmit={getData} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
-                    <ProductImageTablePanel/>
+                    <ProductSuggestTablePanel/>
                 </div>
                 <div className={"mb-10"}>
                     <Pagination currentPage={1} totalPage={10}/>
                 </div>
+
             </AdminLayout>
         </>
     )
