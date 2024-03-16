@@ -1,7 +1,7 @@
 import axios from 'axios';
-import * as env from '../env';
+import {BaseUrl} from '../env';
 export async function signin(mobile) {
-    const response = await fetch(env.api + "auth/signin",
+    const response = await fetch(BaseUrl + "auth/signin",
         {
             method: 'POST',
             body: JSON.stringify(
@@ -14,27 +14,28 @@ export async function signin(mobile) {
             }
         }
     )
-
     return response;
 }
 
 
 export const setAuth = async (mobile, otp) => {
-    const url = env.api + "auth/signup";
+    const url = BaseUrl + "auth/signup";
     return axios.post(url, {
         "mobile": mobile,
         "otp": otp,
-    })
+    },
+        {  withCredentials: true}
+    )
 }
 
 export async function signup(mobile, code) {
-    axios.post
-    const response = await fetch(env.api + "auth/signup",
+     const response = await fetch(BaseUrl + "auth/signup",
         {
             method: 'POST',
             body: JSON.stringify(
                 {
                     mobile: mobile,
+                    otp:code
                 }
             ),
             credentials: 'include',
@@ -42,8 +43,23 @@ export async function signup(mobile, code) {
                 "Content-Type": "application/json",
             }
         }
-    )
-
-
-    return response.json();
+     )
+    return response;
+}
+export async function refreshToken(refreshtoken) {
+     const response = await fetch(BaseUrl + "auth/refreshtoken",
+        {
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    refreshtoken: refreshtoken
+                }
+            ),
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+     )
+    return response;
 }

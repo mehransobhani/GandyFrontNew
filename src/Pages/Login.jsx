@@ -9,6 +9,7 @@ export default function Login() {
     const [mobile, setMobile] = useState("");
     const [code, setCode] = useState("");
     const [step, setStep] = useState(1);
+    const [error, setError] = useState(undefined);
 
     function ConfirmNumber(e) {
         e.preventDefault();
@@ -27,22 +28,23 @@ export default function Login() {
             await signin(mobile);
             setStep(2)
         }
+        // else if (step == 2) {
+        //
+        //     const data = await setAuth(mobile, code);
+        //     console.log("data",data)
+        //     console.log("datah",data.headers)
+        //
+        //
+        // }
+
+
         else if (step == 2) {
-
-            const {data: response} = await setAuth(mobile, code);
-            console.log("SS");
-
-            console.log(response);            
-            console.log("l",JSON.stringify(response.token));
-            console.log("data",data);
-            
-            // let response = await signup(mobile, code);
-            //  const setCookieHeader = response.headers.get('Set-Cookie');
-            // for (let entry of response.headers.entries()) {
-            //     console.log('header', entry);
-            // }
-            // console.log(setCookieHeader);
-        }
+            let response = await signup(mobile, code);
+            console.log("response",response);
+            console.log("response.headers",response.headers);
+            const setCookieHeader = response.headers.get('Set-Cookie');
+            console.log("response.headers.Set-Cookie",setCookieHeader);
+         }
     }
     return (<>
         <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
@@ -58,17 +60,19 @@ export default function Login() {
                             <UserCircleIcon />
                         </div>
                         <h1 className="mb-2 text-2xl">پنل مدیریت</h1>
-                        <span className="text-gray-300">برای ورود نام و کلمه عبور خود را وارد کنید</span>
-                        {
+                        {step==1 && <span className="text-gray-300">برای ورود شماره موبایل  خود را وارد کنید</span>}
+                        {step==2 && <span className="text-gray-300">برای ورود کد پیامک شده را وارد کنید</span>}
+                        {error &&
                             <div
                                 className="font-regular relative   block w-full rounded-lg p-4 text-red-500 text-base leading-5   opacity-100">
-                                نام کاربری یا کلمه عبور اشتباه است
+                               کد وارد شده نا معتبر است
                             </div>
                         }
                     </div>
 
                     <div className="mb-4 text-lg">
                         <input
+                            disabled={step==2?true:false}
                             value={mobile}
                             onChange={changeMobile}
                             className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"

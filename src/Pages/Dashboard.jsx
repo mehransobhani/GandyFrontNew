@@ -3,8 +3,9 @@ import AdminLayout from "../Layout/AdminLayout";
 
 
 const Dashboard = withAuth(() => {
-    return(<AdminLayout><div>This is a protected route. Match: </div></AdminLayout> );
+    return(<AdminLayout>
+        <div></div>
+    </AdminLayout> );
   });
-  
+
   export default Dashboard;
-  
