@@ -31,21 +31,29 @@ export function SidebarMenuItem({item}) {
                         </div>
                     </div>
 
-                    {open && item.children.map((sub) => (<>
+                    {/*{open && item.children.map((sub) => (<>*/}
 
-                        <Link to={sub.href}
+                    {/*    <Link to={sub.href}*/}
 
-                              className={[sub?.current ? " bg-gray-800 text-white font-bold" : "text-gray-300 hover:bg-gray-700   ", " pr-10 flex items-center px-4 py-4 "].join(" ")}>
-                                <span className={"ml-2"}>
-                                {sub?.icon}
-                                    </span>
-                            {sub?.title}
-                        </Link>
+                    {/*          className={[sub?.current ? " bg-gray-800 text-white font-bold" : "text-gray-300 hover:bg-gray-700   ", " pr-10 flex items-center px-4 py-4 "].join(" ")}>*/}
+                    {/*            <span className={"ml-2"}>*/}
+                    {/*            {sub?.icon}*/}
+                    {/*                </span>*/}
+                    {/*        {sub?.title}*/}
+                    {/*    </Link>*/}
+
+                    {/*</>))}    */}
+                <div className={"mw"}>
+
+                {open && item.children.map((sub) => (<>
+                        <SidebarMenuItem item={sub} />
 
                     </>))}
+                </div>
+
                 </>
                 : <Link to={item.href}
-                        className={[item?.current ? "bg-gray-700 text-white font-bold" : "text-gray-300 hover:bg-gray-700", " border-b border-b-gray-800 flex items-center px-4 py-4 "].join(" ")}>
+                        className={[item?.current ? " bg-gray-700 text-white font-bold" : "text-gray-300 hover:bg-gray-700", " border-b border-b-gray-800 flex items-center px-4 py-4 "].join(" ")}>
                                 <span className={"ml-2"}>
                                 {item?.icon}
                                     </span>

@@ -8,6 +8,9 @@ import DatePicker from 'react-datepicker2';
     const [created_at,setCreated_at]=useState("");
     const [expire_at,setExpire_at]=useState("");
 
+    function changeDate(e){
+        console.log('Selected Date and Time:', e.format('YYYY-MM-DD HH:mm:ss'));
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -32,8 +35,10 @@ import DatePicker from 'react-datepicker2';
                                     <div className="mt-2">
                                         <div>
                                             <DatePicker
+
+                                                onChange={changeDate}
                                                 persianDigits={true}
-                                                timePicker={false}
+                                                timePicker={true}
                                                 inputFormat={"Y-m-d"}
                                                 className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
                                                 isGregorian={false}
@@ -50,8 +55,10 @@ import DatePicker from 'react-datepicker2';
                                     <div className="mt-2">
                                         <div>
                                             <DatePicker
+
+                                                onChange={changeDate}
                                                 persianDigits={true}
-                                                timePicker={false}
+                                                timePicker={true}
                                                 inputFormat={"Y-m-d"}
                                                 className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
                                                 isGregorian={false}

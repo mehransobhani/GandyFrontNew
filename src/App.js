@@ -9,6 +9,10 @@ import {Product} from "./Pages/Product/Product";
 import {ProductImage} from "./Pages/ProductImage/ProductImage";
 import { ProductInfo } from './Pages/ProductInfo/ProductInfo';
 import { ProductSuggest } from './Pages/ProductSuggest/ProductSuggest';
+import {AttributeName} from "./Pages/AttributeName/AttributeName";
+import {AttributeSelect} from "./Pages/AttributeSelect/AttributeSelect";
+import {ProductAttribute} from "./Pages/ProductAttribute/ProductAttribute";
+import {ProductType} from "./Pages/ProductType/ProductType";
 
 function App() {
     return (
@@ -22,6 +26,10 @@ function App() {
                         <Route path="/Product/image" element={<ProductImage/>}/>
                         <Route path="/Product/info" element={<ProductInfo/>}/>
                         <Route path="/Product/suggest" element={<ProductSuggest/>}/>
+                        <Route path="/Product/attribute" element={<ProductAttribute/>}/>
+                        <Route path="/Product/type" element={<ProductType/>}/>
+                        <Route path="/Product/attribute/name" element={<AttributeName/>}/>
+                        <Route path="/Product/attribute/select" element={<AttributeSelect/>}/>
                     </Routes>
                 </div>
             </Router>
