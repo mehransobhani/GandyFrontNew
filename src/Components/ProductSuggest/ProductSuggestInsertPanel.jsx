@@ -1,14 +1,12 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import DatePicker from 'react-datepicker2';
 
-export function ProductSuggestInsertPanel() {
+ export function ProductSuggestInsertPanel() {
 
-    const [name,setName]=useState("");
-    const [description,setDescription]=useState("");
-    const [amazingOffer,setAmazingOffer]=useState("");
-    const [productType,setProductType]=useState("");
-    const [brand,setBrand]=useState("");
+    const [product,setProduct]=useState("");
+    const [created_at,setCreated_at]=useState("");
+    const [expire_at,setExpire_at]=useState("");
 
     return (
         <>
@@ -20,8 +18,7 @@ export function ProductSuggestInsertPanel() {
                 </div>
                 <hr/>
 
-                <form>
-                    <div className="space-y-12">
+                     <div className="space-y-12">
 
                         <div className=" ">
 
@@ -30,25 +27,49 @@ export function ProductSuggestInsertPanel() {
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        نام محصول
+                                        تاریخ ایجاد
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"نام محصول"} type={"text"} change={(e) => {
-                                            setName(e.target.value)
-                                        }} value={name}/>
+                                        <div>
+                                            <DatePicker
+                                                persianDigits={true}
+                                                timePicker={false}
+                                                inputFormat={"Y-m-d"}
+                                                className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
+                                                isGregorian={false}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="last-name"
+                                    <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        توضیحات
+                                        تاریخ انقضا
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"توضیحات"} type={"text"} change={(e) => {
-                                            setDescription(e.target.value)
-                                        }} value={description}/>
-
+                                        <div>
+                                            <DatePicker
+                                                persianDigits={true}
+                                                timePicker={false}
+                                                inputFormat={"Y-m-d"}
+                                                className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
+                                                isGregorian={false}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       محصول
+                                    </label>
+                                    <div className="mt-2">
+                                        <select
+                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
+                                        >
+                                            <option>انتخاب کنید</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -59,9 +80,8 @@ export function ProductSuggestInsertPanel() {
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"}/>
                     </div>
-                </form>
-            </div>
+             </div>
 
         </>
     )
-}
+ }

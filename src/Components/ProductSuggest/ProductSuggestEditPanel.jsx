@@ -1,8 +1,10 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import CancelButton from "../Button/CancelButton";
+import DatePicker from "react-datepicker2";
 
-export function ProductSuggestEditPanel() {
+export function ProductSuggestEditPanel({item , cancel ,reload}) {
 
     const [name,setName]=useState("");
     const [description,setDescription]=useState("");
@@ -15,97 +17,75 @@ export function ProductSuggestEditPanel() {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                    ویرایش کالای پیشنهادی
+                        ویرایش کالای پیشنهادی
                     </h2>
                 </div>
                 <hr/>
 
-                <form>
-                    <div className="space-y-12">
+                <div className="space-y-12">
 
-                        <div className=" ">
-
-
-                            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        نام محصول
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"نام محصول"} type={"text"} change={(e) => {
-                                            setName(e.target.value)
-                                        }} value={name}/>
-                                    </div>
-                                </div>
-
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="last-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        توضیحات
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"توضیحات"} type={"text"} change={(e) => {
-                                            setDescription(e.target.value)
-                                        }} value={description}/>
-
-                                    </div>
-                                </div>
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        برند
-                                    </label>
-                                    <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="last-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        نوع کالا
-                                    </label>
-                                    <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
-                                    </div>
-                                </div>
+                    <div className=" ">
 
 
-                                <div className="col-span-full">
-                                    <label htmlFor="street-address"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        پیشنهاد ویژه
-                                    </label>
-                                    <div className="mt-2">
-                                    <label className="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" className="sr-only peer"
-                                                   checked={amazingOffer} onChange={(e) => {
-                                                setAmazingOffer(e.target.checked)
-                                            }}/>
-                                            <div
-                                                className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
-
-                                        </label>
+                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    تاریخ ایجاد
+                                </label>
+                                <div className="mt-2">
+                                    <div>
+                                        <DatePicker
+                                            persianDigits={true}
+                                            timePicker={false}
+                                            inputFormat={"Y-m-d"}
+                                            className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
+                                            isGregorian={false}
+                                        />
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    تاریخ انقضا
+                                </label>
+                                <div className="mt-2">
+                                    <div>
+                                        <DatePicker
+                                            persianDigits={true}
+                                            timePicker={false}
+                                            inputFormat={"Y-m-d"}
+                                            className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
+                                            isGregorian={false}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    محصول
+                                </label>
+                                <div className="mt-2">
+                                    <select
+                                        className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
+                                    >
+                                        <option>انتخاب کنید</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
 
-                    <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
-                    </div>
-                </form>
+                </div>
+
+                <div className="mt-6 flex items-center justify-center gap-x-6">
+                    <ConfirmButton title={"ثبت"}/>
+                    <CancelButton title={"انصراف"} click={cancel}/>
+
+                </div>
             </div>
 
         </>

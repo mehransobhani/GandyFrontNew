@@ -3,14 +3,15 @@ import AdminLayout from "../../Layout/AdminLayout";
 import {ProductImageInsertPanel} from "../../Components/ProductImage/ProductImageInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {ProductImageTablePanel} from "../../Components/ProductImage/ProductImageTablePanel";
-import Modal from "../../Components/Modal/Modal";
-import ConfirmButton from "../../Components/Button/ConfirmButton";
-import CancelButton from "../../Components/Button/CancelButton";
 import {useState} from "react";
 import Pagination from "../../Components/Pagination";
+import {ProductInfoEditPanel} from "../../Components/ProductInfo/ProductInfoEditPanel";
 
 export const ProductImage = withAuth(() => {
     const [search, setSearch] = useState("");
+    const [edit, setEdit] = useState(false);
+    const [editItem, setEditItem] = useState(undefined);
+    const [data, setData] = useState(undefined);
     function getData()
     {
         console.log(search);
@@ -21,7 +22,7 @@ export const ProductImage = withAuth(() => {
 
             <AdminLayout>
                 <div className={"mb-10"}>
-                    <ProductImageInsertPanel/>
+                    {edit?<ProductInfoEditPanel  item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:<ProductImageInsertPanel/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -30,7 +31,11 @@ export const ProductImage = withAuth(() => {
                 <SearchBox searchSubmit={getData} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
-                    <ProductImageTablePanel/>
+                    <ProductImageTablePanel
+                        editMode={()=>{setEdit(true)}}
+                        editItem={setEditItem}
+                        data={data}
+                    />
                 </div>
                 <div className={"mb-10"}>
                     <Pagination currentPage={1} totalPage={10}/>

@@ -1,26 +1,26 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import CancelButton from "../Button/CancelButton";
 
-export function ProductEditPanel() {
+export function ProductEditPanel({item , cancel ,reload}) {
 
-    const [name,setName]=useState("");
-    const [description,setDescription]=useState("");
-    const [amazingOffer,setAmazingOffer]=useState("");
-    const [productType,setProductType]=useState("");
-    const [brand,setBrand]=useState("");
+    const [name,setName]=useState(item.name);
+    const [description,setDescription]=useState(item.description);
+    const [amazingOffer,setAmazingOffer]=useState(item.amazingOffer);
+    const [productType,setProductType]=useState(item.productType);
+    const [brand,setBrand]=useState(item.brand);
 
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ثبت محصول جدید
+                        ویرایش محصول
                     </h2>
                 </div>
                 <hr/>
 
-                <form>
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -104,8 +104,8 @@ export function ProductEditPanel() {
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"}/>
+                        <CancelButton title={"انصراف"}  click={cancel}/>
                     </div>
-                </form>
             </div>
 
         </>

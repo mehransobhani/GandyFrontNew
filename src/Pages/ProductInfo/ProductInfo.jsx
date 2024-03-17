@@ -9,8 +9,9 @@ import { ProductInfoEditPanel } from "../../Components/ProductInfo/ProductInfoEd
 
 export  const ProductInfo = withAuth(() => {
     const [search, setSearch] = useState("");
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
+    const [data, setData] = useState(undefined);
 
     function getData()
     {
@@ -21,9 +22,9 @@ export  const ProductInfo = withAuth(() => {
             <AdminLayout>
                 <div className={"mb-10"}>
                     {
-                        edit?<ProductInfoEditPanel item={editItem}/>:<ProductInfoInsertPanel/>
+                        edit?<ProductInfoEditPanel item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:<ProductInfoInsertPanel/>
                     }
-                    
+
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -32,7 +33,10 @@ export  const ProductInfo = withAuth(() => {
                     <SearchBox searchSubmit={getData} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
-                    <ProductInfoTablePanel edit={()=>{setEdit(true)}}/>
+                    <ProductInfoTablePanel
+                        editMode={()=>{setEdit(true)}}
+                        editItem={setEditItem}
+                        data={data}/>
                 </div>
                 <div className={"mb-10"}>
                     <Pagination currentPage={1} totalPage={10}/>

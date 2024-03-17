@@ -3,7 +3,7 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 
-export function ProductInfoEditPanel({item}) {
+export function ProductInfoEditPanel({item , cancel ,reload}) {
 
     const [count,setCount]=useState(item?.count);
     const [price,setPrice]=useState(item?.price);
@@ -19,12 +19,12 @@ export function ProductInfoEditPanel({item}) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ثبت اطلاعات محصول  
+                        ویرایش اطلاعات محصول
                     </h2>
                 </div>
                 <hr/>
 
-                <form>
+
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -146,9 +146,8 @@ export function ProductInfoEditPanel({item}) {
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                     <ConfirmButton title={"ویرایش"}/>
-                    <CancelButton title={"انصراف"}/>
+                    <CancelButton title={"انصراف"} click={cancel}/>
                     </div>
-                </form>
             </div>
 
         </>

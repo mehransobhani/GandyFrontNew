@@ -2,19 +2,20 @@ import Thead from "../Table/Thead";
 import Table from "../Table/Table";
 import {ProductSuggestTableRow} from "./ProductSuggestTableRow";
 
-export const ProductSuggestTablePanel = () => {
+export const ProductSuggestTablePanel = ({editMode , editItem}) => {
     return (
         <>
             <Table>
-                <Thead heads={[ 
+                <Thead heads={[
                     {title:"محصول"},
-                    {title:"تاریخ انقضا"}, 
+                    {title:"تاریخ انقضا"},
+                    {title:"تاریخ ایجاد"},
                     {title:"ویرایش"},
                     {title:"حذف"},
 
                 ]}/>
                 <tbody>
-                <ProductSuggestTableRow />
+                <ProductSuggestTableRow editMode={editMode} editItem={editItem}/>
                 </tbody>
             </Table>
         </>

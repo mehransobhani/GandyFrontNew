@@ -1,15 +1,13 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import DatePicker from 'react-datepicker2';
+import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
 
-export function ProductImageEditPanel({item}) {
+export function ProductSuggestInsertPanel({item , cancel ,reload}) {
 
-    const [name,setName]=useState("");
-    const [description,setDescription]=useState("");
-    const [amazingOffer,setAmazingOffer]=useState("");
-    const [productType,setProductType]=useState("");
-    const [brand,setBrand]=useState("");
+     const [file,setFile]=useState(item.file);
+    const [product,setProduct]=useState(item.product);
 
     return (
         <>
@@ -39,14 +37,14 @@ export function ProductImageEditPanel({item}) {
                                 <div className="sm:col-span-2 justify-center">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                         محصول
+                                        محصول
                                     </label>
                                     <div className="mt-2">
-                                       <select
-                                           className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 " ].join(" ")}
-                                       >
-                                           <option>انتخاب کنید</option>
-                                       </select>
+                                        <select
+                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 " ].join(" ")}
+                                        >
+                                            <option>انتخاب کنید</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -57,7 +55,7 @@ export function ProductImageEditPanel({item}) {
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"}/>
-                        <CancelButton title={"انصراف"}/>
+                        <CancelButton title={"انصراف"} click={cancel}/>
                     </div>
                 </form>
             </div>

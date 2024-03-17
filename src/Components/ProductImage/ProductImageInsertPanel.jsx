@@ -5,12 +5,8 @@ import Uploader from "../Form/Uploader";
 
 export function ProductImageInsertPanel() {
 
-    const [name,setName]=useState("");
-    const [description,setDescription]=useState("");
-    const [amazingOffer,setAmazingOffer]=useState("");
-    const [productType,setProductType]=useState("");
-    const [brand,setBrand]=useState("");
-
+    const [file,setFile]=useState("");
+    const [product,setProduct]=useState("");
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
