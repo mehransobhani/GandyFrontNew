@@ -1,23 +1,14 @@
 import {useState} from "react";
 import {
-    BanknotesIcon,
     Bars3Icon,
-    BellIcon,
-    CalendarDaysIcon,
-    ChatBubbleBottomCenterTextIcon,
     Cog6ToothIcon,
     CogIcon,
     CubeIcon,
     DevicePhoneMobileIcon,
-    DocumentCheckIcon,
-    HandRaisedIcon,
-    InformationCircleIcon,
-    MusicalNoteIcon,
+    InformationCircleIcon, PencilIcon,
     PencilSquareIcon,
     PhotoIcon,
     QueueListIcon,
-    UserCircleIcon,
-    UserGroupIcon
 } from "@heroicons/react/24/solid";
 import {Squares2X2Icon} from "@heroicons/react/20/solid";
 import {Link, useLocation} from 'react-router-dom';
@@ -35,6 +26,12 @@ export default function Sidebar() {
             icon: <Squares2X2Icon
                 className={["h-6 w-6 ", pathName == "/admin/dashboard" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/admin/dashboard"
+        },  {
+            title: "مقاله",
+            href: "/article",
+            icon: <PencilIcon
+                className={["h-6 w-6 ", pathName == "/article" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
+            current: pathName == "/article"
         }, {
             title: "کالا ها",
             href: "/admin/team",

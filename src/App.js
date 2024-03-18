@@ -13,6 +13,7 @@ import {AttributeName} from "./Pages/AttributeName/AttributeName";
 import {AttributeSelect} from "./Pages/AttributeSelect/AttributeSelect";
 import {ProductAttribute} from "./Pages/ProductAttribute/ProductAttribute";
 import {ProductType} from "./Pages/ProductType/ProductType";
+import {Article} from "./Pages/Article/Article";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <div className={["App", "container-fluid", "p-0"].join(" ")}>
                     <Routes>
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="/article" element={<Article/>}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/Product/create" element={<Product/>}/>
                         <Route path="/Product/image" element={<ProductImage/>}/>

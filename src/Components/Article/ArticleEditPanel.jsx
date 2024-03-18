@@ -1,23 +1,25 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import CancelButton from "../Button/CancelButton";
 import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-export function ProductInsertPanel() {
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Uploader from "../Form/Uploader";
 
-    const [name,setName]=useState("");
-    const [description,setDescription]=useState("");
-    const [amazingOffer,setAmazingOffer]=useState("");
-    const [productType,setProductType]=useState("");
-    const [brand,setBrand]=useState("");
+export function ArticleEditPanel({item , cancel ,reload}) {
+    const [title,setTitle]=useState(item.title);
+    const [description,setDescription]=useState(item.description);
+    const [content,setContent]=useState(item.content);
+    const [url,setUrl]=useState(item.url);
+    const [image,setImage]=useState("");
 
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ثبت مقاله جدید
+                        ویرایش مقاله
                     </h2>
                 </div>
                 <hr/>
@@ -29,6 +31,9 @@ export function ProductInsertPanel() {
 
 
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                <div className="sm:col-span-full">
+                                    <Uploader />
+                                </div>
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
@@ -36,8 +41,8 @@ export function ProductInsertPanel() {
                                     </label>
                                     <div className="mt-2">
                                         <Input placeHolder={"عنوان مقاله"} type={"text"} change={(e) => {
-                                            setName(e.target.value)
-                                        }} value={name}/>
+                                            setTitle(e.target.value)
+                                        }} value={title}/>
                                     </div>
                                 </div>
 
@@ -48,8 +53,8 @@ export function ProductInsertPanel() {
                                     </label>
                                     <div className="mt-2">
                                         <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                            setDescription(e.target.value)
-                                        }} value={description}/>
+                                            setUrl(e.target.value)
+                                        }} value={url}/>
 
                                     </div>
                                 </div>
@@ -59,8 +64,10 @@ export function ProductInsertPanel() {
                                         توضیحات
                                     </label>
                                     <div className="mt-2">
-                                        <Textarea>
-
+                                        <Textarea change={(e) => {
+                                            setDescription(e.target.value)
+                                        }}>
+                                            {description}
                                         </Textarea>
                                     </div>
                                 </div>
@@ -68,43 +75,45 @@ export function ProductInsertPanel() {
                                 <div className="sm:col-span-full">
                                     <label htmlFor="last-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                         محتوا
+                                        محتوا
                                     </label>
                                     <div className="mt-2">
-                                       <CKEditor
-                                           editor={ ClassicEditor }/>
+                                        <CKEditor
+                                            editor={ClassicEditor}
+                                            config={{
+                                                extraPlugins: [],
+                                                mediaEmbed: {
+                                                    extraProviders: [
+                                                        {
+                                                            previewsInData: true,
+                                                            name: "aparat",
+                                                            url: "https://www.aparat.com",
+                                                        },
+                                                    ],
+                                                },
+                                            }}
+                                            data={content}
+                                            onChange={(event, editor) => {
+                                                setContent(editor.getData());
+                                            }}
+                                        />
                                     </div>
                                 </div>
 
 
-                                <div className="col-span-full">
-                                    <label htmlFor="street-address"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        پیشنهاد ویژه
-                                    </label>
-                                    <div className="mt-2">
-                                    <label className="inline-flex items-center me-5 cursor-pointer">
-                                            <input type="checkbox" value="" className="sr-only peer"
-                                                   checked={amazingOffer} onChange={(e) => {
-                                                setAmazingOffer(e.target.checked)
-                                            }}/>
-                                            <div
-                                                className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
-
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ویرایش"}/>
+                        <CancelButton title={"انصراف"}  click={cancel}/>
                     </div>
                 </form>
             </div>
 
         </>
+
     )
 }
