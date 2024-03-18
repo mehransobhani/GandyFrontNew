@@ -5,7 +5,7 @@ import Uploader from "../Form/Uploader";
 import {toast} from "react-toastify";
 import {editProductImage} from "../../Api/ProductImage";
 
-export function ProductSuggestInsertPanel({item , cancel ,reload}) {
+export function ProductImageEditPanel({item , cancel ,reload}) {
 
      const [file,setFile]=useState(item.file);
     const [product,setProduct]=useState(item.product);
@@ -20,7 +20,7 @@ export function ProductSuggestInsertPanel({item , cancel ,reload}) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        آپلود تصویر محصول
+                        ویرایش تصویر محصول
                     </h2>
                 </div>
                 <hr/>

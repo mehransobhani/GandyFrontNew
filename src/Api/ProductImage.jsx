@@ -16,6 +16,9 @@ export async function getProductImage() {
     return response;
 }
 export async function insertProductImage() {
+    const formdata = new FormData();
+    formdata.append("image", "");
+
     const response = await fetch(BaseUrl + "",
         {
             method: '',

@@ -7,6 +7,7 @@ import {useState} from "react";
 import Pagination from "../../Components/Pagination";
 import {ProductInfoEditPanel} from "../../Components/ProductInfo/ProductInfoEditPanel";
 import {getProductImage} from "../../Api/ProductImage";
+import {ProductImageEditPanel} from "../../Components/ProductImage/ProductImageEditPanel";
 
 export const ProductImage = withAuth(() => {
     const [search, setSearch] = useState("");
@@ -23,7 +24,7 @@ export const ProductImage = withAuth(() => {
 
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit?<ProductInfoEditPanel  item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:
+                    {edit?<ProductImageEditPanel  item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:
                         <ProductImageInsertPanel  reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
