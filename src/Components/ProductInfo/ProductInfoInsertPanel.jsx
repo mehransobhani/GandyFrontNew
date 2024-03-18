@@ -1,8 +1,10 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import {toast} from "react-toastify";
+import {insertProductInfo} from "../../Api/ProductInfo";
 
-export function ProductInfoInsertPanel() {
+export function ProductInfoInsertPanel({reload}) {
 
     const [count,setCount]=useState("");
     const [price,setPrice]=useState("");
@@ -12,13 +14,18 @@ export function ProductInfoInsertPanel() {
     const [discount,setDiscount]=useState("");
     const [product,setProduct]=useState("");
     const [productImage,setProductImage]=useState("");
+    async function submit() {
+        let response =await insertProductInfo()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ثبت اطلاعات محصول  
+                        ثبت اطلاعات محصول
                     </h2>
                 </div>
                 <hr/>
@@ -144,7 +151,7 @@ export function ProductInfoInsertPanel() {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
                 </form>
             </div>

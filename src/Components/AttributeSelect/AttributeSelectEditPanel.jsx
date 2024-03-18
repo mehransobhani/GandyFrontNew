@@ -2,13 +2,20 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {AttributeSelectInsertPanel} from "./AttributeSelectInsertPanel";
+ import {toast} from "react-toastify";
+import {editAttributeSelect} from "../../Api/AttributeSelect";
 
 export function AttributeSelectEditPanel({item , cancel ,reload}) {
 
     const [name,setName]=useState(item.name);
     const [value,setValue]=useState(item.value);
 
+    async function submit() {
+        let response =await editAttributeSelect()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -56,7 +63,7 @@ export function AttributeSelectEditPanel({item , cancel ,reload}) {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ویرایش"}/>
+                        <ConfirmButton title={"ویرایش"} click={submit}/>
                         <CancelButton title={"انصراف"}  click={cancel}/>
                     </div>
             </div>

@@ -5,8 +5,10 @@ import Modal from "../Modal/Modal";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {useState} from "react";
+import {removeArticle} from "../../Api/Article";
+import {toast} from "react-toastify";
 
-export function ArticleTableRow({editMode ,editItem}) {
+export function ArticleTableRow({editMode ,editItem , reload}) {
     const [deleteModal, setDeleteModal] = useState(false);
     const [previewModal, setPreviewModal] = useState(false);
 
@@ -23,6 +25,13 @@ export function ArticleTableRow({editMode ,editItem}) {
         editItem(item);
         editMode();
     }
+
+    async function removeHandle(){
+        let response=await removeArticle(item.id);
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+        setDeleteModal(false);
+    }
     return (
         <>
             <tr className={"text-right"}>
@@ -30,7 +39,7 @@ export function ArticleTableRow({editMode ,editItem}) {
                     <strong className={"font-bold"}>آیا از حذف این محصول اطمینان دارید ؟</strong>
                     <hr/>
                     <div className={"flex flex-row gap-2"}>
-                        <ConfirmButton title={"حذف"}/>
+                        <ConfirmButton title={"حذف"}  click={removeHandle}/>
                         <CancelButton title={" انصراف"} click={() => setDeleteModal(false)}/>
                     </div>
                 </Modal>

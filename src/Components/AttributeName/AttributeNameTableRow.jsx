@@ -5,8 +5,10 @@ import Modal from "../Modal/Modal";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {useState} from "react";
+import {toast} from "react-toastify";
+import {removeAttributeName} from "../../Api/AttributeName";
 
-export function AttributeNameTableRow({editMode ,editItem}) {
+export function AttributeNameTableRow({editMode ,editItem , reload}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
     const item={
@@ -22,6 +24,13 @@ export function AttributeNameTableRow({editMode ,editItem}) {
         editItem(item);
         editMode();
     }
+    async  function removeHandler()
+    {
+        let response=await removeAttributeName(item.id);
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+        setDeleteModal(false);
+    }
     return (
         <>
             <tr className={"text-right"}>
@@ -29,7 +38,7 @@ export function AttributeNameTableRow({editMode ,editItem}) {
                     <strong className={"font-bold"}>آیا از حذف این ویژگی اطمینان دارید ؟</strong>
                     <hr/>
                     <div className={"flex flex-row gap-2"}>
-                        <ConfirmButton title={"حذف"}/>
+                        <ConfirmButton title={"حذف"} click={removeHandler}/>
                         <CancelButton title={" انصراف"} click={() => setDeleteModal(false)}/>
                     </div>
                 </Modal>

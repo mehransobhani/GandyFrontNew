@@ -1,12 +1,18 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {Select} from "../Form/Select";
+import {toast} from "react-toastify";
+import {insertProductAttribute} from "../../Api/ProductAttribute";
 
-export function ProductAttributeInsertPanel() {
+export function ProductAttributeInsertPanel({reload}) {
 
     const [name,setName]=useState("");
+    async function submit() {
+        let response =await insertProductAttribute()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -43,7 +49,7 @@ export function ProductAttributeInsertPanel() {
                 </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ثبت"}/>
+                    <ConfirmButton title={"ثبت"} click={submit}/>
                 </div>
             </div>
 

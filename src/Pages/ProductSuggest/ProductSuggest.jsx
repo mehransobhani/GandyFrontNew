@@ -6,6 +6,7 @@ import {useState} from "react";
 import {ProductSuggestInsertPanel} from "../../Components/ProductSuggest/ProductSuggestInsertPanel";
 import {ProductSuggestTablePanel} from "../../Components/ProductSuggest/ProductSuggestTablePanel";
 import {ProductSuggestEditPanel} from "../../Components/ProductSuggest/ProductSuggestEditPanel";
+import {getProductImage} from "../../Api/ProductImage";
 
 export const ProductSuggest = withAuth(() => {
     const [search, setSearch] = useState("");
@@ -13,17 +14,17 @@ export const ProductSuggest = withAuth(() => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData() {
-        console.log(search);
+    async function getData()
+    {
+        let data =await  getProductImage();
     }
-
     return (
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
                     {edit ? <ProductSuggestEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <ProductSuggestInsertPanel/>}
+                    }}/> : <ProductSuggestInsertPanel  reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -36,6 +37,8 @@ export const ProductSuggest = withAuth(() => {
                         editMode={() => {
                             setEdit(true)
                         }}
+                        reload={getData}
+
                         editItem={setEditItem}
                         data={data}/>
                 </div>

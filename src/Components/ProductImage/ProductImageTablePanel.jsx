@@ -3,7 +3,7 @@ import Table from "../Table/Table";
 import {ProductImageTableRow} from "./ProductImageTableRow";
 
 
-export const ProductImageTablePanel = ({editMode , editItem}) => {
+export const ProductImageTablePanel = ({editMode , editItem,reload}) => {
     return (
         <>
 
@@ -16,7 +16,7 @@ export const ProductImageTablePanel = ({editMode , editItem}) => {
 
                 ]}/>
                 <tbody>
-                <ProductImageTableRow editMode={editMode} editItem={editItem}/>
+                <ProductImageTableRow editMode={editMode} editItem={editItem} reload={reload}/>
                 </tbody>
             </Table>
         </>

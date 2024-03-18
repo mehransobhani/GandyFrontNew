@@ -6,6 +6,8 @@ import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
+import {editArticle} from "../../Api/Article";
+import {toast} from "react-toastify";
 
 export function ArticleEditPanel({item , cancel ,reload}) {
     const [title,setTitle]=useState(item.title);
@@ -14,6 +16,12 @@ export function ArticleEditPanel({item , cancel ,reload}) {
     const [url,setUrl]=useState(item.url);
     const [image,setImage]=useState("");
 
+    async  function submit() {
+        let response = await  editArticle()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -107,7 +115,7 @@ export function ArticleEditPanel({item , cancel ,reload}) {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ویرایش"}/>
+                        <ConfirmButton title={"ویرایش"} click={submit}/>
                         <CancelButton title={"انصراف"}  click={cancel}/>
                     </div>
                 </form>

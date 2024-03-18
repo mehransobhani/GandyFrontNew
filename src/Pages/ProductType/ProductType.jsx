@@ -6,6 +6,7 @@ import {useState} from "react";
 import {ProductTypeTablePanel} from "../../Components/ProductType/ProductTypeTablePanel";
 import {ProductTypeInsertPanel} from "../../Components/ProductType/ProductTypeInsertPanel";
 import {ProductTypeEditPanel} from "../../Components/ProductType/ProductTypeEditPanel";
+import {getProductType} from "../../Api/ProductType";
 
 export const ProductType =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -13,9 +14,9 @@ export const ProductType =withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getProductType();
     }
     return (
         <>
@@ -23,7 +24,7 @@ export const ProductType =withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <ProductTypeEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <ProductTypeInsertPanel/>}
+                    }}/> : <ProductTypeInsertPanel  reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -36,6 +37,8 @@ export const ProductType =withAuth( () => {
                         editMode={() => {
                             setEdit(true)
                         }}
+                        reload={getData}
+
                         editItem={setEditItem}
                         data={data}
                     />

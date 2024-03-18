@@ -5,14 +5,23 @@ import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
+import {insertArticle} from "../../Api/Article";
+import {toast} from "react-toastify";
 
-export function ArticleInsertPanel() {
+export function ArticleInsertPanel({reload}) {
 
-    const [title,setTitle]=useState("");
-    const [description,setDescription]=useState("");
-    const [content,setContent]=useState("");
-    const [url,setUrl]=useState("");
-    const [image,setImage]=useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [content, setContent] = useState("");
+    const [url, setUrl] = useState("");
+    const [image, setImage] = useState("");
+
+   async function submit() {
+        let response =await insertArticle()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+
+    }
 
     return (
         <>
@@ -107,7 +116,7 @@ export function ArticleInsertPanel() {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
                 </form>
             </div>

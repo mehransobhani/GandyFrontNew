@@ -2,7 +2,7 @@ import Thead from "../Table/Thead";
 import Table from "../Table/Table";
 import {ProductTypeTableRow} from "./ProductTypeTableRow";
 
-export const ProductTypeTablePanel = ({editMode , editItem}) => {
+export const ProductTypeTablePanel = ({editMode , editItem,reload}) => {
     return (
         <>
             <Table>
@@ -15,7 +15,7 @@ export const ProductTypeTablePanel = ({editMode , editItem}) => {
 
                 ]}/>
                 <tbody>
-                <ProductTypeTableRow editMode={editMode} editItem={editItem} />
+                <ProductTypeTableRow editMode={editMode} editItem={editItem} reload={reload} />
                 </tbody>
             </Table>
         </>

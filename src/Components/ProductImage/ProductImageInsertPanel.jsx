@@ -1,12 +1,19 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import Uploader from "../Form/Uploader";
+import {toast} from "react-toastify";
+import {insertProductImage} from "../../Api/ProductImage";
 
-export function ProductImageInsertPanel() {
+export function ProductImageInsertPanel({reload}) {
 
     const [file,setFile]=useState("");
     const [product,setProduct]=useState("");
+    async function submit() {
+        let response =await insertProductImage()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -52,7 +59,7 @@ export function ProductImageInsertPanel() {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
                 </form>
             </div>

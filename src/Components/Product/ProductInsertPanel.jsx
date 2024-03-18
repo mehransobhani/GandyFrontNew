@@ -4,14 +4,21 @@ import ConfirmButton from "../Button/ConfirmButton";
 import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-export function ProductInsertPanel() {
+import {toast} from "react-toastify";
+import {insertProduct} from "../../Api/Product";
+export function ProductInsertPanel({reload}) {
 
     const [name,setName]=useState("");
     const [description,setDescription]=useState("");
     const [amazingOffer,setAmazingOffer]=useState("");
     const [productType,setProductType]=useState("");
     const [brand,setBrand]=useState("");
+    async function submit() {
+        let response =await insertProduct()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -100,7 +107,7 @@ export function ProductInsertPanel() {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
                 </form>
             </div>

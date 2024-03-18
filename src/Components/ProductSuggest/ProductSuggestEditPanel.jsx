@@ -1,8 +1,9 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import DatePicker from "react-datepicker2";
+import {toast} from "react-toastify";
+import {editProductSuggest} from "../../Api/ProductSuggest";
 
 export function ProductSuggestEditPanel({item , cancel ,reload}) {
 
@@ -11,6 +12,12 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
     const [expire_at,setExpire_at]=useState("");
     function changeDate(e){
         console.log('Selected Date and Time:', e.format('YYYY-MM-DD HH:mm:ss'));
+    }
+    async function submit() {
+        let response =await editProductSuggest()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+
     }
     return (
 
@@ -87,7 +94,7 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
                 </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ثبت"}/>
+                    <ConfirmButton title={"ویرایش"} click={submit}/>
                     <CancelButton title={"انصراف"} click={cancel}/>
 
                 </div>

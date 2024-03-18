@@ -6,15 +6,16 @@ import {ProductImageTablePanel} from "../../Components/ProductImage/ProductImage
 import {useState} from "react";
 import Pagination from "../../Components/Pagination";
 import {ProductInfoEditPanel} from "../../Components/ProductInfo/ProductInfoEditPanel";
+import {getProductImage} from "../../Api/ProductImage";
 
 export const ProductImage = withAuth(() => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getProductImage();
     }
     return (
         <>
@@ -22,7 +23,8 @@ export const ProductImage = withAuth(() => {
 
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit?<ProductInfoEditPanel  item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:<ProductImageInsertPanel/>}
+                    {edit?<ProductInfoEditPanel  item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:
+                        <ProductImageInsertPanel  reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -35,6 +37,8 @@ export const ProductImage = withAuth(() => {
                         editMode={()=>{setEdit(true)}}
                         editItem={setEditItem}
                         data={data}
+                        reload={getData}
+
                     />
                 </div>
                 <div className={"mb-10"}>

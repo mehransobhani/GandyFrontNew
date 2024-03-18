@@ -1,14 +1,12 @@
 import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
-import {ProductEditPanel} from "../../Components/Product/ProductEditPanel";
-import {ProductInsertPanel} from "../../Components/Product/ProductInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {ProductTablePanel} from "../../Components/Product/ProductTablePanel";
 import Pagination from "../../Components/Pagination";
 import {useState} from "react";
 import {AttributeNameTablePanel} from "../../Components/AttributeName/AttributeNameTablePanel";
 import {AttributeNameInsertPanel} from "../../Components/AttributeName/AttributeNameInsertPanel";
 import {AttributeNameEditPanel} from "../../Components/AttributeName/AttributeNameEditPanel";
+import {getAttributeName} from "../../Api/AttributeName";
 
 export const AttributeName =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -16,9 +14,9 @@ export const AttributeName =withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+   async function getData()
     {
-        console.log(search);
+        let data =await  getAttributeName();
     }
     return (
         <>
@@ -26,7 +24,7 @@ export const AttributeName =withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <AttributeNameEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AttributeNameInsertPanel/>}
+                    }}/> : <AttributeNameInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -41,6 +39,7 @@ export const AttributeName =withAuth( () => {
                         }}
                         editItem={setEditItem}
                         data={data}
+                        reload={getData}
                     />
                 </div>
                 <div className={"mb-10"}>

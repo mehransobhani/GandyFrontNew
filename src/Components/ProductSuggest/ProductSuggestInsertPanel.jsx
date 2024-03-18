@@ -1,8 +1,10 @@
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import DatePicker from 'react-datepicker2';
+import {toast} from "react-toastify";
+import {insertProductSuggest} from "../../Api/ProductSuggest";
 
- export function ProductSuggestInsertPanel() {
+ export function ProductSuggestInsertPanel({reload}) {
 
     const [product,setProduct]=useState("");
     const [created_at,setCreated_at]=useState("");
@@ -11,6 +13,12 @@ import DatePicker from 'react-datepicker2';
     function changeDate(e){
         console.log('Selected Date and Time:', e.format('YYYY-MM-DD HH:mm:ss'));
     }
+     async function submit() {
+         let response =await insertProductSuggest()
+         reload();
+         toast.success("عملیات با موفقیت انجام شد")
+
+     }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -85,7 +93,7 @@ import DatePicker from 'react-datepicker2';
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
              </div>
 

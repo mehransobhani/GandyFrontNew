@@ -6,6 +6,7 @@ import {ProductInsertPanel} from "../../Components/Product/ProductInsertPanel";
 import Pagination from "../../Components/Pagination";
 import { useState } from "react";
 import {ProductEditPanel} from "../../Components/Product/ProductEditPanel";
+import {getProduct} from "../../Api/Product";
 
 export const Product = withAuth(() => {
     const [search, setSearch] = useState("");
@@ -13,15 +14,16 @@ export const Product = withAuth(() => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getProduct();
     }
     return (
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit?<ProductEditPanel item={editItem}  reload={getData} cancel={()=>{setEdit(false)}} />:<ProductInsertPanel/>}
+                    {edit?<ProductEditPanel item={editItem}  reload={getData} cancel={()=>{setEdit(false)}} />
+                        :<ProductInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -34,6 +36,8 @@ export const Product = withAuth(() => {
                         editMode={()=>{setEdit(true)}}
                         editItem={setEditItem}
                         data={data}
+                        reload={getData}
+
                     />
                 </div>
                 <div className={"mb-10"}>

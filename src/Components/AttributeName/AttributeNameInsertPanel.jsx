@@ -1,11 +1,18 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
+import {toast} from "react-toastify";
+import {insertAttributeName} from "../../Api/AttributeName";
 
-export function AttributeNameInsertPanel() {
+export function AttributeNameInsertPanel({reload}) {
 
     const [name,setName]=useState("");
+   async function submit() {
+        let response =await insertAttributeName()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -40,7 +47,7 @@ export function AttributeNameInsertPanel() {
                 </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ثبت"}/>
+                    <ConfirmButton title={"ثبت"} click={submit}/>
                 </div>
             </div>
 

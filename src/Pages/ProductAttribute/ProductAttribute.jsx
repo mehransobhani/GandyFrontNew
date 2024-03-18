@@ -6,6 +6,7 @@ import {useState} from "react";
 import {ProductAttributeTablePanel} from "../../Components/ProductAttribute/ProductAttributeTablePanel";
 import {ProductAttributeInsertPanel} from "../../Components/ProductAttribute/ProductAttributeInsertPanel";
 import {ProductAttributeEditPanel} from "../../Components/ProductAttribute/ProductAttributeEditPanel";
+import {getProductAttribute} from "../../Api/ProductAttribute";
 
 export const ProductAttribute =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -13,9 +14,9 @@ export const ProductAttribute =withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getProductAttribute();
     }
     return (
         <>
@@ -23,7 +24,7 @@ export const ProductAttribute =withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <ProductAttributeEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <ProductAttributeInsertPanel/>}
+                    }}/> : <ProductAttributeInsertPanel  reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -38,6 +39,8 @@ export const ProductAttribute =withAuth( () => {
                         }}
                         editItem={setEditItem}
                         data={data}
+                        reload={getData}
+
                     />
                 </div>
                 <div className={"mb-10"}>

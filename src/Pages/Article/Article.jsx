@@ -6,6 +6,7 @@ import {ArticleInsertPanel} from "../../Components/Article/ArticleInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {ArticleTablePanel} from "../../Components/Article/ArticleTablePanel";
 import Pagination from "../../Components/Pagination";
+import {getArticle} from "../../Api/Article";
 
 export const Article  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -13,9 +14,9 @@ export const Article  = withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+   async function getData()
     {
-        console.log(search);
+       let response= await getArticle()
     }
     return (
         <>
@@ -23,7 +24,7 @@ export const Article  = withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <ArticleEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <ArticleInsertPanel/>}
+                    }}/> : <ArticleInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -37,6 +38,7 @@ export const Article  = withAuth( () => {
                             setEdit(true)
                         }}
                         editItem={setEditItem}
+                        reload={getData}
                         data={data}
                     />
                 </div>

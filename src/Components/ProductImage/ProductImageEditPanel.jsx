@@ -1,14 +1,20 @@
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import DatePicker from 'react-datepicker2';
 import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
+import {toast} from "react-toastify";
+import {editProductImage} from "../../Api/ProductImage";
 
 export function ProductSuggestInsertPanel({item , cancel ,reload}) {
 
      const [file,setFile]=useState(item.file);
     const [product,setProduct]=useState(item.product);
+    async function submit() {
+        let response =await editProductImage()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -54,7 +60,7 @@ export function ProductSuggestInsertPanel({item , cancel ,reload}) {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"}/>
+                        <ConfirmButton title={"ویرایش"} click={submit}/>
                         <CancelButton title={"انصراف"} click={cancel}/>
                     </div>
                 </form>

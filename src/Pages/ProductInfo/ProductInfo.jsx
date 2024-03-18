@@ -6,23 +6,24 @@ import { ProductInfoInsertPanel } from "../../Components/ProductInfo/ProductInfo
 import { ProductInfoTablePanel } from "../../Components/ProductInfo/ProductInfoTablePanel";
 import { useState } from "react";
 import { ProductInfoEditPanel } from "../../Components/ProductInfo/ProductInfoEditPanel";
+import {getProductInfo} from "../../Api/ProductInfo";
 
 export  const ProductInfo = withAuth(() => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
-
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getProductInfo();
     }
     return (
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
                     {
-                        edit?<ProductInfoEditPanel item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>:<ProductInfoInsertPanel/>
+                        edit?<ProductInfoEditPanel item={editItem}  reload={getData} cancel={()=>{setEdit(false)}}/>
+                            :<ProductInfoInsertPanel  reload={getData}/>
                     }
 
                 </div>
@@ -36,7 +37,10 @@ export  const ProductInfo = withAuth(() => {
                     <ProductInfoTablePanel
                         editMode={()=>{setEdit(true)}}
                         editItem={setEditItem}
+                        reload={getData}
+
                         data={data}/>
+
                 </div>
                 <div className={"mb-10"}>
                     <Pagination currentPage={1} totalPage={10}/>

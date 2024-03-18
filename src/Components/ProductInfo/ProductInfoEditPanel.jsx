@@ -2,6 +2,8 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
+import {toast} from "react-toastify";
+import {editProductInfo} from "../../Api/ProductInfo";
 
 export function ProductInfoEditPanel({item , cancel ,reload}) {
 
@@ -13,7 +15,12 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
     const [discount,setDiscount]=useState(item?.discount);
     const [product,setProduct]=useState(item?.product);
     const [productImage,setProductImage]=useState(item?.productImage);
+    async function submit() {
+        let response =await editProductInfo()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -145,7 +152,7 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
                     </div>
 
                     <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ویرایش"}/>
+                        <ConfirmButton title={"ویرایش"} click={submit}/>
                     <CancelButton title={"انصراف"} click={cancel}/>
                     </div>
             </div>

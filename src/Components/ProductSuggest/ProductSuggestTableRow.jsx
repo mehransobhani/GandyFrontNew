@@ -5,8 +5,10 @@ import Modal from "../Modal/Modal";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {useState} from "react";
+import {toast} from "react-toastify";
+import {removeProductSuggest} from "../../Api/ProductSuggest";
 
-export function ProductSuggestTableRow({editMode ,editItem}) {
+export function ProductSuggestTableRow({editMode ,editItem,reload}) {
     const [deleteModal, setDeleteModal] = useState(false);
     const item={
         name:"a21",
@@ -20,6 +22,13 @@ export function ProductSuggestTableRow({editMode ,editItem}) {
         editItem(item);
         editMode();
     }
+    async function removeHandler()
+    {
+        let response=await removeProductSuggest();
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
+        setDeleteModal(false);
+    }
     return (
         <>
             <tr className={"text-right"}>
@@ -27,7 +36,7 @@ export function ProductSuggestTableRow({editMode ,editItem}) {
                     <strong className={"font-bold"}>آیا از حذف این کالای پیشنهادی اطمینان دارید ؟</strong>
                     <hr/>
                     <div className={"flex flex-row gap-2"}>
-                        <ConfirmButton title={"حذف"}/>
+                        <ConfirmButton title={"حذف"} click={removeHandler}/>
                         <CancelButton title={" انصراف"} click={() => setDeleteModal(false)}/>
                     </div>
                 </Modal>

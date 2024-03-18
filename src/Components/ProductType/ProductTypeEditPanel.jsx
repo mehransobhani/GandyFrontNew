@@ -4,11 +4,18 @@ import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
 import {Select} from "../Form/Select";
+import {toast} from "react-toastify";
+import {editProductType} from "../../Api/ProductType";
 
 export function ProductTypeEditPanel({item , cancel ,reload}) {
 
     const [name,setName]=useState(item.name);
+    async function submit() {
+        let response =await editProductType()
+        reload();
+        toast.success("عملیات با موفقیت انجام شد")
 
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -60,7 +67,7 @@ export function ProductTypeEditPanel({item , cancel ,reload}) {
 
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ویرایش"}/>
+                    <ConfirmButton title={"ویرایش"} click={submit}/>
                     <CancelButton title={"انصراف"} click={cancel}/>
                 </div>
             </div>

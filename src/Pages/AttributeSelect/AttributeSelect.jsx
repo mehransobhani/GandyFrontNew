@@ -1,14 +1,12 @@
 import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
-import {ProductEditPanel} from "../../Components/Product/ProductEditPanel";
-import {ProductInsertPanel} from "../../Components/Product/ProductInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {ProductTablePanel} from "../../Components/Product/ProductTablePanel";
 import Pagination from "../../Components/Pagination";
 import {useState} from "react";
 import {AttributeSelectTablePanel} from "../../Components/AttributeSelect/AttributeSelectTablePanel";
 import {AttributeSelectInsertPanel} from "../../Components/AttributeSelect/AttributeSelectInsertPanel";
 import {AttributeSelectEditPanel} from "../../Components/AttributeSelect/AttributeSelectEditPanel";
+import {getAttributeSelect} from "../../Api/AttributeSelect";
 
 export const AttributeSelect =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -16,9 +14,9 @@ export const AttributeSelect =withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-    function getData()
+    async function getData()
     {
-        console.log(search);
+        let data =await  getAttributeSelect();
     }
     return (
         <>
@@ -26,7 +24,7 @@ export const AttributeSelect =withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <AttributeSelectEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AttributeSelectInsertPanel/>}
+                    }}/> : <AttributeSelectInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -41,6 +39,8 @@ export const AttributeSelect =withAuth( () => {
                         }}
                         editItem={setEditItem}
                         data={data}
+                        reload={getData}
+
                     />
                 </div>
                 <div className={"mb-10"}>

@@ -14,10 +14,12 @@ import {AttributeSelect} from "./Pages/AttributeSelect/AttributeSelect";
 import {ProductAttribute} from "./Pages/ProductAttribute/ProductAttribute";
 import {ProductType} from "./Pages/ProductType/ProductType";
 import {Article} from "./Pages/Article/Article";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
     return (
         <>
+            <ToastContainer />
             <Router>
                 <div className={["App", "container-fluid", "p-0"].join(" ")}>
                     <Routes>
