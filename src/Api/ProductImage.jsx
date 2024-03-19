@@ -1,27 +1,25 @@
 import {BaseUrl} from "../env";
 
-export async function getProductImage() {
-    const response = await fetch(BaseUrl + "",
+export async function getProductImage(page) {
+    const response = await fetch(BaseUrl + "productImage/getAllProductImage/"+page,
         {
-            method: '',
-            body: JSON.stringify(
-                {
-                }
-            ),
+            credentials: 'include',
+
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             }
         }
     )
-    return response;
+    return response.json();
 }
 export async function insertProductImage() {
     const formdata = new FormData();
     formdata.append("image", "");
 
-    const response = await fetch(BaseUrl + "",
+    const response = await fetch(BaseUrl + "productImage/add",
         {
-            method: '',
+            method: 'POST',
             body: JSON.stringify(
                 {
                 }
@@ -34,9 +32,9 @@ export async function insertProductImage() {
     return response;
 }
 export async function editProductImage() {
-    const response = await fetch(BaseUrl + "",
+    const response = await fetch(BaseUrl + "productImage/add",
         {
-            method: '',
+            method: 'POST',
             body: JSON.stringify(
                 {
                 }
@@ -49,13 +47,9 @@ export async function editProductImage() {
     return response;
 }
 export async function removeProductImage(id) {
-    const response = await fetch(BaseUrl + "",
+    const response = await fetch(BaseUrl + "productImage/deleteById/"+id,
         {
-            method: '',
-            body: JSON.stringify(
-                {
-                }
-            ),
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
             }

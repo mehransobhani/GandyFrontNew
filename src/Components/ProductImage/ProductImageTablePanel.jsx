@@ -3,9 +3,10 @@ import Table from "../Table/Table";
 import {ProductImageTableRow} from "./ProductImageTableRow";
 
 
-export const ProductImageTablePanel = ({editMode , editItem,reload}) => {
+export const ProductImageTablePanel = ({editMode , editItem,reload,data}) => {
     return (
         <>
+        {console.log("DT",data)}
 
             <Table>
                 <Thead heads={[
@@ -16,7 +17,11 @@ export const ProductImageTablePanel = ({editMode , editItem,reload}) => {
 
                 ]}/>
                 <tbody>
-                <ProductImageTableRow editMode={editMode} editItem={editItem} reload={reload}/>
+                    {
+                        data && data.map((item,index)=>(
+                            <ProductImageTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>
+                        ))
+                    }
                 </tbody>
             </Table>
         </>

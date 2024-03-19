@@ -17,7 +17,7 @@ export function SearchBox({searchSubmit , change}) {
                     className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500"
                     placeholder="جستجو بر اساس نام" required />
 
-                <ConfirmButton title={"جستجو"} cssClass={"absolute end-1 top-1 bottom-1 "} />
+                <ConfirmButton title={"جستجو"} cssClass={"absolute end-1 top-1 bottom-1 "}  click={searchSubmit}/>
 
             </div>
         </>

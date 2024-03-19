@@ -14,7 +14,11 @@ export const AttributeSelectTablePanel = ({editMode , editItem,reload}) => {
 
                 ]}/>
                 <tbody>
-                <AttributeSelectTableRow editMode={editMode} editItem={editItem} reload={reload}/>
+                {
+                        data && data.map((item,index)=>(
+                            <AttributeSelectTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>
+                            ))
+                    }
                 </tbody>
             </Table>
         </>

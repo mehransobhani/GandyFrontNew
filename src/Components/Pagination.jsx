@@ -1,4 +1,4 @@
-export  default function Pagination({totalPage , currentPage}){
+export  default function Pagination({totalPage , currentPage ,click}){
     function pageBuilder(){
         let items = [];
         let upExtra=0;
@@ -17,9 +17,9 @@ export  default function Pagination({totalPage , currentPage}){
             }
             items.push(
                 <li key={i}>
-                    <a href="#" className={["flex  items-center justify-center px-3 h-8 leading-tight ", i==currentPage ?" text-indigo-600 border border-l border-indigo-300 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700":"text-slate-500 bg-white border border-slate-300 hover:bg-slate-100 hover:text-slate-700"].join(" ")}>
+                    <div onClick={()=>{click(i)}} className={["flex  items-center justify-center px-3 h-8 leading-tight ", i==currentPage ?" text-indigo-600 border border-l border-indigo-300 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700":"text-slate-500 bg-white border border-slate-300 hover:bg-slate-100 hover:text-slate-700"].join(" ")}>
                         {i}
-                    </a>
+                    </div>
                 </li>
             );
 
@@ -33,7 +33,8 @@ export  default function Pagination({totalPage , currentPage}){
                 <ul className="flex items-center   h-8 text-sm">
 
                         <li>
-                            <a href="#"
+                            <a 
+                             onClick={()=>{click(currentPage-1)}}
                                className={[currentPage <= 1 && "bg-slate-200 cursor-not-allowed opacity-50","flex items-center justify-center px-3 h-8 ms-0 leading-tight text-slate-500 bg-white border border-e-0 border-slate-300 rounded-s-lg hover:bg-slate-100 hover:text-slate-700 "].join(" ")}>
                                 <span className="sr-only">Previous</span>
                                 <svg className="w-2.5 h-2.5  rotate-180" aria-hidden="true"
@@ -48,7 +49,7 @@ export  default function Pagination({totalPage , currentPage}){
                     {pageBuilder()}
 
                    <li>
-                            <a href="#"
+                            <div  onClick={()=>{click(currentPage+1)}}
                                className={[ totalPage < currentPage+1 && "bg-slate-200 cursor-not-allowed opacity-50","flex items-center justify-center px-3 h-8 leading-tight text-slate-500 bg-white border border-slate-300 rounded-e-lg hover:bg-slate-100 hover:text-slate-700 "].join(" ")}>
                                 <span className="sr-only">Next</span>
                                 <svg className="w-2.5 h-2.5 rotate-180" aria-hidden="true"
@@ -57,7 +58,7 @@ export  default function Pagination({totalPage , currentPage}){
                                           stroke-width="2"
                                           d="m1 9 4-4-4-4"/>
                                 </svg>
-                            </a>
+                            </div>
                         </li>
 
                 </ul>

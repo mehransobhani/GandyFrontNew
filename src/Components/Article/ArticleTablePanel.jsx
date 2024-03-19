@@ -18,7 +18,11 @@ export const ArticleTablePanel = ({editMode , editItem , reload}) => {
 
                 ]}/>
                 <tbody>
-                <ArticleTableRow editMode={editMode} editItem={editItem} reload={reload} />
+                {
+                        data && data.map((item,index)=>(
+                            <ArticleTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>
+                            ))
+                    }
                 </tbody>
             </Table>
         </>

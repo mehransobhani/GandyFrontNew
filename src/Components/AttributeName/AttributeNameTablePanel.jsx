@@ -13,7 +13,11 @@ export const AttributeNameTablePanel = ({editMode , editItem , reload}) => {
 
                 ]}/>
                 <tbody>
-                <AttributeNameTableRow editMode={editMode} editItem={editItem} reload={reload} />
+                {
+                        data && data.map((item,index)=>(
+                            <AttributeNameTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>
+                            ))
+                    }
                 </tbody>
             </Table>
         </>

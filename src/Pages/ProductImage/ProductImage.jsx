@@ -3,7 +3,7 @@ import AdminLayout from "../../Layout/AdminLayout";
 import {ProductImageInsertPanel} from "../../Components/ProductImage/ProductImageInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {ProductImageTablePanel} from "../../Components/ProductImage/ProductImageTablePanel";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Pagination from "../../Components/Pagination";
 import {ProductInfoEditPanel} from "../../Components/ProductInfo/ProductInfoEditPanel";
 import {getProductImage} from "../../Api/ProductImage";
@@ -14,10 +14,30 @@ export const ProductImage = withAuth(() => {
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
-    async function getData()
+    const [item, setItem] = useState(undefined);
+    async function getData(page=0)
     {
-        let data =await  getProductImage();
+        let data =await  getProductImage(page);
+        setData(data); 
+        setItem(data?.content)
+        console.log("DAD0",data);
+        console.log("item",item);
     }
+    async function searchProductHandler()
+    {
+    //     if(search=="")
+    //     {
+    //         getData();
+    //     }
+    //     else{
+    //     let data =await  searchProduct(search);
+    //     setProduct(data); 
+    // }
+}
+ 
+    useEffect(()=>{
+        getData();
+    },[])
     return (
         <>
 
@@ -37,13 +57,13 @@ export const ProductImage = withAuth(() => {
                     <ProductImageTablePanel
                         editMode={()=>{setEdit(true)}}
                         editItem={setEditItem}
-                        data={data}
+                        data={item}
                         reload={getData}
 
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

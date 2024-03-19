@@ -15,7 +15,11 @@ export const ProductTypeTablePanel = ({editMode , editItem,reload}) => {
 
                 ]}/>
                 <tbody>
-                <ProductTypeTableRow editMode={editMode} editItem={editItem} reload={reload} />
+                {
+                        data && data.map((item,index)=>(
+                            <ProductTypeTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
+                            ))
+                    }
                 </tbody>
             </Table>
         </>

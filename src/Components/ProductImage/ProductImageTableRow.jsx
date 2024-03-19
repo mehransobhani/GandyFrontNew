@@ -8,19 +8,12 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProductImage} from "../../Api/ProductImage";
 
-export function ProductImageTableRow({editMode ,editItem,reload}) {
+export function ProductImageTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
+  console.log("Item",item);
     function setEditMode(){
-        console.log("EDit")
-        editItem(item);
+         editItem(item);
         editMode();
     }
     async function removeHandler()
@@ -43,7 +36,7 @@ export function ProductImageTableRow({editMode ,editItem,reload}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>A21s</Td>
+                <Td>{item.product.name}</Td>
                 <Td>
                     <img src={""} className={"w-24 h-24 mx-auto"}/>
                 </Td>

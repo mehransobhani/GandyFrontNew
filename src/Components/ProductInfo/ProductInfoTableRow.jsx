@@ -8,7 +8,7 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProductInfo} from "../../Api/ProductInfo";
 
-export function ProductInfoTableRow({editMode ,editItem,reload}) {
+export function ProductInfoTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
     const item={
         name:"a21",

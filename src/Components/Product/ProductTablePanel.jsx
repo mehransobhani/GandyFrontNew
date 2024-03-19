@@ -2,7 +2,7 @@ import Thead from "../Table/Thead";
 import Table from "../Table/Table";
 import {ProductTableRow} from "./ProductTableRow";
 
-export const ProductTablePanel = ({editMode , editItem,reload}) => {
+export const ProductTablePanel = ({editMode , editItem,reload , data}) => {
     return (
         <>
             <Table>
@@ -17,7 +17,12 @@ export const ProductTablePanel = ({editMode , editItem,reload}) => {
 
                 ]}/>
                 <tbody>
-                <ProductTableRow editMode={editMode} editItem={editItem}  reload={reload}/>
+                    {
+                        data && data.map((item , index)=>(<>
+                               <ProductTableRow editMode={editMode} editItem={editItem}  reload={reload} item={item}/>
+                        </>
+                        ))
+                    }
                 </tbody>
             </Table>
         </>

@@ -3,29 +3,48 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {toast} from "react-toastify";
-import {editProduct} from "../../Api/Product";
+import {editProduct, getBrandByWords, getProductTypeByWords} from "../../Api/Product";
+import Select2 from "../Form/Select2";
 
 export function ProductEditPanel({item , cancel ,reload}) {
 
     const [name,setName]=useState(item.name);
+    const [id,setId]=useState(item.id);
     const [description,setDescription]=useState(item.description);
     const [amazingOffer,setAmazingOffer]=useState(item.amazingOffer);
     const [productType,setProductType]=useState(item.productType);
     const [brand,setBrand]=useState(item.brand);
 
+    const [productTypeSearch,setProductTypeSearch]=useState(undefined);
+    const [brandSearch,setBrandSearch]=useState(undefined);
+
     async function submit() {
-        let response =await editProduct()
+        let response =await editProduct(name,
+            description,
+            amazingOffer?1:0,
+            productType,
+            brand,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
     }
 
+    async function changeBrandSearchHandle(e) {
+        let response =await getBrandByWords(e.target.value);
+        setBrandSearch(response);
+
+    } 
+
+    async function changeProductTypeSearchHandle(e) {
+        let response =await getProductTypeByWords(e.target.value);
+        setProductTypeSearch(response);
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش محصول
                     </h2>
                 </div>
                 <hr/>
@@ -66,11 +85,8 @@ export function ProductEditPanel({item , cancel ,reload}) {
                                         برند
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2 value={brand.name} change={changeBrandSearchHandle} options={brandSearch} click={setBrand} />
+
                                     </div>
                                 </div>
 
@@ -80,11 +96,8 @@ export function ProductEditPanel({item , cancel ,reload}) {
                                         نوع کالا
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                        <Select2 value={productType.name} change={changeProductTypeSearchHandle} options={productTypeSearch} click={setProductType} />
+                                    
                                     </div>
                                 </div>
 

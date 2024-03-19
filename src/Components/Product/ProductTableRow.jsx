@@ -8,17 +8,10 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProduct} from "../../Api/Product";
 
-export function ProductTableRow({editMode ,editItem,reload}) {
+export function ProductTableRow({editMode ,editItem,reload ,item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
-
+   
     function setEditMode(){
         console.log("EDit")
         editItem(item);
@@ -27,7 +20,7 @@ export function ProductTableRow({editMode ,editItem,reload}) {
 
     async function removeHandler()
     {
-        let response=await removeProduct();
+        let response=await removeProduct(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);
@@ -45,11 +38,11 @@ export function ProductTableRow({editMode ,editItem,reload}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>A21s</Td>
-                <Td>mobile samsung</Td>
-                <Td>mobile</Td>
-                <Td>samsung</Td>
-                <Td>بله</Td>
+                <Td>{item.name}</Td>
+                <Td>{item.description}</Td>
+                <Td>{item.productType.name}</Td>
+                <Td>{item.brand.name}</Td>
+                <Td>{item.amazingOffer?"بله":"خیر"}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>
