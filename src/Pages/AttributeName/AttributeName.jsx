@@ -14,10 +14,27 @@ export const AttributeName =withAuth( () => {
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
 
-   async function getData()
+    async function getData(page=0)
     {
-        let data =await  getAttributeName();
+        let data =await  getProductImage(page);
+        setData(data); 
+        setItem(data?.content) 
     }
+    async function searchProductHandler()
+    {
+    //     if(search=="")
+    //     {
+    //         getData();
+    //     }
+    //     else{
+    //     let data =await  searchProduct(search);
+    //     setProduct(data); 
+    // }
+}
+ 
+    useEffect(()=>{
+        getData();
+    },[])
     return (
         <>
             <AdminLayout>

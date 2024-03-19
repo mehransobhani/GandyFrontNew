@@ -19,9 +19,7 @@ export const ProductImage = withAuth(() => {
     {
         let data =await  getProductImage(page);
         setData(data); 
-        setItem(data?.content)
-        console.log("DAD0",data);
-        console.log("item",item);
+        setItem(data?.content) 
     }
     async function searchProductHandler()
     {

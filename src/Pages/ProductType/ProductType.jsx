@@ -13,11 +13,29 @@ export const ProductType =withAuth( () => {
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
+    const [item, setItem] = useState(undefined);
 
-    async function getData()
+    async function getData(page=0)
     {
-        let data =await  getProductType();
+        let data =await  getProductImage(page);
+        setData(data); 
+        setItem(data?.content) 
     }
+    async function searchProductHandler()
+    {
+    //     if(search=="")
+    //     {
+    //         getData();
+    //     }
+    //     else{
+    //     let data =await  searchProduct(search);
+    //     setProduct(data); 
+    // }
+}
+ 
+    useEffect(()=>{
+        getData();
+    },[])
     return (
         <>
             <AdminLayout>
