@@ -1,5 +1,5 @@
 import withAuth from "../../AuthMiddleware";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
 import {ArticleEditPanel} from "../../Components/Article/ArticleEditPanel";
 import {ArticleInsertPanel} from "../../Components/Article/ArticleInsertPanel";
@@ -7,12 +7,14 @@ import {SearchBox} from "../../Components/Form/SearchBox";
 import {ArticleTablePanel} from "../../Components/Article/ArticleTablePanel";
 import Pagination from "../../Components/Pagination";
 import {getArticle} from "../../Api/Article";
+import { getProductImage } from "../../Api/ProductImage";
 
 export const Article  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
+    const [item, setItem] = useState(undefined);
 
     async function getData(page=0)
     {

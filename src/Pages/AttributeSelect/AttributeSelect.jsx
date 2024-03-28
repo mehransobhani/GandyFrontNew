@@ -2,17 +2,18 @@ import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import Pagination from "../../Components/Pagination";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AttributeSelectTablePanel} from "../../Components/AttributeSelect/AttributeSelectTablePanel";
 import {AttributeSelectInsertPanel} from "../../Components/AttributeSelect/AttributeSelectInsertPanel";
 import {AttributeSelectEditPanel} from "../../Components/AttributeSelect/AttributeSelectEditPanel";
-import {getAttributeSelect} from "../../Api/AttributeSelect";
+import { getProductImage } from "../../Api/ProductImage";
 
 export const AttributeSelect =withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
+    const [item, setItem] = useState(undefined);
 
     async function getData(page=0)
     {

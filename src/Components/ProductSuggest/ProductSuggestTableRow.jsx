@@ -8,15 +8,9 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProductSuggest} from "../../Api/ProductSuggest";
 
-export function ProductSuggestTableRow({editMode ,editItem,reload}) {
+export function ProductSuggestTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
+    
     function setEditMode(){
         console.log("EDit")
         editItem(item);
@@ -43,9 +37,9 @@ export function ProductSuggestTableRow({editMode ,editItem,reload}) {
             </tr>
             <Tr>
 
-                <Td>samsung</Td>
-                <Td>1403/12/22</Td>
-                <Td>1403/12/22</Td>
+                <Td>{item.productCount.product.name}</Td>
+                <Td>{item.expire_at}</Td>
+                <Td>{item.create_at}</Td> 
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

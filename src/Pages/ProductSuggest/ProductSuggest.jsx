@@ -1,66 +1,64 @@
 import AdminLayout from "../../Layout/AdminLayout";
 import withAuth from "../../AuthMiddleware";
-import {SearchBox} from "../../Components/Form/SearchBox";
+import { SearchBox } from "../../Components/Form/SearchBox";
 import Pagination from "../../Components/Pagination";
-import {useState} from "react";
-import {ProductSuggestInsertPanel} from "../../Components/ProductSuggest/ProductSuggestInsertPanel";
-import {ProductSuggestTablePanel} from "../../Components/ProductSuggest/ProductSuggestTablePanel";
-import {ProductSuggestEditPanel} from "../../Components/ProductSuggest/ProductSuggestEditPanel";
-import {getProductImage} from "../../Api/ProductImage";
+import { useEffect, useState } from "react";
+import { ProductSuggestInsertPanel } from "../../Components/ProductSuggest/ProductSuggestInsertPanel";
+import { ProductSuggestTablePanel } from "../../Components/ProductSuggest/ProductSuggestTablePanel";
+import { ProductSuggestEditPanel } from "../../Components/ProductSuggest/ProductSuggestEditPanel";
+import { getProductSuggest, searchProductSuggest } from "../../Api/ProductSuggest";
 
 export const ProductSuggest = withAuth(() => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(true);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
+    const [item, setItem] = useState(undefined);
 
-    async function getData(page=0)
-    {
-        let data =await  getProductImage(page);
-        setData(data); 
-        setItem(data?.content) 
+    async function getData(page = 0) {
+        let data = await getProductSuggest(page);
+        setData(data);
+        setItem(data?.content)
     }
-    async function searchProductHandler()
-    {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
-}
- 
-    useEffect(()=>{
+    async function searchProductHandler() {
+        if (search == "") {
+            getData();
+        }
+        else {
+            let data = await searchProductSuggest(search);
+            console.log("kji",data);
+            setItem(data);
+        }
+    }
+
+    useEffect(() => {
         getData();
-    },[])
+    }, [])
     return (
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
                     {edit ? <ProductSuggestEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <ProductSuggestInsertPanel  reload={getData}/>}
+                    }} /> : <ProductSuggestInsertPanel reload={getData} />}
                 </div>
                 <div className={"mb-10"}>
-                    <hr/>
+                    <hr />
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch}/>
+                    <SearchBox searchSubmit={searchProductHandler} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
-                    <ProductSuggestTablePanel
+                  { item && <ProductSuggestTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}
                         reload={getData}
-
                         editItem={setEditItem}
-                        data={data}/>
+                        data={item} />}
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                    <Pagination currentPage={1} totalPage={10} />
                 </div>
 
             </AdminLayout>

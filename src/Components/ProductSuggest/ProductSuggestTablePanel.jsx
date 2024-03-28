@@ -1,24 +1,25 @@
 import Thead from "../Table/Thead";
 import Table from "../Table/Table";
-import {ProductSuggestTableRow} from "./ProductSuggestTableRow";
+import { ProductSuggestTableRow } from "./ProductSuggestTableRow";
 
-export const ProductSuggestTablePanel = ({editMode , editItem,reload}) => {
+export const ProductSuggestTablePanel = ({ editMode, editItem, reload, data }) => {
     return (
         <>
             <Table>
                 <Thead heads={[
-                    {title:"محصول"},
-                    {title:"تاریخ انقضا"},
-                    {title:"تاریخ ایجاد"},
-                    {title:"ویرایش"},
-                    {title:"حذف"},
+                    { title: "محصول" },
+                    { title: "تاریخ انقضا" },
+                    { title: "تاریخ ایجاد" },
+                    { title: "ویرایش" },
+                    { title: "حذف" },
 
-                ]}/>
+                ]} />
                 <tbody>
-                {
-                        data && data.map((item,index)=>(
-                            <ProductSuggestTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>
-                            ))
+                    {console.log("DS", data)}
+                    {
+                        data && data.map((item, index) => (
+                            <ProductSuggestTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
+                        ))
                     }
                 </tbody>
             </Table>
