@@ -7,9 +7,10 @@ import {editAttributeName} from "../../Api/AttributeName";
 
 export function AttributeNameEditPanel({item , cancel ,reload}) {
 
-    const [name,setName]=useState(item.name);
+    const [name,setName]=useState(item.attributeType);
+    const [id,setId]=useState(item.id);
     async  function submit() {
-        let response = await  editAttributeName()
+        let response = await  editAttributeName(name ,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 

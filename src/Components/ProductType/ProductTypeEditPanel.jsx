@@ -32,9 +32,7 @@ export function ProductTypeEditPanel({item , cancel ,reload}) {
 
 
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-full">
-                                <Uploader/>
-                            </div>
+                          
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">

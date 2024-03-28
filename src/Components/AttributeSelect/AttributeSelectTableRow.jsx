@@ -8,16 +8,10 @@ import {useState} from "react";
 import {removeAttributeSelect} from "../../Api/AttributeSelect";
 import {toast} from "react-toastify";
 
-export function AttributeSelectTableRow({editMode ,editItem ,reload}) {
+export function AttributeSelectTableRow({editMode ,editItem ,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
+  
 
     function setEditMode(){
         console.log("EDit")
@@ -27,7 +21,7 @@ export function AttributeSelectTableRow({editMode ,editItem ,reload}) {
 
     async function removeHandler()
     {
-        let response=await removeAttributeSelect();
+        let response=await removeAttributeSelect(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);
@@ -45,8 +39,8 @@ export function AttributeSelectTableRow({editMode ,editItem ,reload}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>بله</Td>
-                <Td>بله</Td>
+                <Td>{item.attributeType.attributeType}</Td>
+                <Td>{item.attributeOption}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

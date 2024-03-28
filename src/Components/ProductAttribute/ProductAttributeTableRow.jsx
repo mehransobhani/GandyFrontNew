@@ -8,16 +8,9 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProductAttribute} from "../../Api/ProductAttribute";
 
-export function ProductAttributeTableRow({editMode ,editItem , reload}) {
+export function ProductAttributeTableRow({editMode ,editItem , reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
 
     function setEditMode(){
         console.log("EDit")

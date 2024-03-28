@@ -8,17 +8,10 @@ import {useState} from "react";
 import {removeArticle} from "../../Api/Article";
 import {toast} from "react-toastify";
 
-export function ArticleTableRow({editMode ,editItem , reload}) {
+export function ArticleTableRow({editMode ,editItem , reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
     const [previewModal, setPreviewModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
 
     function setEditMode(){
         console.log("EDit")

@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import {AttributeSelectTablePanel} from "../../Components/AttributeSelect/AttributeSelectTablePanel";
 import {AttributeSelectInsertPanel} from "../../Components/AttributeSelect/AttributeSelectInsertPanel";
 import {AttributeSelectEditPanel} from "../../Components/AttributeSelect/AttributeSelectEditPanel";
-import { getProductImage } from "../../Api/ProductImage";
+import { getAttributeSelect, searchAttributeOption } from "../../Api/AttributeSelect";
 
 export const AttributeSelect =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -17,20 +17,20 @@ export const AttributeSelect =withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getProductImage(page);
+        let data =await  getAttributeSelect(page);
         setData(data); 
         setItem(data?.content) 
     }
-    async function searchProductHandler()
+    async function searchHandler()
     {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
+        if(search=="")
+        {
+            getData();
+        }
+        else{
+        let data =await  searchAttributeOption(search);
+        setItem(data); 
+    }
 }
  
     useEffect(()=>{
@@ -48,7 +48,7 @@ export const AttributeSelect =withAuth( () => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch}/>
+                    <SearchBox searchSubmit={searchHandler} change={setSearch}/>
                 </div>
                 <div className={"mb-10"}>
                     <AttributeSelectTablePanel
@@ -56,13 +56,13 @@ export const AttributeSelect =withAuth( () => {
                             setEdit(true)
                         }}
                         editItem={setEditItem}
-                        data={data}
+                        data={item}
                         reload={getData}
 
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

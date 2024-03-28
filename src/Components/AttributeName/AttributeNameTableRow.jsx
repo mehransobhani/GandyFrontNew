@@ -8,19 +8,12 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeAttributeName} from "../../Api/AttributeName";
 
-export function AttributeNameTableRow({editMode ,editItem , reload}) {
+export function AttributeNameTableRow({editMode ,editItem , reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
+ 
 
     function setEditMode(){
-        console.log("EDit")
         editItem(item);
         editMode();
     }
@@ -44,7 +37,7 @@ export function AttributeNameTableRow({editMode ,editItem , reload}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>بله</Td>
+                <Td>{item.attributeType}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

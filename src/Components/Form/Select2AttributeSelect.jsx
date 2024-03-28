@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Select2({  placeHolder, cssClass, value, change, options , click   }) {
+export default function Select2AttributeSelect({  placeHolder, cssClass, value, change, options , click   }) {
     const [open,setOpen]=useState(false);
     const [input,setInput]=useState(value);
 
@@ -22,7 +22,7 @@ export default function Select2({  placeHolder, cssClass, value, change, options
            {open && <div className="absolute top-10 left-0 w-full h-52 bg-white border">
                 <ul>
                     {options && options.map((item) => (<>
-                        <li className="bg-white cursor-pointer text-center border-b py-2" value={item.id} onClick={()=>{click(item) ; setInput(item.name)}}>{item.name}</li>
+                        <li className="bg-white cursor-pointer text-center border-b py-2" value={item.id} onClick={()=>{click(item) ; setInput(item.attributeType)}}>{item.attributeType}</li>
                     </>))}
                 </ul>
             </div>}

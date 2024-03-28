@@ -8,16 +8,9 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import {removeProductType} from "../../Api/ProductType";
 
-export function ProductTypeTableRow({editMode ,editItem,reload}) {
+export function ProductTypeTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
 
-    const item={
-        name:"a21",
-        description:"a21",
-        brand:"a21",
-        productType:"a21",
-        amazingOffer:true,
-    }
 
     function setEditMode(){
         console.log("EDit")
@@ -43,14 +36,9 @@ export function ProductTypeTableRow({editMode ,editItem,reload}) {
                     </div>
                 </Modal>
             </tr>
-            <Tr>
-                <Td>
-                    <img src={""} className={"w-24 h-24 mx-auto"}/>
-                </Td>
-                <Td>بله</Td>
-                <Td>A21s</Td>
-
-
+            <Tr> 
+            <Td>{item.name}</Td>
+            <Td>{item?.parentProductType?.name}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

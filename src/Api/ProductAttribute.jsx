@@ -1,10 +1,27 @@
 import {BaseUrl} from "../env";
-export async function getProductAttribute() {
-    const response = await fetch(BaseUrl + "",
+export async function getProductAttribute(page) {
+    const response = await fetch(BaseUrl + "pconfig/findAll/"+page,
         {
-            method: '',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+    return response.json();
+}
+export async function insertProductAttribute(attributeOption,product) {
+    const response = await fetch(BaseUrl + "pconfig/add",
+        {
+            method: 'POST',
             body: JSON.stringify(
                 {
+                    attributeOption:{
+                        id:attributeOption
+                    },
+                    product:{
+                        id:product
+                    }
                 }
             ),
             headers: {
@@ -14,27 +31,19 @@ export async function getProductAttribute() {
     )
     return response;
 }
-export async function insertProductAttribute() {
-    const response = await fetch(BaseUrl + "",
+export async function editProductAttribute(attributeOption,product,id) {
+    const response = await fetch(BaseUrl + "pconfig/add",
         {
-            method: '',
+            method: 'POST',
             body: JSON.stringify(
                 {
-                }
-            ),
-            headers: {
-                "Content-Type": "application/json",
-            }
-        }
-    )
-    return response;
-}
-export async function editProductAttribute() {
-    const response = await fetch(BaseUrl + "",
-        {
-            method: '',
-            body: JSON.stringify(
-                {
+                    attributeOption:{
+                        id:attributeOption
+                    },
+                    product:{
+                        id:product
+                    },
+                    id:id
                 }
             ),
             headers: {
@@ -45,11 +54,55 @@ export async function editProductAttribute() {
     return response;
 }
 export async function removeProductAttribute(id) {
-    const response = await fetch(BaseUrl + "",
+    const response = await fetch(BaseUrl + "pconfig/deleteById"+id,
         {
-            method: '',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+    return response;
+}
+export async function searchPConfigByPName(name) {
+    const response = await fetch(BaseUrl + "pconfig/searchPConfigByPName",
+        {
+            method: 'POST',
             body: JSON.stringify(
                 {
+                    name:name
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+    return response;
+}
+export async function searchAttributeOption(name) {
+    const response = await fetch(BaseUrl + "pconfig/searchAttributeOption",
+        {
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    name:name
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+    return response;
+}
+export async function getProductByWords(name) {
+    const response = await fetch(BaseUrl + "pconfig/getProductByWords",
+        {
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    name:name
                 }
             ),
             headers: {

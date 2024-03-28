@@ -3,17 +3,29 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {Select} from "../Form/Select";
 import {toast} from "react-toastify";
-import {insertAttributeSelect} from "../../Api/AttributeSelect";
+import {getAttributeTypeByWords, insertAttributeSelect} from "../../Api/AttributeSelect";
+import Select2 from "../Form/Select2";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function AttributeSelectInsertPanel({reload}) {
 
     const [name,setName]=useState("");
+    const [attributeType,setAttributeType]=useState("");
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
     async function submit() {
-        let response =await insertAttributeSelect();
+        let response =await insertAttributeSelect(name,attributeType.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
     }
+
+
+    async function changeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeTypeSearch(response);
+
+    }
+
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -36,9 +48,8 @@ export function AttributeSelectInsertPanel({reload}) {
                                     انتخاب ویژگی
                                 </label>
                                 <div className="mt-2">
-                                  <Select>
-                                        <option>انتخاب کنید</option>
-                                    </Select>
+                                <Select2AttributeSelect  change={changeOptionSearchHandle} options={attributeTypeSearch} click={setAttributeType} />
+
                                 </div>
                             </div>
                             <div className="sm:col-span-3">

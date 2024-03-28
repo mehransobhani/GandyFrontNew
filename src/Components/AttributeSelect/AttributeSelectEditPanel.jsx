@@ -3,19 +3,29 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
  import {toast} from "react-toastify";
-import {editAttributeSelect} from "../../Api/AttributeSelect";
+import {editAttributeSelect, getAttributeTypeByWords} from "../../Api/AttributeSelect";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function AttributeSelectEditPanel({item , cancel ,reload}) {
-
-    const [name,setName]=useState(item.name);
-    const [value,setValue]=useState(item.value);
+ 
+    const [name,setName]=useState(item.attributeOption);
+    const [attributeType,setAttributeType]=useState(item.attributeType);
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
+    const [id,setId]=useState(item.id);
 
     async function submit() {
-        let response =await editAttributeSelect()
+        let response =await editAttributeSelect(name,attributeType.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
     }
+
+    async function changeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeTypeSearch(response);
+
+    }
+
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -38,11 +48,8 @@ export function AttributeSelectEditPanel({item , cancel ,reload}) {
                                         انتخاب ویژگی
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2AttributeSelect value={attributeType.attributeType} change={changeOptionSearchHandle} options={attributeTypeSearch} click={setAttributeType} />
+
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
@@ -51,6 +58,7 @@ export function AttributeSelectEditPanel({item , cancel ,reload}) {
                                         مقدار ویژگی
                                     </label>
                                     <div className="mt-2">
+
                                         <Input placeHolder={"نام ویژگی"} type={"text"} change={(e) => {
                                             setName(e.target.value)
                                         }} value={name}/>

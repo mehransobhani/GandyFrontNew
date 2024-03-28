@@ -2,11 +2,11 @@ import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import Pagination from "../../Components/Pagination";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ProductTypeTablePanel} from "../../Components/ProductType/ProductTypeTablePanel";
 import {ProductTypeInsertPanel} from "../../Components/ProductType/ProductTypeInsertPanel";
 import {ProductTypeEditPanel} from "../../Components/ProductType/ProductTypeEditPanel";
-import {getProductType} from "../../Api/ProductType";
+import {getProductType, getProductTypeByWords} from "../../Api/ProductType";
 
 export const ProductType =withAuth( () => {
     const [search, setSearch] = useState("");
@@ -17,20 +17,20 @@ export const ProductType =withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getProductImage(page);
+        let data =await  getProductType(page);
         setData(data); 
         setItem(data?.content) 
     }
     async function searchProductHandler()
     {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
+        if(search=="")
+        {
+            getData();
+        }
+        else{
+        let data =await  getProductTypeByWords(search);
+        setItem(data); 
+    }
 }
  
     useEffect(()=>{
@@ -48,7 +48,7 @@ export const ProductType =withAuth( () => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch}/>
+                    <SearchBox searchSubmit={searchProductHandler} change={setSearch}/>
                 </div>
                 <div className={"mb-10"}>
                     <ProductTypeTablePanel
@@ -58,11 +58,11 @@ export const ProductType =withAuth( () => {
                         reload={getData}
 
                         editItem={setEditItem}
-                        data={data}
+                        data={item}
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

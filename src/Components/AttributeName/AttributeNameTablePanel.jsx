@@ -2,7 +2,7 @@ import Thead from "../Table/Thead";
 import Table from "../Table/Table";
 import {AttributeNameTableRow} from "./AttributeNameTableRow";
 
-export const AttributeNameTablePanel = ({editMode , editItem , reload}) => {
+export const AttributeNameTablePanel = ({editMode , editItem , reload ,data}) => {
     return (
         <>
             <Table>
@@ -13,6 +13,7 @@ export const AttributeNameTablePanel = ({editMode , editItem , reload}) => {
 
                 ]}/>
                 <tbody>
+                    {console.log(data)}
                 {
                         data && data.map((item,index)=>(
                             <AttributeNameTableRow editMode={editMode} editItem={editItem} reload={reload} item={item}/>

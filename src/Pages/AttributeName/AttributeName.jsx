@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import {AttributeNameTablePanel} from "../../Components/AttributeName/AttributeNameTablePanel";
 import {AttributeNameInsertPanel} from "../../Components/AttributeName/AttributeNameInsertPanel";
 import {AttributeNameEditPanel} from "../../Components/AttributeName/AttributeNameEditPanel";
-import {getAttributeName} from "../../Api/AttributeName";
+import {getAttributeName, getAttributeTypeByWords} from "../../Api/AttributeName";
 import { getProductImage } from "../../Api/ProductImage";
 import { searchProduct } from "../../Api/Product";
 
@@ -19,7 +19,7 @@ export const AttributeName =withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getProductImage(page);
+        let data =await  getAttributeName(page);
         setData(data); 
         setItem(data?.content) 
     }
@@ -30,7 +30,8 @@ export const AttributeName =withAuth( () => {
             getData();
         }
         else{
-        let data =await  searchProduct(search);
+        let data =await  getAttributeTypeByWords(search);
+        console.log("Data Is",data);
         setItem(data); 
     }
 }
@@ -53,17 +54,17 @@ export const AttributeName =withAuth( () => {
                     <SearchBox searchSubmit={searchProductHandler} change={setSearch}/>
                 </div>
                 <div className={"mb-10"}>
-                    <AttributeNameTablePanel
+                   {data && <AttributeNameTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}
                         editItem={setEditItem}
-                        data={data}
+                        data={item}
                         reload={getData}
-                    />
+                    />}
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>
