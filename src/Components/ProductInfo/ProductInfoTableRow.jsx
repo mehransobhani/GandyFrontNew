@@ -18,7 +18,7 @@ export function ProductInfoTableRow({editMode ,editItem,reload , item}) {
     }
     async function removeHandler()
     {
-        let response=await removeProductInfo();
+        let response=await removeProductInfo(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);
@@ -36,14 +36,14 @@ export function ProductInfoTableRow({editMode ,editItem,reload , item}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>A21s</Td>
-                <Td>mobile samsung</Td>
-                <Td>mobile</Td>
-                <Td>samsung</Td>
-                <Td>بله</Td>
-                <Td>mobile samsung</Td>
-                <Td>mobile</Td>
-                <Td>بله</Td>
+                <Td>{item.count}</Td>
+                <Td>{item.price}</Td>
+                <Td>{item.color}</Td>
+                <Td>{item.colorHex}</Td>
+                <Td>{item.discount}</Td>
+                <Td>{item.product.name}</Td>
+                <Td>{item.count}</Td>
+                <Td>{item.main?"بله":"خیر"}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

@@ -4,7 +4,7 @@ import withAuth from "../../AuthMiddleware";
 import Pagination from "../../Components/Pagination";
 import { ProductInfoInsertPanel } from "../../Components/ProductInfo/ProductInfoInsertPanel";
 import { ProductInfoTablePanel } from "../../Components/ProductInfo/ProductInfoTablePanel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductInfoEditPanel } from "../../Components/ProductInfo/ProductInfoEditPanel";
 import {getProductInfo} from "../../Api/ProductInfo";
 
@@ -17,7 +17,7 @@ export  const ProductInfo = withAuth(() => {
 
     async function getData(page=0)
     {
-        let data =await  getProductImage(page);
+        let data =await  getProductInfo(page);
         setData(data); 
         setItem(data?.content) 
     }
@@ -58,11 +58,11 @@ export  const ProductInfo = withAuth(() => {
                         editItem={setEditItem}
                         reload={getData}
 
-                        data={data}/>
+                        data={item}/>
 
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
 
             </AdminLayout>

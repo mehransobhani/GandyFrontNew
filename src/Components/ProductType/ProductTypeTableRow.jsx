@@ -19,7 +19,7 @@ export function ProductTypeTableRow({editMode ,editItem,reload , item}) {
     }
     async function removeHandler()
     {
-        let response=await removeProductType();
+        let response=await removeProductType(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);

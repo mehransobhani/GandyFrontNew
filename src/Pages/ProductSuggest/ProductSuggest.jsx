@@ -58,7 +58,7 @@ export const ProductSuggest = withAuth(() => {
                         data={item} />}
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10} />
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
 
             </AdminLayout>

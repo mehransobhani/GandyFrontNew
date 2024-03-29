@@ -2,23 +2,37 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {toast} from "react-toastify";
-import {insertProductInfo} from "../../Api/ProductInfo";
+import {getProductImageByWords, insertProductInfo} from "../../Api/ProductInfo";
+import { searchProduct } from "../../Api/Product";
+import Select2 from "../Form/Select2";
+import Select2ProductImage from "../Form/Select2ProductImage";
 
 export function ProductInfoInsertPanel({reload}) {
 
     const [count,setCount]=useState("");
     const [price,setPrice]=useState("");
     const [color,setColor]=useState("");
-    const [hexColor,setHexColor]=useState("");
+    const [colorHex,setColorHex]=useState("");
     const [main,setMain]=useState("");
     const [discount,setDiscount]=useState("");
     const [product,setProduct]=useState("");
     const [productImage,setProductImage]=useState("");
+
+    const [productSearch,setProductSearch]=useState("");
+    const [productImageSearch,setProductImageSearch]=useState("");
+
     async function submit() {
-        let response =await insertProductInfo()
+        let response =await insertProductInfo(price,color,colorHex,count,discount,product.id,productImage.id,main?1:0)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+    }
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
+    async function changeProductImageSearchHandle(e) {
+        let response = await getProductImageByWords(e.target.value);
+        setProductImageSearch(response);
     }
     return (
         <>
@@ -29,8 +43,7 @@ export function ProductInfoInsertPanel({reload}) {
                     </h2>
                 </div>
                 <hr/>
-
-                <form>
+ 
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -81,8 +94,8 @@ export function ProductInfoInsertPanel({reload}) {
                                     </label>
                                     <div className="mt-2">
                                         <Input placeHolder={"کد رنگ محصول"} type={"color"} change={(e) => {
-                                            setHexColor(e.target.value)
-                                        }} value={hexColor}/>
+                                            setColorHex(e.target.value)
+                                        }} value={colorHex}/>
 
                                     </div>
                                 </div>
@@ -105,11 +118,8 @@ export function ProductInfoInsertPanel({reload}) {
                                         محصول
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2 change={changeProductSearchHandle} options={productSearch} click={setProduct} />
+
                                     </div>
                                 </div>
 
@@ -119,11 +129,8 @@ export function ProductInfoInsertPanel({reload}) {
                                         تصویر محصول
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2ProductImage change={changeProductImageSearchHandle} options={productImageSearch} click={setProductImage} />
+
                                     </div>
                                 </div>
 
@@ -153,8 +160,7 @@ export function ProductInfoInsertPanel({reload}) {
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
-                </form>
-            </div>
+             </div>
 
         </>
     )

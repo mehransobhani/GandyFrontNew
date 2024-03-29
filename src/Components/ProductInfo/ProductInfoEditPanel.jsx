@@ -3,23 +3,38 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {toast} from "react-toastify";
-import {editProductInfo} from "../../Api/ProductInfo";
+import {editProductInfo, getProductImageByWords} from "../../Api/ProductInfo";
+import { searchProduct } from "../../Api/Product";
+import Select2ProductImage from "../Form/Select2ProductImage";
+import Select2 from "../Form/Select2";
 
 export function ProductInfoEditPanel({item , cancel ,reload}) {
 
-    const [count,setCount]=useState(item?.count);
-    const [price,setPrice]=useState(item?.price);
-    const [color,setColor]=useState(item?.color);
-    const [hexColor,setHexColor]=useState(item?.hexColor);
-    const [main,setMain]=useState(item?.main);
-    const [discount,setDiscount]=useState(item?.discount);
-    const [product,setProduct]=useState(item?.product);
-    const [productImage,setProductImage]=useState(item?.productImage);
+    const [count,setCount]=useState(item.count);
+    const [price,setPrice]=useState(item.price);
+    const [id,setId]=useState(item.id);
+    const [color,setColor]=useState(item.color);
+    const [hexColor,setHexColor]=useState(item.colorHex);
+    const [main,setMain]=useState(item.main);
+    const [discount,setDiscount]=useState(item.discount);
+    const [product,setProduct]=useState(item.product);
+    const [productImage,setProductImage]=useState(item.productImage);
+
+    const [productSearch,setProductSearch]=useState("");
+    const [productImageSearch,setProductImageSearch]=useState("");
+
     async function submit() {
-        let response =await editProductInfo()
+        let response =await editProductInfo(price,color,hexColor,count,discount,product.id,productImage.id,main?1:0,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+    }
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
+    async function changeProductImageSearchHandle(e) {
+        let response = await getProductImageByWords(e.target.value);
+        setProductImageSearch(response);
     }
     return (
         <>
@@ -106,11 +121,8 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
                                         محصول
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2 value={product.name} change={changeProductSearchHandle} options={productSearch} click={setProduct} />
+
                                     </div>
                                 </div>
 
@@ -120,11 +132,8 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
                                         تصویر محصول
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                    <Select2ProductImage value={productImage.product.name} change={changeProductImageSearchHandle} options={productImageSearch} click={setProductImage} />
+
                                     </div>
                                 </div>
 

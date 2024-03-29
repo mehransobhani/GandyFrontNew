@@ -6,8 +6,7 @@ import {ArticleInsertPanel} from "../../Components/Article/ArticleInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {ArticleTablePanel} from "../../Components/Article/ArticleTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getArticle} from "../../Api/Article";
-import { getProductImage } from "../../Api/ProductImage";
+import {getArticle, getArticleByWords} from "../../Api/Article";
 
 export const Article  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -18,20 +17,20 @@ export const Article  = withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getProductImage(page);
+        let data =await  getArticle(page);
         setData(data); 
         setItem(data?.content) 
     }
-    async function searchProductHandler()
+    async function searchArticleHandler()
     {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
+        if(search=="")
+        {
+            getData();
+        }
+        else{
+        let data =await  getArticleByWords(search);
+        setItem(data); 
+    }
 }
  
     useEffect(()=>{
@@ -49,7 +48,7 @@ export const Article  = withAuth( () => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch}/>
+                    <SearchBox searchSubmit={searchArticleHandler} change={setSearch}/>
                 </div>
                 <div className={"mb-10"}>
                     <ArticleTablePanel
@@ -58,11 +57,11 @@ export const Article  = withAuth( () => {
                         }}
                         editItem={setEditItem}
                         reload={getData}
-                        data={data}
+                        data={item}
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

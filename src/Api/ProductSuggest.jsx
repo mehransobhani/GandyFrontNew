@@ -4,7 +4,7 @@ export async function getProductSuggest(page) {
     const response = await fetch(BaseUrl + "psug/getAll/"+page,
         {
             method: 'POST',
-         
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -63,6 +63,7 @@ export async function removeProductSuggest(id) {
     const response = await fetch(BaseUrl + "psug/delete",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     id:id
@@ -79,6 +80,7 @@ export async function searchProductSuggest(name) {
     const response = await fetch(BaseUrl + "pcount/getProductByWords",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     name:name

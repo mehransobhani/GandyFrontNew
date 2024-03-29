@@ -12,7 +12,6 @@ export function ProductSuggestTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
     
     function setEditMode(){
-        console.log("EDit")
         editItem(item);
         editMode();
     }

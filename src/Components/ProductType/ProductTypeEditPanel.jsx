@@ -2,18 +2,28 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import Uploader from "../Form/Uploader";
-import {Select} from "../Form/Select";
+import Select2 from "../Form/Select2";
 import {toast} from "react-toastify";
-import {editProductType} from "../../Api/ProductType";
+import {editProductType, getProductTypeByWords} from "../../Api/ProductType";
 
 export function ProductTypeEditPanel({item , cancel ,reload}) {
 
     const [name,setName]=useState(item.name);
+    const [parent,setParent]=useState(item.parentProductType);
+    const [id,setId]=useState(item.id);
+
+    const [parentSearch,setParentSearch]=useState("");
+
     async function submit() {
-        let response =await editProductType()
+        let response =await editProductType(name,parent.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
+
+    }
+
+    async function changeParentSearchHandle(e) {
+        let response = await getProductTypeByWords(e.target.value);
+        setParentSearch(response);
 
     }
     return (
@@ -50,11 +60,8 @@ export function ProductTypeEditPanel({item , cancel ,reload}) {
                                     والد
                                 </label>
                                 <div className="mt-2">
-                                    <Select>
-                                        <option>
-                                            انتخاب کنید
-                                        </option>
-                                    </Select>
+                                <Select2 value={parent.name} change={changeParentSearchHandle} options={parentSearch} click={setParent} />
+
                                 </div>
                             </div>
 

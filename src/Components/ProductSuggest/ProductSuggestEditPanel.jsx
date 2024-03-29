@@ -4,19 +4,33 @@ import CancelButton from "../Button/CancelButton";
 import DatePicker from "react-datepicker2";
 import {toast} from "react-toastify";
 import {editProductSuggest} from "../../Api/ProductSuggest";
-
+import Select2 from "../Form/Select2";
+import { searchProduct } from "../../Api/Product";
 export function ProductSuggestEditPanel({item , cancel ,reload}) {
 
-    const [product,setProduct]=useState("");
-    const [created_at,setCreated_at]=useState("");
-    const [expire_at,setExpire_at]=useState("");
-    function changeDate(e){
-        console.log('Selected Date and Time:', e.format('YYYY-MM-DD HH:mm:ss'));
+
+    console.log("ITEM ",item);
+    const [product,setProduct]=useState(item?.productCount);
+    const [created_at,setCreated_at]=useState(item?.create_at);
+    const [expire_at,setExpire_at]=useState(item?.expire_at);
+    const [id,setId]=useState(item?.id);
+    const [productSearch, setProductSearch] = useState(undefined);
+
+    function changeCreateDate(e){
+        setCreated_at(e.format('YYYY-MM-DD HH:mm'));
     }
-    async function submit() {
-        let response =await editProductSuggest()
-        reload();
-        toast.success("عملیات با موفقیت انجام شد")
+    function changeExpireDate(e){
+        setExpire_at(e.format('YYYY-MM-DD HH:mm'));
+    }
+     async function submit() {
+         let response =await editProductSuggest(product.id,created_at,expire_at,id)
+         reload();
+         toast.success("عملیات با موفقیت انجام شد")
+
+     }
+     async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
 
     }
     return (
@@ -45,7 +59,7 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
                                     <div>
                                         <DatePicker
 
-                                            onChange={changeDate}
+                                            onChange={changeCreateDate}
                                             persianDigits={true}
                                             timePicker={true}
                                             inputFormat={"Y-m-d"}
@@ -65,7 +79,7 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
                                     <div>
                                         <DatePicker
 
-                                            onChange={changeDate}
+                                            onChange={changeExpireDate}
                                             persianDigits={true}
                                             timePicker={true}
                                             inputFormat={"Y-m-d"}
@@ -81,11 +95,7 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
                                     محصول
                                 </label>
                                 <div className="mt-2">
-                                    <select
-                                        className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 "].join(" ")}
-                                    >
-                                        <option>انتخاب کنید</option>
-                                    </select>
+                                <Select2 value={product?.name} change={changeProductSearchHandle} options={productSearch} click={setProduct} />
                                 </div>
                             </div>
                         </div>

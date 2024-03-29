@@ -1,8 +1,8 @@
 import {useState} from "react";
 
 export  default  function Uploader({change})
-{
-    const [file,setFile]=useState(undefined);
+{ 
+    const[file,setFile]=useState(undefined)
     return(<>
         <div className="flex flex-col gap-4 items-center justify-center w-full">
             <label htmlFor="dropzone-file"
@@ -18,7 +18,7 @@ export  default  function Uploader({change})
 
                 </div>
                 <input id="dropzone-file" type="file" className="hidden" onChange={(e) => {
-                    // change(e.target.files[0]);
+                    change(e.target.files[0]);
                     setFile(e.target.files[0]);
                 }}/>
             </label>
