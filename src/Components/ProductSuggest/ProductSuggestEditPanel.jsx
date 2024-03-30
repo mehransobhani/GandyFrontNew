@@ -6,10 +6,7 @@ import {toast} from "react-toastify";
 import {editProductSuggest} from "../../Api/ProductSuggest";
 import Select2 from "../Form/Select2";
 import { searchProduct } from "../../Api/Product";
-export function ProductSuggestEditPanel({item , cancel ,reload}) {
-
-
-    console.log("ITEM ",item);
+  export function ProductSuggestEditPanel({item , cancel ,reload}) {
     const [product,setProduct]=useState(item?.productCount);
     const [created_at,setCreated_at]=useState(item?.create_at);
     const [expire_at,setExpire_at]=useState(item?.expire_at);
@@ -58,8 +55,7 @@ export function ProductSuggestEditPanel({item , cancel ,reload}) {
                                 <div className="mt-2">
                                     <div>
                                         <DatePicker
-
-                                            onChange={changeCreateDate}
+                                             onChange={changeCreateDate}
                                             persianDigits={true}
                                             timePicker={true}
                                             inputFormat={"Y-m-d"}
