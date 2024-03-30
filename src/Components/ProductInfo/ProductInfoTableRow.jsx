@@ -10,7 +10,7 @@ import {removeProductInfo} from "../../Api/ProductInfo";
 
 export function ProductInfoTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
-  
+
     function setEditMode(){
         console.log("EDit")
         editItem(item);
@@ -42,7 +42,7 @@ export function ProductInfoTableRow({editMode ,editItem,reload , item}) {
                 <Td>{item.colorHex}</Td>
                 <Td>{item.discount}</Td>
                 <Td>{item.product.name}</Td>
-                <Td>{item.count}</Td>
+                <Td>{item.productImage?.img}</Td>
                 <Td>{item.main?"بله":"خیر"}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}

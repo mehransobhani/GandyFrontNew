@@ -19,7 +19,7 @@ export function ProductAttributeTableRow({editMode ,editItem , reload , item}) {
     }
     async function removeHandler()
     {
-        let response=await removeProductAttribute();
+        let response=await removeProductAttribute(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);
@@ -37,8 +37,8 @@ export function ProductAttributeTableRow({editMode ,editItem , reload , item}) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>بله</Td>
-                <Td>بله</Td>
+                <Td>{item.product?.name}</Td>
+                <Td>{item?.attributeOption?.name}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

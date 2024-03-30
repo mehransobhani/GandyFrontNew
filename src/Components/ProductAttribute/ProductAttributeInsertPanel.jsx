@@ -2,11 +2,26 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {Select} from "../Form/Select";
 import {toast} from "react-toastify";
-import {insertProductAttribute} from "../../Api/ProductAttribute";
+import {insertProductAttribute, searchAttributeOption, searchPConfigByPName} from "../../Api/ProductAttribute";
+import {searchProduct} from "../../Api/Product";
+import Select2 from "../Form/Select2";
 
 export function ProductAttributeInsertPanel({reload}) {
 
-    const [name,setName]=useState("");
+    const [product,setProduct]=useState("");
+    const [productSearch,setProductSearch]=useState("");
+
+    const [option,setOption]=useState("");
+    const [optionSearch,setOptionSearch]=useState("");
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
+    async function changeOptionSearchHandle(e) {
+        let response = await searchAttributeOption(e.target.value);
+        setOptionSearch(response);
+    }
+
     async function submit() {
         let response =await insertProductAttribute()
         reload();
@@ -30,19 +45,14 @@ export function ProductAttributeInsertPanel({reload}) {
                                        className="block text-sm font-medium leading-6 text-gray-900">
                                    محصول
                                 </label>
-                                     <Select>
-                                        <option>انتخاب کنید</option>
-                                    </Select>
-
+                                <Select2 change={changeProductSearchHandle} options={productSearch} click={setProduct} />
                             </div>
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
                                       ویژگی
                                 </label>
-                                <Select>
-                                    <option>انتخاب کنید</option>
-                                </Select>
+                                <Select2 change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
                             </div>
                         </div>
                     </div>

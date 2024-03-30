@@ -2,22 +2,41 @@ import withAuth from "../../AuthMiddleware";
 import AdminLayout from "../../Layout/AdminLayout";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import Pagination from "../../Components/Pagination";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ProductAttributeTablePanel} from "../../Components/ProductAttribute/ProductAttributeTablePanel";
 import {ProductAttributeInsertPanel} from "../../Components/ProductAttribute/ProductAttributeInsertPanel";
 import {ProductAttributeEditPanel} from "../../Components/ProductAttribute/ProductAttributeEditPanel";
-import {getProductAttribute} from "../../Api/ProductAttribute";
+import {getProductAttribute, searchAttributeOption} from "../../Api/ProductAttribute";
 
 export const ProductAttribute =withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
+    const [item, setItem] = useState(undefined);
 
-    async function getData()
+    async function getData(page=0)
     {
-        let data =await  getProductAttribute();
+        let data =await  getProductAttribute(page);
+        setData(data);
+        setItem(data?.content)
     }
+    async function searchProductHandler()
+    {
+            if(search=="")
+            {
+                getData();
+            }
+            else{
+            let data =await  searchAttributeOption(search);
+            setItem(data);
+        }
+    }
+
+    useEffect(()=>{
+        getData();
+    },[])
+
     return (
         <>
             <AdminLayout>
@@ -38,13 +57,13 @@ export const ProductAttribute =withAuth( () => {
                             setEdit(true)
                         }}
                         editItem={setEditItem}
-                        data={data}
+                        data={item}
                         reload={getData}
 
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={1} totalPage={10}/>
+                    <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

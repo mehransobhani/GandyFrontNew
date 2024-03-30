@@ -91,6 +91,14 @@ export default function Sidebar() {
                             icon: <CogIcon
                                 className={["h-6 w-6 ", pathName == "/product/attribute/select" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
 
+                        },
+                        {
+                            title: "افزودن ویژگی",
+                            href: "/product/attribute/",
+                            current: pathName == "/product/attribute/",
+                            icon: <CogIcon
+                                className={["h-6 w-6 ", pathName == "/product/attribute/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
+
                         }
                     ]
                 },

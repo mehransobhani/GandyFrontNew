@@ -3,11 +3,26 @@ import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {Select} from "../Form/Select";
 import {toast} from "react-toastify";
-import {editProductAttribute} from "../../Api/ProductAttribute";
+import {editProductAttribute, searchAttributeOption} from "../../Api/ProductAttribute";
+import {searchProduct} from "../../Api/Product";
+import Select2 from "../Form/Select2";
 
 export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
-    const [name,setName]=useState(item.name);
+    const [product,setProduct]=useState(item.product);
+    const [productSearch,setProductSearch]=useState("");
+
+    const [option,setOption]=useState(item.attributeOption);
+    const [optionSearch,setOptionSearch]=useState("");
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
+    async function changeOptionSearchHandle(e) {
+        let response = await searchAttributeOption(e.target.value);
+        setOptionSearch(response);
+    }
+
     async function submit() {
         let response =await editProductAttribute()
         reload();
@@ -25,34 +40,24 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
                 <hr/>
 
                     <div className="space-y-12">
-
                         <div className=" ">
-
-
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
                                         محصول
                                     </label>
-
-                                        <Select>
-                                            <option>انتخاب کنید</option>
-                                        </Select>
+                                    <Select2 value={product?.name} change={changeProductSearchHandle} options={productSearch} click={setProduct} />
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
                                         ویژگی
                                     </label>
-                                    <Select>
-                                        <option>انتخاب کنید</option>
-                                    </Select>
+                                    <Select2 value={option?.name} change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">

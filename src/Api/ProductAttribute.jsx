@@ -2,6 +2,7 @@ import {BaseUrl} from "../env";
 export async function getProductAttribute(page) {
     const response = await fetch(BaseUrl + "pconfig/findAll/"+page,
         {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -14,6 +15,7 @@ export async function insertProductAttribute(attributeOption,product) {
     const response = await fetch(BaseUrl + "pconfig/add",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     attributeOption:{
@@ -35,6 +37,7 @@ export async function editProductAttribute(attributeOption,product,id) {
     const response = await fetch(BaseUrl + "pconfig/add",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     attributeOption:{
@@ -57,6 +60,7 @@ export async function removeProductAttribute(id) {
     const response = await fetch(BaseUrl + "pconfig/deleteById"+id,
         {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -68,6 +72,7 @@ export async function searchPConfigByPName(name) {
     const response = await fetch(BaseUrl + "pconfig/searchPConfigByPName",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     name:name
@@ -84,6 +89,7 @@ export async function searchAttributeOption(name) {
     const response = await fetch(BaseUrl + "pconfig/searchAttributeOption",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     name:name
@@ -100,6 +106,7 @@ export async function getProductByWords(name) {
     const response = await fetch(BaseUrl + "pconfig/getProductByWords",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     name:name

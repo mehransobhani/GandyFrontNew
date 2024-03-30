@@ -3,13 +3,22 @@ import ConfirmButton from "../Button/ConfirmButton";
 import Uploader from "../Form/Uploader";
 import {toast} from "react-toastify";
 import {insertProductImage} from "../../Api/ProductImage";
+import {searchProduct} from "../../Api/Product";
+import Select2 from "../Form/Select2";
 
 export function ProductImageInsertPanel({reload}) {
 
     const [file,setFile]=useState("");
     const [product,setProduct]=useState("");
+    const [productSearch,setProductSearch]=useState("");
+
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
+
     async function submit() {
-        let response =await insertProductImage()
+        let response =await insertProductImage(product.id,file)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
@@ -24,7 +33,6 @@ export function ProductImageInsertPanel({reload}) {
                 </div>
                 <hr/>
 
-                <form>
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -46,11 +54,7 @@ export function ProductImageInsertPanel({reload}) {
                                          محصول
                                     </label>
                                     <div className="mt-2">
-                                       <select
-                                           className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 " ].join(" ")}
-                                       >
-                                           <option>انتخاب کنید</option>
-                                       </select>
+                                        <Select2 change={changeProductSearchHandle} options={productSearch} click={setProduct} />
                                     </div>
                                 </div>
 
@@ -62,7 +66,7 @@ export function ProductImageInsertPanel({reload}) {
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
-                </form>
+
             </div>
 
         </>
