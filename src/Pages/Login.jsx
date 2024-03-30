@@ -3,6 +3,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import Input from '../Components/Form/Input';
 import { setAuth, signin, signup } from '../Api/Auth';
+import {redirect} from "react-router-dom";
 
 export default function Login() {
     Cookies.set('myCat', 'Pacman', { path: '/' });
@@ -40,10 +41,7 @@ export default function Login() {
 
         else if (step == 2) {
             let response = await signup(mobile, code);
-            console.log("response",response);
-            console.log("response.headers",response.headers);
-            const setCookieHeader = response.headers.get('Set-Cookie');
-            console.log("response.headers.Set-Cookie",setCookieHeader);
+            redirect("/product/create");
          }
     }
     return (<>
