@@ -1,9 +1,8 @@
 import Cookies from 'js-cookie';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-import Input from '../Components/Form/Input';
-import { setAuth, signin, signup } from '../Api/Auth';
-import {redirect} from "react-router-dom";
+import { signin, signup } from '../Api/Auth';
+import { useNavigate} from "react-router-dom";
 
 export default function Login() {
     Cookies.set('myCat', 'Pacman', { path: '/' });
@@ -12,6 +11,7 @@ export default function Login() {
     const [step, setStep] = useState(1);
     const [error, setError] = useState(undefined);
 
+    const navigate = useNavigate();
     function ConfirmNumber(e) {
         e.preventDefault();
     }
@@ -29,19 +29,9 @@ export default function Login() {
             await signin(mobile);
             setStep(2)
         }
-        // else if (step == 2) {
-        //
-        //     const data = await setAuth(mobile, code);
-        //     console.log("data",data)
-        //     console.log("datah",data.headers)
-        //
-        //
-        // }
-
-
         else if (step == 2) {
             let response = await signup(mobile, code);
-            redirect("/product/create");
+            navigate("/product/create")
          }
     }
     return (<>
