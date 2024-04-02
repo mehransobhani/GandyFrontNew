@@ -4,13 +4,22 @@ import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
 import {toast} from "react-toastify";
 import {editProductImage} from "../../Api/ProductImage";
+import Select2 from "../Form/Select2";
+import {searchProduct} from "../../Api/Product";
 
 export function ProductImageEditPanel({item , cancel ,reload}) {
 
      const [file,setFile]=useState(item.file);
+     const [id,setId]=useState(item.id);
     const [product,setProduct]=useState(item.product);
+    const [productSearch,setProductSearch]=useState("");
+
+    async function changeProductSearchHandle(e) {
+        let response = await searchProduct(e.target.value);
+        setProductSearch(response);
+    }
     async function submit() {
-        let response =await editProductImage()
+        let response =await editProductImage(product.id,file,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
@@ -46,11 +55,8 @@ export function ProductImageEditPanel({item , cancel ,reload}) {
                                         محصول
                                     </label>
                                     <div className="mt-2">
-                                        <select
-                                            className={["block w-full bg-white rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 focus:outline focus:outline-1 focus:outline-indigo-500   sm:text-sm sm:leading-6 " ].join(" ")}
-                                        >
-                                            <option>انتخاب کنید</option>
-                                        </select>
+                                        <Select2 value={product.name} change={changeProductSearchHandle} options={productSearch} click={setProduct} />
+
                                     </div>
                                 </div>
 

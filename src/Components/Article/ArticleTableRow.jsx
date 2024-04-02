@@ -39,7 +39,7 @@ export function ArticleTableRow({editMode ,editItem , reload , item}) {
             </tr>
             <tr className={"text-right"}>
                 <Modal isOpen={previewModal} title={"پیش نمایش"} onClose={() => setPreviewModal(false)}>
-                    <strong className={"font-bold"}>آیا از حذف این محصول اطمینان دارید ؟</strong>
+                    <div dangerouslySetInnerHTML={{__html: item.content}}></div>
                     <hr/>
                     <div className={"flex flex-row gap-2"}>
                         <CancelButton title={" بستن"} click={() => setPreviewModal(false)}/>
@@ -48,14 +48,14 @@ export function ArticleTableRow({editMode ,editItem , reload , item}) {
             </tr>
             <Tr>
                 <Td>
-                    <img src={""} className={"w-24 h-24 mx-auto"}/>
+                    <img src={""+item.image} className={"w-24 h-24 mx-auto"}/>
                 </Td>
-                <Td>A21s</Td>
-                <Td>mobile samsung</Td>
-                <Td>mobile</Td>
+                <Td>{item.title}</Td>
+                <Td>{item.description}</Td>
+                <Td>{item.url}</Td>
                 <Td>
                     <div className={"  whitespace-normal overflow-hidden line-clamp-1"}>
-                        آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟آیا از حذف این محصول اطمینان دارید ؟دارید ؟آیا از حذف این محصول اطمینان دارید ؟
+                        <div dangerouslySetInnerHTML={{__html: item.content}}></div>
                 </div>
                 </Td>
                  <Td><EyeIcon onClick={() => {

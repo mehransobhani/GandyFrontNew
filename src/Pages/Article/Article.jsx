@@ -18,8 +18,8 @@ export const Article  = withAuth( () => {
     async function getData(page=0)
     {
         let data =await  getArticle(page);
-        setData(data); 
-        setItem(data?.content) 
+        setData(data);
+        setItem(data?.content)
     }
     async function searchArticleHandler()
     {
@@ -29,10 +29,10 @@ export const Article  = withAuth( () => {
         }
         else{
         let data =await  getArticleByWords(search);
-        setItem(data); 
+        setItem(data);
     }
 }
- 
+
     useEffect(()=>{
         getData();
     },[])
@@ -50,6 +50,9 @@ export const Article  = withAuth( () => {
                 <div className={"mb-10"}>
                     <SearchBox searchSubmit={searchArticleHandler} change={setSearch}/>
                 </div>
+                {
+                    console.log("ITEM IS ",item)
+                }
                 <div className={"mb-10"}>
                     <ArticleTablePanel
                         editMode={() => {

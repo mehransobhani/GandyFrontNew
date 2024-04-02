@@ -2,59 +2,66 @@ import {BaseUrl} from '../env';
 export async function getArticle(page) {
     const response = await fetch(BaseUrl + "article/getAll/"+page,
         {
-            method: 'POST', 
+            method: 'POST',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
         }
     )
-    return response;
+    return response.json();
 }export async function insertArticle(title,description,url,content,image) {
 
+    let body=JSON.stringify({
+        title:title,
+        description:description,
+        url:url,
+        content:content,
+        create_at:"2024-02-12 12:23",
+        image:image.name,
+    })
     const formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("description", description);
-    formdata.append("url", url);
-    formdata.append("content", content);
-    formdata.append("image", image);
-    formdata.append("create_at","2024-02-12 12:23");
-    // create_at
+    formdata.append("file", image);
+    formdata.append("model", body);
+
     const response = await fetch(BaseUrl + "article/add",
         {
             method: 'POST',
             credentials: 'include',
+
             body:formdata,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
+
         }
     )
     return response;
 }export async function editArticle(title,description,url,content,image,id) {
+    let body=JSON.stringify({
+        id:id,
+        title:title,
+        description:description,
+        url:url,
+        content:content,
+        create_at:"2024-02-12 12:23",
+        image:image.name,
+    })
     const formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("description", description);
-    formdata.append("url", url);
-    formdata.append("content", content);
-    formdata.append("image", image);
-    formdata.append("id", id);
+    formdata.append("file", image);
+    formdata.append("model", body);
 
     const response = await fetch(BaseUrl + "article/add",
         {
             method: 'POST',
             credentials: 'include',
+
             body:formdata,
-            headers: {
-                "Content-Type": "application/json",
-            }
+
         }
     )
     return response;
 }export async function removeArticle(id) {
     const response = await fetch(BaseUrl + "article/delete/"+id,
         {
-            method: 'POST', 
+            method: 'POST',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +81,7 @@ export async function getArticleByWords(name) {
                 }
             ),
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             }
         }
     )

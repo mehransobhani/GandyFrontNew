@@ -10,6 +10,7 @@ import {removeProductImage} from "../../Api/ProductImage";
 
 export function ProductImageTableRow({editMode ,editItem,reload , item}) {
     const [deleteModal, setDeleteModal] = useState(false);
+    const [previewModal, setPreviewodal] = useState(false);
 
   console.log("Item",item);
     function setEditMode(){
@@ -18,7 +19,7 @@ export function ProductImageTableRow({editMode ,editItem,reload , item}) {
     }
     async function removeHandler()
     {
-        let response=await removeProductImage();
+        let response=await removeProductImage(item.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         setDeleteModal(false);
@@ -35,6 +36,7 @@ export function ProductImageTableRow({editMode ,editItem,reload , item}) {
                     </div>
                 </Modal>
             </tr>
+
             <Tr>
                 <Td>{item.product.name}</Td>
                 <Td>

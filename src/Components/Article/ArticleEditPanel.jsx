@@ -11,13 +11,14 @@ import {toast} from "react-toastify";
 
 export function ArticleEditPanel({item , cancel ,reload}) {
     const [title,setTitle]=useState(item.title);
+    const [id,setId]=useState(item.id);
     const [description,setDescription]=useState(item.description);
     const [content,setContent]=useState(item.content);
     const [url,setUrl]=useState(item.url);
     const [image,setImage]=useState("");
 
     async  function submit() {
-        let response = await  editArticle()
+        let response = await  editArticle(title,description,url,content,image,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
@@ -32,7 +33,6 @@ export function ArticleEditPanel({item , cancel ,reload}) {
                 </div>
                 <hr/>
 
-                <form>
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -72,10 +72,10 @@ export function ArticleEditPanel({item , cancel ,reload}) {
                                         توضیحات
                                     </label>
                                     <div className="mt-2">
-                                        <Textarea change={(e) => {
+                                        <Textarea value={description} change={(e) => {
                                             setDescription(e.target.value)
                                         }}>
-                                            {description}
+                                            {item.description}
                                         </Textarea>
                                     </div>
                                 </div>
@@ -118,7 +118,6 @@ export function ArticleEditPanel({item , cancel ,reload}) {
                         <ConfirmButton title={"ویرایش"} click={submit}/>
                         <CancelButton title={"انصراف"}  click={cancel}/>
                     </div>
-                </form>
             </div>
 
         </>

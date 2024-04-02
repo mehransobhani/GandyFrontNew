@@ -14,38 +14,42 @@ export async function getProductImage(page) {
     return response.json();
 }
 export async function insertProductImage(product,image) {
-    let products= {product: {id:product}}
+    let body=JSON.stringify({
+        img:image.name,
+        product:{
+            id:product
+        }
+    })
+
     const formdata = new FormData();
-    formdata.append("image", image);
-    formdata.append("product", products);
+    formdata.append("file", image);
+    formdata.append("model", body);
 
     const response = await fetch(BaseUrl + "productImage/add",
         {
             method: 'POST',
             credentials: 'include',
             body: formdata,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
         }
     )
     return response;
 }
 export async function editProductImage(product,image,id) {
-    let products= {product: {id:product}}
-
+    let body=JSON.stringify({
+        id:id,
+        img:image.name,
+        product:{
+            id:product
+        }
+    })
     const formdata = new FormData();
-    formdata.append("image", image);
-    formdata.append("product", products);
-    formdata.append("id", id);
+    formdata.append("file", image);
+    formdata.append("model", body);
     const response = await fetch(BaseUrl + "productImage/add",
         {
             method: 'POST',
             credentials: 'include',
             body: formdata,
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
         }
     )
     return response;
