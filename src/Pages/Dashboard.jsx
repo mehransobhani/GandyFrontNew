@@ -3,8 +3,11 @@ import AdminLayout from "../Layout/AdminLayout";
 
 
 const Dashboard = withAuth(() => {
+
     return(<AdminLayout>
-        <div></div>
+        <div>
+           داشبورد
+        </div>
     </AdminLayout> );
   });
 

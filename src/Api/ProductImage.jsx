@@ -1,4 +1,5 @@
 import {BaseUrl} from "../env";
+import {refreshToken, signout} from "./Auth";
 
 export async function getProductImage(page) {
     const response = await fetch(BaseUrl + "productImage/getAllProductImage/"+page,
@@ -11,6 +12,17 @@ export async function getProductImage(page) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getProductImage(page);
+        }
+    }
     return response.json();
 }
 export async function insertProductImage(product,image) {
@@ -32,6 +44,17 @@ export async function insertProductImage(product,image) {
             body: formdata,
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            insertProductImage(product,image);
+        }
+    }
     return response;
 }
 export async function editProductImage(product,image,id) {
@@ -52,6 +75,17 @@ export async function editProductImage(product,image,id) {
             body: formdata,
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            editProductImage(product,image,id);
+        }
+    }
     return response;
 }
 export async function removeProductImage(id) {
@@ -64,5 +98,16 @@ export async function removeProductImage(id) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            removeProductImage(id);
+        }
+    }
     return response;
 }

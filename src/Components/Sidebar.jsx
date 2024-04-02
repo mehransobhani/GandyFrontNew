@@ -22,10 +22,10 @@ export default function Sidebar() {
     const menu = [
         {
             title: "داشبورد",
-            href: "/admin/dashboard",
+            href: "/dashboard",
             icon: <Squares2X2Icon
-                className={["h-6 w-6 ", pathName == "/admin/dashboard" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
-            current: pathName == "/admin/dashboard"
+                className={["h-6 w-6 ", pathName == "/dashboard" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
+            current: pathName == "/dashboard"
         },  {
             title: "مقاله",
             href: "/article",

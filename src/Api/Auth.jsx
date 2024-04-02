@@ -46,20 +46,31 @@ export async function signup(mobile, code) {
      )
     return response;
 }
-export async function refreshToken(refreshtoken) {
+export async function refreshToken() {
      const response = await fetch(BaseUrl + "auth/refreshtoken",
         {
             method: 'POST',
-            body: JSON.stringify(
-                {
-                    refreshtoken: refreshtoken
-                }
-            ),
+
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
         }
      )
+    return response;
+}
+
+
+export async function signout() {
+    const response = await fetch(BaseUrl + "auth/signout",
+        {
+            method: 'POST',
+
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
     return response;
 }

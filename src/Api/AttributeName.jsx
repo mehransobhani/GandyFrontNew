@@ -1,4 +1,5 @@
 import {BaseUrl} from '../env';
+import {refreshToken, signout} from "./Auth";
 export async function getAttributeName(page) {
     const response = await fetch(BaseUrl + "attributeType/findAll/"+page,
         {
@@ -10,6 +11,17 @@ export async function getAttributeName(page) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getAttributeName(page);
+        }
+    }
     return response.json();
 }export async function getAttributeTypeByWords(name) {
     const response = await fetch(BaseUrl + "attributeType/getAttributeTypeByWords",
@@ -27,6 +39,17 @@ export async function getAttributeName(page) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getAttributeTypeByWords(name);
+        }
+    }
     return response.json();
 }
 export async function insertAttributeName(attributeType) {
@@ -45,6 +68,17 @@ export async function insertAttributeName(attributeType) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            insertAttributeName(attributeType);
+        }
+    }
     return response;
 }export async function editAttributeName(attributeType ,id) {
     const response = await fetch(BaseUrl + "attributeType/add",
@@ -63,6 +97,17 @@ export async function insertAttributeName(attributeType) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            editAttributeName(attributeType ,id);
+        }
+    }
     return response;
 }export async function removeAttributeName(id) {
     const response = await fetch(BaseUrl + "attributeType/deleteById/"+id,
@@ -75,5 +120,16 @@ export async function insertAttributeName(attributeType) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            removeAttributeName(id);
+        }
+    }
     return response;
 }

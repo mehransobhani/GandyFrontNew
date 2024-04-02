@@ -1,4 +1,5 @@
 import {BaseUrl} from "../env";
+import {refreshToken, signout} from "./Auth";
 export async function getProductAttribute(page) {
     const response = await fetch(BaseUrl + "pconfig/findAll/"+page,
         {
@@ -9,6 +10,17 @@ export async function getProductAttribute(page) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getProductAttribute(page);
+        }
+    }
     return response.json();
 }
 export async function insertProductAttribute(attributeOption,product) {
@@ -31,6 +43,17 @@ export async function insertProductAttribute(attributeOption,product) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            insertProductAttribute(attributeOption,product);
+        }
+    }
     return response;
 }
 export async function editProductAttribute(attributeOption,product,id) {
@@ -54,6 +77,17 @@ export async function editProductAttribute(attributeOption,product,id) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            editProductAttribute(attributeOption,product,id);
+        }
+    }
     return response;
 }
 export async function removeProductAttribute(id) {
@@ -66,6 +100,17 @@ export async function removeProductAttribute(id) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            removeProductAttribute(id);
+        }
+    }
     return response;
 }
 export async function searchPConfigByPName(name) {
@@ -83,6 +128,17 @@ export async function searchPConfigByPName(name) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            searchPConfigByPName(name);
+        }
+    }
     return response;
 }
 export async function searchAttributeOption(name) {
@@ -100,6 +156,17 @@ export async function searchAttributeOption(name) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            searchAttributeOption(name);
+        }
+    }
     return response.json();
 }
 export async function getProductByWords(name) {
@@ -117,5 +184,16 @@ export async function getProductByWords(name) {
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getProductByWords(name);
+        }
+    }
     return response;
 }

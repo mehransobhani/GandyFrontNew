@@ -1,6 +1,5 @@
-import { async } from "q";
 import {BaseUrl} from "../env";
-
+import {refreshToken, signout} from "./Auth";
 
 export async function getProduct(page) {
     const response = await fetch(BaseUrl + "product/getAll/"+page,
@@ -8,15 +7,25 @@ export async function getProduct(page) {
             credentials: 'include',
 
             method: 'POST',
-            body: JSON.stringify(
-               
-            ),
+
             headers: {
                 "Content-Type": "application/json",
             }
-            
+
         }
     )
+
+    if(response.status==408)
+    {
+       let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+           window.location.href="/login";
+         }
+        else {
+            getProduct(page);
+        }
+    }
     return response.json();
 }
 
@@ -32,9 +41,20 @@ export async function searchProduct(name) {
             headers: {
                 "Content-Type": "application/json",
             }
-            
+
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            searchProduct(name);
+        }
+    }
     return response.json();
 }
 export async function insertProduct(name,  description,  amazingOffer,  productType, brand) {
@@ -62,6 +82,17 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            insertProduct(name,  description,  amazingOffer,  productType, brand);
+        }
+    }
     return response;
 }export async function editProduct(name,  description,  amazingOffer,  productType, brand ,id) {
     const response = await fetch(BaseUrl + "product/add",
@@ -87,6 +118,17 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            editProduct(name,  description,  amazingOffer,  productType, brand ,id);
+        }
+    }
     return response;
 }export async function removeProduct(id) {
     const response = await fetch(BaseUrl + "product/delete",
@@ -104,6 +146,17 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
             }
         }
     )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            removeProduct(id);
+        }
+    }
     return response;
 }
 
@@ -123,6 +176,17 @@ export async function getProductTypeByWords(name){
         }
     }
 )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getProductTypeByWords(name)
+        }
+    }
 return response.json();
 }
 
@@ -142,5 +206,16 @@ export async function getBrandByWords(name){
        }
    }
 )
+    if(response.status==408)
+    {
+        let  refreshTokens=await refreshToken()
+        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+            let  signouts=await signout()
+            window.location.href="/login";
+        }
+        else {
+            getBrandByWords(name);
+        }
+    }
 return response.json();
 }

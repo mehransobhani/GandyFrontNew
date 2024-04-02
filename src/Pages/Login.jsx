@@ -1,12 +1,10 @@
-import Cookies from 'js-cookie';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { signin, signup } from '../Api/Auth';
 import { useNavigate} from "react-router-dom";
 
 export default function Login() {
-    Cookies.set('myCat', 'Pacman', { path: '/' });
-    const [mobile, setMobile] = useState("");
+     const [mobile, setMobile] = useState("");
     const [code, setCode] = useState("");
     const [step, setStep] = useState(1);
     const [error, setError] = useState(undefined);
