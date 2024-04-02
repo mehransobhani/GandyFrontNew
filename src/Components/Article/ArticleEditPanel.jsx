@@ -45,7 +45,7 @@ export function ArticleEditPanel({item , cancel ,reload}) {
 
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div className="sm:col-span-full">
-                                    <Uploader />
+                                    <Uploader change={setImage}/>
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"

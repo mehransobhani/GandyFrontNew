@@ -17,7 +17,6 @@ export async function getArticle(page) {
         description:description,
         url:url,
         content:content,
-        create_at:"2024-02-12 12:23",
         image:image.name,
     })
     const formdata = new FormData();
@@ -41,8 +40,7 @@ export async function getArticle(page) {
         description:description,
         url:url,
         content:content,
-        create_at:"2024-02-12 12:23",
-        image:image.name,
+         image:image.name,
     })
     const formdata = new FormData();
     formdata.append("file", image);

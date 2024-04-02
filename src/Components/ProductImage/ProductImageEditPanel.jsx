@@ -50,8 +50,7 @@ export function ProductImageEditPanel({item , cancel ,reload}) {
                                 <div className="sm:col-span-3">
 
                                     <div className="mt-2">
-                                        <Uploader/>
-
+                                        <Uploader change={setFile}/>
                                     </div>
                                 </div>
 
