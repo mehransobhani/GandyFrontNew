@@ -10,6 +10,7 @@ import Select2AttributeOption from "../Form/Select2AttributeOption";
 
 export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
+    const [id,setId]=useState(item.id);
     const [product,setProduct]=useState(item.product);
     const [productSearch,setProductSearch]=useState("");
 
@@ -25,7 +26,7 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
     }
 
     async function submit() {
-        let response =await editProductAttribute()
+        let response =await editProductAttribute(option.id,product.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 

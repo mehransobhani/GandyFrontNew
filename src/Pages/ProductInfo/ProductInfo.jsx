@@ -7,6 +7,7 @@ import { ProductInfoTablePanel } from "../../Components/ProductInfo/ProductInfoT
 import { useEffect, useState } from "react";
 import { ProductInfoEditPanel } from "../../Components/ProductInfo/ProductInfoEditPanel";
 import {getProductInfo} from "../../Api/ProductInfo";
+import {searchProductSuggest} from "../../Api/ProductSuggest";
 
 export  const ProductInfo = withAuth(() => {
     const [search, setSearch] = useState("");
@@ -18,21 +19,21 @@ export  const ProductInfo = withAuth(() => {
     async function getData(page=0)
     {
         let data =await  getProductInfo(page);
-        setData(data); 
-        setItem(data?.content) 
+        setData(data);
+        setItem(data?.content)
     }
     async function searchProductHandler()
     {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
+        if(search=="")
+        {
+            getData();
+        }
+        else{
+        let data =await  searchProductSuggest(search);
+        setItem(Object.values(data.productCountResponses));
+    }
 }
- 
+
     useEffect(()=>{
         getData();
     },[])
@@ -50,7 +51,7 @@ export  const ProductInfo = withAuth(() => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch} />
+                    <SearchBox searchSubmit={searchProductHandler} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
                     <ProductInfoTablePanel

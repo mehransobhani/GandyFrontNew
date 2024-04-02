@@ -26,7 +26,8 @@ export const ProductSuggest = withAuth(() => {
         }
         else {
             let data = await searchProductSuggest(search);
-            console.log("kji",data);
+
+            console.log("DATA AS" ,data)
             setItem(data);
         }
     }
@@ -45,9 +46,9 @@ export const ProductSuggest = withAuth(() => {
                 <div className={"mb-10"}>
                     <hr />
                 </div>
-                <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchProductHandler} change={setSearch} />
-                </div>
+                {/*<div className={"mb-10"}>*/}
+                {/*    <SearchBox searchSubmit={searchProductHandler} change={setSearch} />*/}
+                {/*</div>*/}
                 <div className={"mb-10"}>
                   { item && <ProductSuggestTablePanel
                         editMode={() => {
