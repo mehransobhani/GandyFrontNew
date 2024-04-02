@@ -38,7 +38,7 @@ export function ProductAttributeTableRow({editMode ,editItem , reload , item}) {
             </tr>
             <Tr>
                 <Td>{item.product?.name}</Td>
-                <Td>{item?.attributeOption?.name}</Td>
+                <Td>{item?.attributeOption?.attributeOption}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer"/></Td>

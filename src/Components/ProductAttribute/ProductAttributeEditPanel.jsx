@@ -6,6 +6,7 @@ import {toast} from "react-toastify";
 import {editProductAttribute, searchAttributeOption} from "../../Api/ProductAttribute";
 import {searchProduct} from "../../Api/Product";
 import Select2 from "../Form/Select2";
+import Select2AttributeOption from "../Form/Select2AttributeOption";
 
 export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
@@ -54,7 +55,7 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
                                            className="block text-sm font-medium leading-6 text-gray-900">
                                         ویژگی
                                     </label>
-                                    <Select2 value={option?.name} change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
+                                    <Select2AttributeOption value={option?.attributeOption} change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
                                 </div>
                             </div>
                         </div>

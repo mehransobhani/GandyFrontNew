@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {insertProductAttribute, searchAttributeOption, searchPConfigByPName} from "../../Api/ProductAttribute";
 import {searchProduct} from "../../Api/Product";
 import Select2 from "../Form/Select2";
+import Select2AttributeOption from "../Form/Select2AttributeOption";
 
 export function ProductAttributeInsertPanel({reload}) {
 
@@ -23,7 +24,7 @@ export function ProductAttributeInsertPanel({reload}) {
     }
 
     async function submit() {
-        let response =await insertProductAttribute()
+        let response =await insertProductAttribute(option.id,product.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
 
@@ -52,7 +53,7 @@ export function ProductAttributeInsertPanel({reload}) {
                                        className="block text-sm font-medium leading-6 text-gray-900">
                                       ویژگی
                                 </label>
-                                <Select2 change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
+                                <Select2AttributeOption change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
                             </div>
                         </div>
                     </div>

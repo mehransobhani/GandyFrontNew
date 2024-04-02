@@ -86,7 +86,7 @@ export async function searchPConfigByPName(name) {
     return response;
 }
 export async function searchAttributeOption(name) {
-    const response = await fetch(BaseUrl + "pconfig/searchAttributeOption",
+    const response = await fetch(BaseUrl + "attributeOption/searchAttributeOption",
         {
             method: 'POST',
             credentials: 'include',
@@ -100,7 +100,7 @@ export async function searchAttributeOption(name) {
             }
         }
     )
-    return response;
+    return response.json();
 }
 export async function getProductByWords(name) {
     const response = await fetch(BaseUrl + "pconfig/getProductByWords",
