@@ -19,6 +19,7 @@ export function ProductEditPanel({item , cancel ,reload}) {
     const [brandSearch,setBrandSearch]=useState(undefined);
 
     async function submit() {
+        try {
         let response =await editProduct(name,
             description,
             amazingOffer?1:0,
@@ -26,14 +27,18 @@ export function ProductEditPanel({item , cancel ,reload}) {
             brand,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
     async function changeBrandSearchHandle(e) {
         let response =await getBrandByWords(e.target.value);
         setBrandSearch(response);
 
-    } 
+    }
 
     async function changeProductTypeSearchHandle(e) {
         let response =await getProductTypeByWords(e.target.value);
@@ -97,7 +102,7 @@ export function ProductEditPanel({item , cancel ,reload}) {
                                     </label>
                                     <div className="mt-2">
                                         <Select2 value={productType.name} change={changeProductTypeSearchHandle} options={productTypeSearch} click={setProductType} />
-                                    
+
                                     </div>
                                 </div>
 

@@ -18,10 +18,15 @@ export function ProductImageInsertPanel({reload}) {
     }
 
     async function submit() {
-        let response =await insertProductImage(product.id,file)
-        reload();
-        toast.success("عملیات با موفقیت انجام شد")
-
+        try {
+            let response = await insertProductImage(product.id, file)
+            reload();
+            toast.success("عملیات با موفقیت انجام شد")
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     return (
         <>

@@ -8,10 +8,15 @@ export function AttributeNameInsertPanel({reload}) {
 
     const [name,setName]=useState("");
    async function submit() {
+       try {
         let response =await insertAttributeName(name)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+       }
+       catch (e)
+       {
+           toast.error("متاسفانه عملیات با شکست روبرو شد")
+       }
     }
     return (
         <>

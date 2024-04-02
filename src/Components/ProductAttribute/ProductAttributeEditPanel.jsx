@@ -26,10 +26,15 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
     }
 
     async function submit() {
+        try {
         let response =await editProductAttribute(option.id,product.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     return (
         <>

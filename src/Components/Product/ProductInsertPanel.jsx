@@ -17,6 +17,7 @@ export function ProductInsertPanel({ reload }) {
     const [brandSearch, setBrandSearch] = useState(undefined);
 
     async function submit() {
+        try {
         let response = await insertProduct(name,
             description,
             amazingOffer?1:0,
@@ -24,7 +25,11 @@ export function ProductInsertPanel({ reload }) {
             brand)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
 

@@ -13,9 +13,15 @@ export function ProductTypeInsertPanel({reload}) {
     const [parentSearch,setParentSearch]=useState("");
 
     async function submit() {
+        try {
         let response =await insertProductType(name,parent.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
     async function changeParentSearchHandle(e) {

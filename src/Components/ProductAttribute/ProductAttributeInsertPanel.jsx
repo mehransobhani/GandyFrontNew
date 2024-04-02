@@ -24,10 +24,15 @@ export function ProductAttributeInsertPanel({reload}) {
     }
 
     async function submit() {
+        try {
         let response =await insertProductAttribute(option.id,product.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     return (
         <>

@@ -17,10 +17,15 @@ export function ArticleInsertPanel({reload}) {
     const [image, setImage] = useState("");
 
    async function submit() {
+       try {
         let response =await insertArticle(title,description,url,content,image)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+       }
+       catch (e)
+       {
+           toast.error("متاسفانه عملیات با شکست روبرو شد")
+       }
     }
 
     return (
@@ -31,10 +36,10 @@ export function ArticleInsertPanel({reload}) {
                         ثبت مقاله جدید
                     </h2>
                 </div>
-                <hr/> 
+                <hr/>
                     <div className="space-y-12">
 
-                        <div className=" "> 
+                        <div className=" ">
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div className="sm:col-span-full">
                                     <Uploader change={setImage}/>
@@ -114,7 +119,7 @@ export function ArticleInsertPanel({reload}) {
                     <div className="mt-6 flex items-center justify-center gap-x-6">
                         <ConfirmButton title={"ثبت"} click={submit}/>
                     </div>
-                
+
             </div>
 
         </>

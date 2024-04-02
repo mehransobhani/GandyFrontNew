@@ -18,10 +18,15 @@ export function ArticleEditPanel({item , cancel ,reload}) {
     const [image,setImage]=useState("");
 
     async  function submit() {
-        let response = await  editArticle(title,description,url,content,image,id)
-        reload();
-        toast.success("عملیات با موفقیت انجام شد")
-
+        try {
+            let response = await editArticle(title, description, url, content, image, id)
+            reload();
+            toast.success("عملیات با موفقیت انجام شد")
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     return (
         <>

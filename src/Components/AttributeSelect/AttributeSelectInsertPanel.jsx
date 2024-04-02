@@ -13,10 +13,15 @@ export function AttributeSelectInsertPanel({reload}) {
     const [attributeType,setAttributeType]=useState("");
     const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
     async function submit() {
+        try {
         let response =await insertAttributeSelect(name,attributeType.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
 

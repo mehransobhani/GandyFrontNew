@@ -22,9 +22,15 @@ export function ProductInfoInsertPanel({reload}) {
     const [productImageSearch,setProductImageSearch]=useState("");
 
     async function submit() {
+        try {
         let response =await insertProductInfo(price,color,colorHex,count,discount,product.id,productImage.id,main?1:0)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     async function changeProductSearchHandle(e) {
         let response = await searchProduct(e.target.value);
@@ -43,7 +49,7 @@ export function ProductInfoInsertPanel({reload}) {
                     </h2>
                 </div>
                 <hr/>
- 
+
                     <div className="space-y-12">
 
                         <div className=" ">

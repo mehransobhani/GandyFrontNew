@@ -15,10 +15,15 @@ export function ProductTypeEditPanel({item , cancel ,reload}) {
     const [parentSearch,setParentSearch]=useState("");
 
     async function submit() {
+        try {
         let response =await editProductType(name,parent.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
     async function changeParentSearchHandle(e) {
@@ -42,7 +47,7 @@ export function ProductTypeEditPanel({item , cancel ,reload}) {
 
 
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                          
+
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">

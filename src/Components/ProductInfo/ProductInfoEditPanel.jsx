@@ -24,9 +24,15 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
     const [productImageSearch,setProductImageSearch]=useState("");
 
     async function submit() {
+        try {
         let response =await editProductInfo(price,color,hexColor,count,discount,product.id,productImage.id,main?1:0,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
     async function changeProductSearchHandle(e) {
         let response = await searchProduct(e.target.value);

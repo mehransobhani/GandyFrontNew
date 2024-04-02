@@ -7,17 +7,22 @@ import {editAttributeSelect, getAttributeTypeByWords} from "../../Api/AttributeS
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function AttributeSelectEditPanel({item , cancel ,reload}) {
- 
+
     const [name,setName]=useState(item.attributeOption);
     const [attributeType,setAttributeType]=useState(item.attributeType);
     const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
     const [id,setId]=useState(item.id);
 
     async function submit() {
+        try {
         let response =await editAttributeSelect(name,attributeType.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
-
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
     }
 
     async function changeOptionSearchHandle(e) {

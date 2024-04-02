@@ -20,17 +20,22 @@ import { searchProduct } from "../../Api/Product";
         setExpire_at(e.format('YYYY-MM-DD HH:mm'));
     }
      async function submit() {
+         try {
          let response =await insertProductSuggest(product.id,created_at,expire_at)
          reload();
          toast.success("عملیات با موفقیت انجام شد")
-
+         }
+         catch (e)
+         {
+             toast.error("متاسفانه عملیات با شکست روبرو شد")
+         }
      }
      async function changeProductSearchHandle(e) {
         let response = await searchProduct(e.target.value);
         setProductSearch(response);
 
     }
-    
+
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>

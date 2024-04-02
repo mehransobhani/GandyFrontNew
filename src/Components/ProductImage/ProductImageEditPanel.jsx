@@ -19,9 +19,16 @@ export function ProductImageEditPanel({item , cancel ,reload}) {
         setProductSearch(response);
     }
     async function submit() {
-        let response =await editProductImage(product.id,file,id)
-        reload();
-        toast.success("عملیات با موفقیت انجام شد")
+        try {
+            let response = await editProductImage(product.id, file, id)
+            toast.success("عملیات با موفقیت انجام شد")
+            reload();
+
+        }
+        catch (e)
+        {
+            toast.error("متاسفانه عملیات با شکست روبرو شد")
+        }
 
     }
     return (
@@ -34,7 +41,6 @@ export function ProductImageEditPanel({item , cancel ,reload}) {
                 </div>
                 <hr/>
 
-                <form>
                     <div className="space-y-12">
 
                         <div className=" ">
@@ -69,7 +75,6 @@ export function ProductImageEditPanel({item , cancel ,reload}) {
                         <ConfirmButton title={"ویرایش"} click={submit}/>
                         <CancelButton title={"انصراف"} click={cancel}/>
                     </div>
-                </form>
             </div>
 
         </>
