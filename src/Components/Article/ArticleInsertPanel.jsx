@@ -90,7 +90,9 @@ export function ArticleInsertPanel({reload}) {
                                     <div className="mt-2">
                                         <CKEditor
                                             editor={ClassicEditor}
+                                            
                                             config={{
+                                                direction: 'rtl',
                                                 extraPlugins: [],
                                                 mediaEmbed: {
                                                     extraProviders: [

@@ -37,6 +37,8 @@ export function ProductTypeTableRow({editMode ,editItem,reload , item}) {
                 </Modal>
             </tr>
             <Tr> 
+            <Td>{item.id}</Td>
+
             <Td>{item.name}</Td>
             <Td>{item?.parentProductType?.name}</Td>
                 <Td><PencilSquareIcon

@@ -62,7 +62,8 @@ export const ProductType =withAuth( () => {
                     />
                 </div>
                 <div className={"mb-10"}>
-                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
+                                <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
+
                 </div>
             </AdminLayout>
         </>

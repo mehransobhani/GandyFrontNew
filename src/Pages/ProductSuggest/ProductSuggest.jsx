@@ -10,7 +10,7 @@ import { getProductSuggest, searchProductSuggest } from "../../Api/ProductSugges
 
 export const ProductSuggest = withAuth(() => {
     const [search, setSearch] = useState("");
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
     const [item, setItem] = useState(undefined);
@@ -59,7 +59,8 @@ export const ProductSuggest = withAuth(() => {
                         data={item} />}
                 </div>
                 <div className={"mb-10"}>
-                <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
+                                <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
+
                 </div>
 
             </AdminLayout>

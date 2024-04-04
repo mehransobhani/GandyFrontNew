@@ -33,21 +33,21 @@ export default function Login() {
          }
     }
     return (<>
-        <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
+        <div className="flex h-screen w-full items-center justify-center bg-slate-100 bg-cover bg-no-repeat"
             style={{ backgroundImage: "url('../../public/icon/login_bg.jpg')" }}>
 
             <div
-                className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+                className="rounded-xl bg-white px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
 
                 <div className="text-white">
 
                     <div className="mb-8 flex flex-col items-center">
                         <div className={"w-12 "}>
-                            <UserCircleIcon />
+                            <UserCircleIcon className='text-gray-600' />
                         </div>
-                        <h1 className="mb-2 text-2xl">پنل مدیریت</h1>
-                        {step==1 && <span className="text-gray-300">برای ورود شماره موبایل  خود را وارد کنید</span>}
-                        {step==2 && <span className="text-gray-300">برای ورود کد پیامک شده را وارد کنید</span>}
+                        <h1 className="mb-2 text-2xl text-gray-600">پنل مدیریت</h1>
+                        {step==1 && <span className="text-gray-500">برای ورود شماره موبایل  خود را وارد کنید</span>}
+                        {step==2 && <span className="text-gray-500">برای ورود کد پیامک شده را وارد کنید</span>}
                         {error &&
                             <div
                                 className="font-regular relative   block w-full rounded-lg p-4 text-red-500 text-base leading-5   opacity-100">
@@ -56,21 +56,21 @@ export default function Login() {
                         }
                     </div>
 
-                    <div className="mb-4 text-lg">
+                { step==1 &&   <div className="mb-4 text-lg">
                         <input
                             disabled={step==2?true:false}
                             value={mobile}
                             onChange={changeMobile}
-                            className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                            className="rounded border-none bg-slate-50 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-600 text-gray-600 shadow border outline-none backdrop-blur-md"
                             type="text" name="phone" placeholder="شماره موبایل" />
-                    </div>
+                    </div>}
                     {step == 2 &&
                         <div className="mb-4 text-lg">
 
                             <input
                                 onChange={changeCode}
                                 value={code}
-                                className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded border-none bg-slate-50 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-600 text-gray-600 shadow border outline-none backdrop-blur-md"
                                 type="Password" name="password" placeholder="کد تایید" />
                         </div>
                     }
@@ -78,7 +78,7 @@ export default function Login() {
                     <div className="mt-8 flex justify-center text-lg text-black">
                         <button type="submit"
                             onClick={SubmitHandle}
-                            className="rounded-3xl bg-indigo-700 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-indigo-600">ورود
+                            className="w-full rounded border-none bg-indigo-900 bg-opacity-50 px-6 py-2 text-center text-inherit   text-white shadow border outline-none backdrop-blur-md">ورود
                         </button>
                     </div>
                 </div>

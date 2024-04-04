@@ -119,6 +119,7 @@ export async function getArticleByWords(name) {
     const response = await fetch(BaseUrl + "article/getArticleByWords",
         {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     name:name

@@ -6,9 +6,10 @@ export const ProductSuggestTablePanel = ({ editMode, editItem, reload, data }) =
     return (
         <>
 
-            {console.log("DATA ",data)}
+            {console.log("DATA ", data)}
             <Table>
                 <Thead heads={[
+                    { title: "شناسه" },
                     { title: "محصول" },
                     { title: "تاریخ انقضا" },
                     { title: "تاریخ ایجاد" },

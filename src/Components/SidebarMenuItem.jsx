@@ -46,8 +46,9 @@ export function SidebarMenuItem({item}) {
                 <div className={"mw"}>
 
                 {open && item.children.map((sub) => (<>
+                <div className="mr-2">
                         <SidebarMenuItem item={sub} />
-
+                        </div>
                     </>))}
                 </div>
 

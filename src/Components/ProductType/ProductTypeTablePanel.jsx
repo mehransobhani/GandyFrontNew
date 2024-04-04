@@ -7,6 +7,7 @@ export const ProductTypeTablePanel = ({ editMode, editItem, reload, data }) => {
         <>
             <Table>
                 <Thead heads={[
+                    { title: "شناسه" },
                     { title: "نام" },
                     { title: "والد" },
                     { title: "ویرایش" },

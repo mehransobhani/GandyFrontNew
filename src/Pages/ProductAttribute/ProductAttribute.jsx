@@ -49,7 +49,7 @@ export const ProductAttribute =withAuth( () => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={getData} change={setSearch}/>
+                    <SearchBox searchSubmit={searchProductHandler} change={setSearch}/>
                 </div>
                 <div className={"mb-10"}>
                     <ProductAttributeTablePanel
@@ -63,7 +63,7 @@ export const ProductAttribute =withAuth( () => {
                     />
                 </div>
                 <div className={"mb-10"}>
-                    <Pagination currentPage={(data?.pageable?.pageNumber)+1} totalPage={data?.totalPages} click={getData} />
+                <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
                 </div>
             </AdminLayout>
         </>

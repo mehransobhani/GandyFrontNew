@@ -10,6 +10,7 @@ export const ProductImageTablePanel = ({editMode , editItem,reload,data}) => {
 
             <Table>
                 <Thead heads={[
+                    {title:"شناسه"},
                     {title:"نام محصول"},
                     {title:"تصویر"},
                     {title:"ویرایش"},

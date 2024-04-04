@@ -35,6 +35,7 @@ export function ProductSuggestTableRow({editMode ,editItem,reload , item}) {
                 </Modal>
             </tr>
             <Tr>
+            <Td>{item.id}</Td>
 
                 <Td>{item.productCount.product.name}</Td>
                 <Td>{item.expire_at}</Td>
