@@ -2,6 +2,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { signin, signup } from '../Api/Auth';
 import { useNavigate} from "react-router-dom";
+import Timer from '../Components/Timer';
 
 export default function Login() {
      const [mobile, setMobile] = useState("");
@@ -61,8 +62,8 @@ export default function Login() {
                             disabled={step==2?true:false}
                             value={mobile}
                             onChange={changeMobile}
-                            className="rounded border-none bg-slate-50 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-600 text-gray-600 shadow border outline-none backdrop-blur-md"
-                            type="text" name="phone" placeholder="شماره موبایل" />
+                            className="rounded border-none  px-6 py-2 text-center text-inherit placeholder-gray-600 text-gray-900 shadow border outline-none backdrop-blur-md"
+                            type="text" name="phone" placeholder="شماره موبایل" style={{color:"#000"}} />
                     </div>}
                     {step == 2 &&
                         <div className="mb-4 text-lg">
@@ -71,7 +72,7 @@ export default function Login() {
                                 onChange={changeCode}
                                 value={code}
                                 className="rounded border-none bg-slate-50 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-600 text-gray-600 shadow border outline-none backdrop-blur-md"
-                                type="Password" name="password" placeholder="کد تایید" />
+                                type="Password" name="password" placeholder="کد تایید"  style={{color:"#000"}} />
                         </div>
                     }
 
@@ -81,6 +82,7 @@ export default function Login() {
                             className="w-full rounded border-none bg-indigo-900 bg-opacity-50 px-6 py-2 text-center text-inherit   text-white shadow border outline-none backdrop-blur-md">ورود
                         </button>
                     </div>
+                    {step == 2 &&  <Timer/> }
                 </div>
 
             </div>

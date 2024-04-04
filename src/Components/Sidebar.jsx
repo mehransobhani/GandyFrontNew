@@ -13,12 +13,17 @@ import {
 import {Squares2X2Icon} from "@heroicons/react/20/solid";
 import {Link, useLocation} from 'react-router-dom';
 import {SidebarMenuItem} from "./SidebarMenuItem";
+import { signout } from "../Api/Auth";
 
 export default function Sidebar() {
 
     const location = useLocation();
     const pathName = location.pathname;
 
+    async function signOut(){
+       await signout();
+       window.location.href="/login";
+    }
     const menu = [
         {
             title: "داشبورد",
@@ -143,6 +148,14 @@ export default function Sidebar() {
                     </button>
                 </div>
 
+                <div className="flex items-center px-4">
+                    <button className="text-gray-500 focus:outline-none focus:text-gray-700" onClick={() => {
+                        signOut();
+                    }} aria-label={"button"}>
+                        خروج از حساب کاربری
+
+                    </button>
+                </div>
             </div>
 
         </div>
