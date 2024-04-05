@@ -1,8 +1,8 @@
-import {BaseUrl} from "../env";
-import {refreshToken, signout} from "./Auth";
+import { BaseUrl } from "../env";
+import { refreshToken, signout } from "./Auth";
 
 export async function getProductImage(page) {
-    const response = await fetch(BaseUrl + "productImage/getAllProductImage/"+page,
+    const response = await fetch(BaseUrl + "productImage/getAllProductImage/" + page,
         {
             credentials: 'include',
 
@@ -12,12 +12,11 @@ export async function getProductImage(page) {
             }
         }
     )
-    if(response.status==408)
-    {
-        let  refreshTokens=await refreshToken()
-        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
-            let  signouts=await signout()
-            window.location.href="/login";
+    if (response.status == 408) {
+        let refreshTokens = await refreshToken()
+        if (refreshTokens.status == 20 || refreshTokens.status == 400 || refreshTokens.status == 408) {
+            let signouts = await signout()
+            window.location.href = "/login";
         }
         else {
             getProductImage(page);
@@ -25,11 +24,11 @@ export async function getProductImage(page) {
     }
     return response.json();
 }
-export async function insertProductImage(product,image) {
-    let body=JSON.stringify({
-        img:image.name,
-        product:{
-            id:product
+export async function insertProductImage(product, image) {
+    let body = JSON.stringify({
+        img: image.name,
+        product: {
+            id: product
         }
     })
 
@@ -44,25 +43,24 @@ export async function insertProductImage(product,image) {
             body: formdata,
         }
     )
-    if(response.status==408)
-    {
-        let  refreshTokens=await refreshToken()
-        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
-            let  signouts=await signout()
-            window.location.href="/login";
+    if (response.status == 408) {
+        let refreshTokens = await refreshToken()
+        if (refreshTokens.status == 20 || refreshTokens.status == 400 || refreshTokens.status == 408) {
+            let signouts = await signout()
+            window.location.href = "/login";
         }
         else {
-            insertProductImage(product,image);
+            insertProductImage(product, image);
         }
     }
     return response;
 }
-export async function editProductImage(product,image,id) {
-    let body=JSON.stringify({
-        id:id,
-        img:image.name,
-        product:{
-            id:product
+export async function editProductImage(product, image, id) {
+    let body = JSON.stringify({
+        id: id,
+        img: image.name,
+        product: {
+            id: product
         }
     })
     const formdata = new FormData();
@@ -75,21 +73,20 @@ export async function editProductImage(product,image,id) {
             body: formdata,
         }
     )
-    if(response.status==408)
-    {
-        let  refreshTokens=await refreshToken()
-        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
-            let  signouts=await signout()
-            window.location.href="/login";
+    if (response.status == 408) {
+        let refreshTokens = await refreshToken()
+        if (refreshTokens.status == 20 || refreshTokens.status == 400 || refreshTokens.status == 408) {
+            let signouts = await signout()
+            window.location.href = "/login";
         }
         else {
-            editProductImage(product,image,id);
+            editProductImage(product, image, id);
         }
     }
     return response;
 }
 export async function removeProductImage(id) {
-    const response = await fetch(BaseUrl + "productImage/deleteById/"+id,
+    const response = await fetch(BaseUrl + "productImage/deleteById/" + id,
         {
             method: 'DELETE',
             credentials: 'include',
@@ -98,16 +95,46 @@ export async function removeProductImage(id) {
             }
         }
     )
-    if(response.status==408)
-    {
-        let  refreshTokens=await refreshToken()
-        if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
-            let  signouts=await signout()
-            window.location.href="/login";
+    if (response.status == 408) {
+        let refreshTokens = await refreshToken()
+        if (refreshTokens.status == 20 || refreshTokens.status == 400 || refreshTokens.status == 408) {
+            let signouts = await signout()
+            window.location.href = "/login";
         }
         else {
             removeProductImage(id);
         }
     }
     return response;
+}
+
+
+
+export async function getProductImageByWords(name) {
+    const response = await fetch(BaseUrl + "productImage/getProductImageByWords",
+    {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(
+            {
+                name:name
+            }
+        ),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }
+)
+if(response.status==408)
+{
+    let  refreshTokens=await refreshToken()
+    if(refreshTokens.status==20||refreshTokens.status==400||refreshTokens.status==408) {
+        let  signouts=await signout()
+        window.location.href="/login";
+    }
+    else {
+        getProductImageByWords(name);
+    }
+}
+return response.json();
 }

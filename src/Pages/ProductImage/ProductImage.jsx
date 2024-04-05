@@ -6,7 +6,7 @@ import {ProductImageTablePanel} from "../../Components/ProductImage/ProductImage
 import {useEffect, useState} from "react";
 import Pagination from "../../Components/Pagination";
 import {ProductInfoEditPanel} from "../../Components/ProductInfo/ProductInfoEditPanel";
-import {getProductImage} from "../../Api/ProductImage";
+import {getProductImage,getProductImageByWords} from "../../Api/ProductImage";
 import {ProductImageEditPanel} from "../../Components/ProductImage/ProductImageEditPanel";
 
 export const ProductImage = withAuth(() => {
@@ -23,14 +23,14 @@ export const ProductImage = withAuth(() => {
     }
     async function searchProductHandler()
     {
-    //     if(search=="")
-    //     {
-    //         getData();
-    //     }
-    //     else{
-    //     let data =await  searchProduct(search);
-    //     setProduct(data); 
-    // }
+        if(search=="")
+        {
+            getData();
+        }
+        else{
+        let data =await  getProductImageByWords(search);
+        setItem(data); 
+    }
 }
  
     useEffect(()=>{
@@ -49,7 +49,7 @@ export const ProductImage = withAuth(() => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                <SearchBox searchSubmit={getData} change={setSearch} />
+                <SearchBox searchSubmit={searchProductHandler} change={setSearch} />
                 </div>
                 <div className={"mb-10"}>
                     <ProductImageTablePanel
