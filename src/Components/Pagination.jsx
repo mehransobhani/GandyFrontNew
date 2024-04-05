@@ -49,7 +49,7 @@ export  default function Pagination({totalPage , currentPage ,click}){
                     {pageBuilder()}
 
                    <li>
-                            <div  onClick={()=>{click(currentPage+1)}}
+                            <div  onClick={()=>{totalPage >= currentPage+1 && click(currentPage+1)}}
                                className={[ totalPage < currentPage+1 && "bg-slate-200 cursor-not-allowed opacity-50","flex items-center justify-center px-3 h-8 leading-tight text-slate-500 bg-white border border-slate-300 rounded-e-lg hover:bg-slate-100 hover:text-slate-700  cursor-pointer"].join(" ")}>
                                 <span className="sr-only">Next</span>
                                 <svg className="w-2.5 h-2.5 rotate-180" aria-hidden="true"
