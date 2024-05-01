@@ -16,6 +16,7 @@ import {ProductType} from "./Pages/ProductType/ProductType";
 import {Article} from "./Pages/Article/Article";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { Address } from './Pages/Address/Address';
 function App() {
     return (
         <>
@@ -24,6 +25,10 @@ function App() {
                 <div className={["App", "container-fluid", "p-0"].join(" ")}>
                     <Routes>
                         <Route path="/login" element={<Login/>}/>
+
+                        <Route path="/address" element={<Address/>}/>
+
+
                         <Route path="/article" element={<Article/>}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/Product/create" element={<Product/>}/>

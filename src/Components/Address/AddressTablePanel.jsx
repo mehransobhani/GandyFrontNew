@@ -8,12 +8,14 @@ export const AddressTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "تصویر" },
-                    { title: "عنوان" },
-                    { title: "توضیحات" },
+                    { title: "کاربر" },
+                    { title: "کد پسیتی" },
                     { title: "ادرس" },
-                    { title: "محتوا" },
-                    { title: "پیش نمایش محتوا" },
+                    { title: "محله" },
+                    { title: "طبقه" },
+                    { title: "پلاک" },
+                    { title: "استان" },
+                    { title: "شهر" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

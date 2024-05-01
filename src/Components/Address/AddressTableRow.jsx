@@ -47,22 +47,16 @@ export function AddressTableRow({ editMode, editItem, reload, item }) {
                 </Modal>
             </tr>
             <Tr>
-                <Td>{item.id}</Td>
-                <Td>
-                    <img src={"" + item.image} className={"w-24 h-24 mx-auto"} />
-                </Td>
-                <Td>{item.title}</Td>
-                <Td>{item.description}</Td>
-                <Td>{item.url}</Td>
-                <Td>
-                    <div className={"  whitespace-normal overflow-hidden line-clamp-1"}>
-                        <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    </div>
-                </Td>
-                <Td><EyeIcon onClick={() => {
-                    setPreviewModal(true)
-                }}
-                    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
+                <Td>{item.id}</Td> 
+                <Td>{item?.user?.name}</Td>
+                <Td>{item.postalCode}</Td>
+                <Td>{item.address}</Td>
+                <Td>{item.area}</Td>
+                <Td>{item.unit}</Td>
+                <Td>{item.no}</Td>
+                <Td>{item?.province?.name}</Td> 
+                <Td>{item?.city?.name}</Td> 
+                
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>

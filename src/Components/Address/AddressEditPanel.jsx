@@ -1,12 +1,14 @@
 import Input from "../Form/Input";
-import {useState} from "react";
+import { useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {editAddress, getCity, getProvince, getUserByMobile} from "../../Api/Address";
-import {toast} from "react-toastify";
-import {getTagByWords} from "../../Api/Category";
+import { editAddress, getCity, getProvince, getUserByMobile } from "../../Api/Address";
+import { toast } from "react-toastify";
+import { getTagByWords } from "../../Api/Category";
+import { Select } from "../Form/Select";
+import Select2 from "../Form/Select2";
 
-export function AddressEditPanel({item , cancel ,reload}) {
+export function AddressEditPanel({ item, cancel, reload }) {
     const [postalCode, setPostalCode] = useState(item.postalCode);
     const [address, setAddress] = useState(item.address);
     const [no, setNo] = useState(item.no);
@@ -21,31 +23,31 @@ export function AddressEditPanel({item , cancel ,reload}) {
     const [allCity, setAllCity] = useState([]);
     const [userSearch, setUserSearch] = useState("");
 
-    async  function submit() {
+    async function submit() {
         try {
-            let response = await editAddress(postalCode, address, no, unit, area, province, city, users ,id);
+            let response = await editAddress(postalCode, address, no, unit, area, province, city, users, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
-        catch (e)
-        {
+        catch (e) {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
     }
 
 
-   async function  getAllProvince(){
+    async function getAllProvince() {
         let response = await getProvince();
         setAllProvince(response);
     }
-   async function getCitys(){
-        let response = await getCity(province);
+    async function getCitys(e) {
+        setProvince(e.target.value)
+        let response = await getCity(e.target.value);
         setAllCity(response);
     }
 
     async function changeUserSearchHandle(e) {
         let response = await getUserByMobile(e.target.value);
-        setProductTagSearch(response);
+        setUserSearch(response);
 
     }
 
@@ -57,7 +59,7 @@ export function AddressEditPanel({item , cancel ,reload}) {
                         ویرایش مقاله
                     </h2>
                 </div>
-                <hr/>
+                <hr />
                 <div className="space-y-12">
 
                     <div className=" ">
@@ -65,72 +67,120 @@ export function AddressEditPanel({item , cancel ,reload}) {
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    className="block text-sm font-medium leading-6 text-gray-900">
                                     کد پستی
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
                                         setPostalCode(e.target.value)
-                                    }} value={postalCode}/>
+                                    }} value={postalCode} />
                                 </div>
                             </div>
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    className="block text-sm font-medium leading-6 text-gray-900">
                                     آدرس
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
                                         setAddress(e.target.value)
-                                    }} value={address}/>
+                                    }} value={address} />
 
                                 </div>
                             </div>
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    className="block text-sm font-medium leading-6 text-gray-900">
                                     طبقه
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"طبقه"} type={"text"} change={(e) => {
                                         setUnit(e.target.value)
-                                    }} value={unit}/>
+                                    }} value={unit} />
                                 </div>
                             </div>
 
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    className="block text-sm font-medium leading-6 text-gray-900">
                                     پلاک
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"پلاک"} type={"text"} change={(e) => {
                                         setNo(e.target.value)
-                                    }} value={no}/>
+                                    }} value={no} />
                                 </div>
                             </div>
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    className="block text-sm font-medium leading-6 text-gray-900">
                                     محله
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"محله"} type={"text"} change={(e) => {
                                         setArea(e.target.value)
-                                    }} value={area}/>
+                                    }} value={area} />
                                 </div>
                             </div>
+
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    استان
+                                </label>
+                                <div className="mt-2">
+                                    <Select change={getCitys}>
+                                        <option value={null}>انتخاب کنید</option>
+                                        {
+                                            allProvince.map((item) => (<>
+                                                <option value={item.id}>{item.name}</option>
+                                            </>))
+                                        }
+                                    </Select>
+                                </div>
+                            </div>
+
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    شهر
+                                </label>
+                                <div className="mt-2">
+                                    <Select>
+                                        <option value={null}>انتخاب کنید</option>
+                                        {
+                                            allCity && allCity.map((item) => (<>
+                                                <option>{item.name}</option>
+                                            </>))
+                                        }
+                                    </Select>
+                                </div>
+                            </div>
+
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    کاربر
+                                </label>
+                                <div className="mt-2">
+                                <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
+                                   </div>
+                            </div>
+                            
                         </div>
                     </div>
 
                 </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ویرایش"} click={submit}/>
-                    <CancelButton title={"انصراف"} click={cancel}/>
+                    <ConfirmButton title={"ویرایش"} click={submit} />
+                    <CancelButton title={"انصراف"} click={cancel} />
                 </div>
             </div>
 

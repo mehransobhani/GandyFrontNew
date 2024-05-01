@@ -165,12 +165,12 @@ export async function getProvince() {
             getProvince();
         }
     }
-    return response;
+    return response.json();
 }
 
 
 export async function getCity(province) {
-    const response = await fetch(BaseUrl + "city/"+province,
+    const response = await fetch(BaseUrl + "city/"+province+"/",
         {
             method: 'POST',
             credentials: 'include',
@@ -190,7 +190,7 @@ export async function getCity(province) {
             getCity(province);
         }
     }
-    return response;
+    return response.json();
 }
 
 export async function getUserByMobile(mobile) {
@@ -219,5 +219,5 @@ export async function getUserByMobile(mobile) {
             getUserByMobile(mobile);
         }
     }
-    return response;
+    return response.json();
 }

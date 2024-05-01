@@ -1,8 +1,9 @@
 import Input from "../Form/Input";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {getCity, getProvince, getUserByMobile, insertAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
+import { Select } from "../Form/Select";
 
 export function AddressInsertPanel({reload}) {
 
@@ -30,17 +31,21 @@ export function AddressInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
+    useEffect(()=>{
+        getAllProvince();
+    },[])
     async function  getAllProvince(){
-        let response = await getProvince();
+        let response = await getProvince(); 
         setAllProvince(response);
     }
-    async function getCitys(){
-        let response = await getCity(province);
+    async function getCitys(e){
+        setProvince(e.target.value)
+        let response = await getCity(e.target.value);
         setAllCity(response);
     }
     async function changeUserSearchHandle(e) {
         let response = await getUserByMobile(e.target.value);
-        setProductTagSearch(response);
+        setUserSearch(response);
 
     }
     return (
@@ -115,6 +120,41 @@ export function AddressInsertPanel({reload}) {
                                         <Input placeHolder={"محله"} type={"text"} change={(e) => {
                                             setArea(e.target.value)
                                         }} value={area}/>
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        استان
+                                    </label>
+                                    <div className="mt-2">
+                                       <Select change={getCitys}>
+                                        <option value={null}>انتخاب کنید</option>
+                                        {
+                                            allProvince.map((item)=>(<>
+                                            <option value={item.id}>{item.name}</option>
+                                            </>))
+                                        }
+                                       </Select>
+                                    </div>
+                                </div>
+
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        شهر
+                                    </label>
+                                    <div className="mt-2">
+                                       <Select>
+                                        <option value={null}>انتخاب کنید</option>
+                                        {
+                                          allCity &&  allCity.map((item)=>(<>
+                                            <option>{item.name}</option>
+                                            </>))
+                                        }
+                                       </Select>
                                     </div>
                                 </div>
                             </div>
