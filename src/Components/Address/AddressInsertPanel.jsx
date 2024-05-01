@@ -1,7 +1,7 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {insertAddress} from "../../Api/Address";
+import {getCity, getProvince, insertAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
 
 export function AddressInsertPanel({reload}) {
@@ -15,6 +15,9 @@ export function AddressInsertPanel({reload}) {
     const [city, setCity] = useState("");
     const [users, setUsers] = useState("");
 
+    const [allProvince, setAllProvince] = useState([]);
+    const [allCity, setAllCity] = useState([]);
+
    async function submit() {
        try {
         let response =await insertAddress(postalCode, address, no, unit, area, province, city, users);
@@ -26,7 +29,14 @@ export function AddressInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
-
+    async function  getAllProvince(){
+        let response = await getProvince();
+        setAllProvince(response);
+    }
+    async function getCitys(){
+        let response = await getCity(province);
+        setAllCity(response);
+    }
 
     return (
         <>
