@@ -6,7 +6,7 @@ import {AddressInsertPanel} from "../../Components/Address/AddressInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {AddressTablePanel} from "../../Components/Address/AddressTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getAddress, getAddressByWords, getUserByMobile} from "../../Api/Address";
+import {getAddress, getAddressByWords, getAddressListByMobile, getUserByMobile} from "../../Api/Address";
 
 export const Address  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ export const Address  = withAuth( () => {
             getData();
         }
         else{
-        let data =await  getUserByMobile(search);
+        let data =await  getAddressListByMobile(search);
         setItem(data);
     }
 }
