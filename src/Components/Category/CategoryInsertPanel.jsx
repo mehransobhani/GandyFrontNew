@@ -5,8 +5,9 @@ import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
-import {insertCategory} from "../../Api/Category";
+import {getProductTypeByWords, getTagByWords, insertCategory} from "../../Api/Category";
 import {toast} from "react-toastify";
+import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
 
 export function CategoryInsertPanel({reload}) {
 
@@ -19,6 +20,11 @@ export function CategoryInsertPanel({reload}) {
     const [productType,setProductType]=useState("");
     const [productTag,setProductTag]=useState("");
     const [attributeOption,setAttributeOption]=useState("");
+
+    const [productTypeSearch,setProductTypeSearch]=useState("");
+    const [productTagSearch,setProductTagSearch]=useState("");
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
+
     const [id,setId]=useState("");
    async function submit() {
        try {
@@ -30,6 +36,21 @@ export function CategoryInsertPanel({reload}) {
        {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
+    }
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeOptionSearch(response);
+
+    }
+    async function changeProductTypeSearchSearchHandle(e) {
+        let response = await getProductTypeByWords(e.target.value);
+        setProductTypeSearch(response);
+
+    }
+    async function changeTagSearchHandle(e) {
+        let response = await getTagByWords(e.target.value);
+        setProductTagSearch(response);
+
     }
 
     return (

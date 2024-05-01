@@ -3,8 +3,9 @@ import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
-import {editCategory} from "../../Api/Category";
+import {editCategory, getProductTypeByWords, getTagByWords} from "../../Api/Category";
 import {toast} from "react-toastify";
+import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
 
 export function CategoryEditPanel({item , cancel ,reload}) {
     const [name,setName]=useState(item.title);
@@ -16,6 +17,11 @@ export function CategoryEditPanel({item , cancel ,reload}) {
     const [productType,setProductType]=useState("");
     const [productTag,setProductTag]=useState("");
     const [attributeOption,setAttributeOption]=useState("");
+
+    const [productTypeSearch,setProductTypeSearch]=useState("");
+    const [productTagSearch,setProductTagSearch]=useState("");
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
+
     const [id,setId]=useState("");
 
     async  function submit() {
@@ -28,6 +34,22 @@ export function CategoryEditPanel({item , cancel ,reload}) {
         {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
+    }
+
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeOptionSearch(response);
+
+    }
+    async function changeProductTypeSearchSearchHandle(e) {
+        let response = await getProductTypeByWords(e.target.value);
+        setProductTypeSearch(response);
+
+    }
+    async function changeTagSearchHandle(e) {
+        let response = await getTagByWords(e.target.value);
+        setProductTagSearch(response);
+
     }
     return (
         <>

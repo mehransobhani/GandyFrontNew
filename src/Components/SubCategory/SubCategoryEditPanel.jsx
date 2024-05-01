@@ -2,13 +2,17 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {editSubCategory} from "../../Api/SubCategory";
+import {editSubCategory, getCategoryByWords} from "../../Api/SubCategory";
 import {toast} from "react-toastify";
+import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
 
 export function SubCategoryEditPanel({item , cancel ,reload}) {
     const [subId,setSubId]=useState(item.subId);
     const [id,setId]=useState(item.id);
     const [parentId,setParentId]=useState(item.parentId);
+
+    const [subSearch,setSubSearch]=useState();
+    const [parentSearch,setParentSearch]=useState();
 
     async  function submit() {
         try {
@@ -20,6 +24,15 @@ export function SubCategoryEditPanel({item , cancel ,reload}) {
         {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
+    }
+
+    async function getParents(e){
+        let response = await getCategoryByWords(e.target.value);
+        setParentSearch(response);
+    }
+    async function getSubs(e){
+        let response = await getCategoryByWords(e.target.value);
+        setSubSearch(response);
     }
     return (
         <>

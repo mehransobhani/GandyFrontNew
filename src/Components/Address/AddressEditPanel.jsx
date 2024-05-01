@@ -2,8 +2,9 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {editAddress} from "../../Api/Address";
+import {editAddress, getCity, getProvince} from "../../Api/Address";
 import {toast} from "react-toastify";
+import {getTagByWords} from "../../Api/Category";
 
 export function AddressEditPanel({item , cancel ,reload}) {
     const [postalCode, setPostalCode] = useState(item.postalCode);
@@ -16,6 +17,9 @@ export function AddressEditPanel({item , cancel ,reload}) {
     const [users, setUsers] = useState(item.users);
     const [id, setId] = useState(item.id);
 
+    const [allProvince, setAllProvince] = useState([]);
+    const [allCity, setAllCity] = useState([]);
+
     async  function submit() {
         try {
             let response = await editAddress(postalCode, address, no, unit, area, province, city, users ,id);
@@ -26,6 +30,16 @@ export function AddressEditPanel({item , cancel ,reload}) {
         {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
+    }
+
+
+   async function  getAllProvince(){
+        let response = await getProvince();
+        setAllProvince(response);
+    }
+   async function getCitys(){
+        let response = await getCity(province);
+        setAllCity(response);
     }
     return (
         <>
