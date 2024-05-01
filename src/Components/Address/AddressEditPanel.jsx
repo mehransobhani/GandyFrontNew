@@ -2,7 +2,7 @@ import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {editAddress, getCity, getProvince} from "../../Api/Address";
+import {editAddress, getCity, getProvince, getUserByMobile} from "../../Api/Address";
 import {toast} from "react-toastify";
 import {getTagByWords} from "../../Api/Category";
 
@@ -19,6 +19,7 @@ export function AddressEditPanel({item , cancel ,reload}) {
 
     const [allProvince, setAllProvince] = useState([]);
     const [allCity, setAllCity] = useState([]);
+    const [userSearch, setUserSearch] = useState("");
 
     async  function submit() {
         try {
@@ -41,6 +42,13 @@ export function AddressEditPanel({item , cancel ,reload}) {
         let response = await getCity(province);
         setAllCity(response);
     }
+
+    async function changeUserSearchHandle(e) {
+        let response = await getUserByMobile(e.target.value);
+        setProductTagSearch(response);
+
+    }
+
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
