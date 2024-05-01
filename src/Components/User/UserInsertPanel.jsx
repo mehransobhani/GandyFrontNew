@@ -7,6 +7,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
 import {insertAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
+import {editUser} from "../../Api/User";
 
 export function AddressInsertPanel({reload}) {
 
@@ -20,7 +21,7 @@ export function AddressInsertPanel({reload}) {
 
    async function submit() {
        try {
-        let response =await insertAddress( name, family, mobile, password, nationalCode, create_at, roles )
+        let response =await editUser( name, family, mobile, password, nationalCode, create_at, roles )
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }

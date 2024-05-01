@@ -8,6 +8,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
 import {editAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
+import {editUser} from "../../Api/User";
 
 export function AddressEditPanel({item , cancel ,reload}) {
      const [id,setId]=useState(item.id);
@@ -21,7 +22,7 @@ export function AddressEditPanel({item , cancel ,reload}) {
 
     async  function submit() {
         try {
-            let response = await editAddress(title, description, url, content, image, id)
+            let response = await editUser(name, family, mobile, password, nationalCode, create_at, roles, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
