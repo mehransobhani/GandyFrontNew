@@ -1,14 +1,14 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
-import {AddressEditPanel} from "../../Components/Address/AddressEditPanel";
-import {AddressInsertPanel} from "../../Components/Address/AddressInsertPanel";
+import {BrandEditPanel} from "../../Components/Brand/BrandEditPanel";
+import {BrandInsertPanel} from "../../Components/Brand/BrandInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {AddressTablePanel} from "../../Components/Address/AddressTablePanel";
+import {BrandTablePanel} from "../../Components/Brand/BrandTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getAddress, getAddressByWords} from "../../Api/Address";
+import {getBrand, getBrandByWords} from "../../Api/Brand";
 
-export const Address  = withAuth( () => {
+export const Brand  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
@@ -17,18 +17,18 @@ export const Address  = withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getAddress(page);
+        let data =await  getBrand(page);
         setData(data);
         setItem(data?.content)
     }
-    async function searchAddressHandler()
+    async function searchBrandHandler()
     {
         if(search=="")
         {
             getData();
         }
         else{
-        let data =await  getAddressByWords(search);
+        let data =await  getBrandByWords(search);
         setItem(data);
     }
 }
@@ -40,21 +40,21 @@ export const Address  = withAuth( () => {
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit ? <AddressEditPanel item={editItem} reload={getData} cancel={() => {
+                    {edit ? <BrandEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AddressInsertPanel reload={getData}/>}
+                    }}/> : <BrandInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchAddressHandler} change={setSearch}/>
+                    <SearchBox searchSubmit={searchBrandHandler} change={setSearch}/>
                 </div>
                 {
                     console.log("ITEM IS ",item)
                 }
                 <div className={"mb-10"}>
-                    <AddressTablePanel
+                    <BrandTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}

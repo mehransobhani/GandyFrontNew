@@ -1,14 +1,14 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
-import {AddressEditPanel} from "../../Components/Address/AddressEditPanel";
-import {AddressInsertPanel} from "../../Components/Address/AddressInsertPanel";
+import {SubCategoryEditPanel} from "../../Components/SubCategory/SubCategoryEditPanel";
+import {SubCategoryInsertPanel} from "../../Components/SubCategory/SubCategoryInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {AddressTablePanel} from "../../Components/Address/AddressTablePanel";
+import {SubCategoryTablePanel} from "../../Components/SubCategory/SubCategoryTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getAddress, getAddressByWords} from "../../Api/Address";
+import {getSubCategory, getSubCategoryByWords} from "../../Api/SubCategory";
 
-export const Address  = withAuth( () => {
+export const SubCategory  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
@@ -17,18 +17,18 @@ export const Address  = withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getAddress(page);
+        let data =await  getSubCategory(page);
         setData(data);
         setItem(data?.content)
     }
-    async function searchAddressHandler()
+    async function searchSubCategoryHandler()
     {
         if(search=="")
         {
             getData();
         }
         else{
-        let data =await  getAddressByWords(search);
+        let data =await  getSubCategoryByWords(search);
         setItem(data);
     }
 }
@@ -40,21 +40,21 @@ export const Address  = withAuth( () => {
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit ? <AddressEditPanel item={editItem} reload={getData} cancel={() => {
+                    {edit ? <SubCategoryEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AddressInsertPanel reload={getData}/>}
+                    }}/> : <SubCategoryInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchAddressHandler} change={setSearch}/>
+                    <SearchBox searchSubmit={searchSubCategoryHandler} change={setSearch}/>
                 </div>
                 {
                     console.log("ITEM IS ",item)
                 }
                 <div className={"mb-10"}>
-                    <AddressTablePanel
+                    <SubCategoryTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}

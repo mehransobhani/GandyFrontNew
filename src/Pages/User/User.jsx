@@ -1,14 +1,14 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
-import {AddressEditPanel} from "../../Components/Address/AddressEditPanel";
-import {AddressInsertPanel} from "../../Components/Address/AddressInsertPanel";
+import {UserEditPanel} from "../../Components/User/UserEditPanel";
+import {UserInsertPanel} from "../../Components/User/UserInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {AddressTablePanel} from "../../Components/Address/AddressTablePanel";
+import {UserTablePanel} from "../../Components/User/UserTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getAddress, getAddressByWords} from "../../Api/Address";
+import {getUser, getUserByWords} from "../../Api/User";
 
-export const Address  = withAuth( () => {
+export const User  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
@@ -17,18 +17,18 @@ export const Address  = withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getAddress(page);
+        let data =await  getUser(page);
         setData(data);
         setItem(data?.content)
     }
-    async function searchAddressHandler()
+    async function searchUserHandler()
     {
         if(search=="")
         {
             getData();
         }
         else{
-        let data =await  getAddressByWords(search);
+        let data =await  getUserByWords(search);
         setItem(data);
     }
 }
@@ -40,21 +40,21 @@ export const Address  = withAuth( () => {
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit ? <AddressEditPanel item={editItem} reload={getData} cancel={() => {
+                    {edit ? <UserEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AddressInsertPanel reload={getData}/>}
+                    }}/> : <UserInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchAddressHandler} change={setSearch}/>
+                    <SearchBox searchSubmit={searchUserHandler} change={setSearch}/>
                 </div>
                 {
                     console.log("ITEM IS ",item)
                 }
                 <div className={"mb-10"}>
-                    <AddressTablePanel
+                    <UserTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}

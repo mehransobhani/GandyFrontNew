@@ -1,14 +1,14 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
-import {AddressEditPanel} from "../../Components/Address/AddressEditPanel";
-import {AddressInsertPanel} from "../../Components/Address/AddressInsertPanel";
+import {DiscountEditPanel} from "../../Components/Discount/DiscountEditPanel";
+import {DiscountInsertPanel} from "../../Components/Discount/DiscountInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
-import {AddressTablePanel} from "../../Components/Address/AddressTablePanel";
+import {DiscountTablePanel} from "../../Components/Discount/DiscountTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getAddress, getAddressByWords} from "../../Api/Address";
+import {getDiscount, getDiscountByWords} from "../../Api/Discount";
 
-export const Address  = withAuth( () => {
+export const Discount  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
@@ -17,18 +17,18 @@ export const Address  = withAuth( () => {
 
     async function getData(page=0)
     {
-        let data =await  getAddress(page);
+        let data =await  getDiscount(page);
         setData(data);
         setItem(data?.content)
     }
-    async function searchAddressHandler()
+    async function searchDiscountHandler()
     {
         if(search=="")
         {
             getData();
         }
         else{
-        let data =await  getAddressByWords(search);
+        let data =await  getDiscountByWords(search);
         setItem(data);
     }
 }
@@ -40,21 +40,21 @@ export const Address  = withAuth( () => {
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit ? <AddressEditPanel item={editItem} reload={getData} cancel={() => {
+                    {edit ? <DiscountEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <AddressInsertPanel reload={getData}/>}
+                    }}/> : <DiscountInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchAddressHandler} change={setSearch}/>
+                    <SearchBox searchSubmit={searchDiscountHandler} change={setSearch}/>
                 </div>
                 {
                     console.log("ITEM IS ",item)
                 }
                 <div className={"mb-10"}>
-                    <AddressTablePanel
+                    <DiscountTablePanel
                         editMode={() => {
                             setEdit(true)
                         }}

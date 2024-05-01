@@ -25,7 +25,7 @@ export async function getAddress(page) {
     return response.json();
 }export async function insertAddress(postalCode,address,no,unit,area,province,city,users) {
 
-   
+
     const response = await fetch(BaseUrl + "address/addAddress",
         {
             method: 'POST',
@@ -40,7 +40,7 @@ export async function getAddress(page) {
                     province:{id:province},
                     city:{id:city},
                     users:{id:users},
-                   
+
                 }
             ),
 
@@ -59,12 +59,12 @@ export async function getAddress(page) {
     }
     return response;
 }export async function editAddress(postalCode,address,no,unit,area,province,city,users,id) {
-  
 
-    const response = await fetch(BaseUrl + "article/add",
+
+    const response = await fetch(BaseUrl + "address/addAddress",
         {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
             body: JSON.stringify(
                 {
                     postalCode:postalCode,
