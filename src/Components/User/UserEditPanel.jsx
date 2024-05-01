@@ -10,12 +10,14 @@ import {editAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
 
 export function AddressEditPanel({item , cancel ,reload}) {
-    const [title,setTitle]=useState(item.title);
-    const [id,setId]=useState(item.id);
-    const [description,setDescription]=useState(item.description);
-    const [content,setContent]=useState(item.content);
-    const [url,setUrl]=useState(item.url);
-    const [image,setImage]=useState("");
+     const [id,setId]=useState(item.id);
+    const [name, setName] = useState(item.name);
+    const [family, setFamily] = useState(item.family);
+    const [mobile, setMobile] = useState(item.mobile);
+    const [password, setPassword] = useState(item.password);
+    const [nationalCode, setNationalCode] = useState(item.nationalCode);
+    const [create_at, setCreate_at] = useState(item.create_at);
+    const [roles, setRoles] = useState(item.roles);
 
     async  function submit() {
         try {
@@ -33,96 +35,105 @@ export function AddressEditPanel({item , cancel ,reload}) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش کاربر
                     </h2>
                 </div>
                 <hr/>
 
                     <div className="space-y-12">
-
-                        <div className=" ">
-
-
+                        <div >
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                <div className="sm:col-span-full">
-                                    <Uploader change={setImage}/>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        نام
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"نام"} type={"text"} change={(e) => {
+                                            setName(e.target.value)
+                                        }} value={name}/>
+                                    </div>
                                 </div>
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        عنوان مقاله
+                                        نام خانوادگی
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"عنوان مقاله"} type={"text"} change={(e) => {
-                                            setTitle(e.target.value)
-                                        }} value={title}/>
+                                        <Input placeHolder={"نام خانوادگی "} type={"text"} change={(e) => {
+                                            setFamily(e.target.value)
+                                        }} value={family}/>
                                     </div>
                                 </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="last-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        آدرس
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                            setUrl(e.target.value)
-                                        }} value={url}/>
-
-                                    </div>
-                                </div>
-                                <div className="sm:col-span-full">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        توضیحات
+                                        شماره موبایل
                                     </label>
                                     <div className="mt-2">
-                                        <Textarea value={description} change={(e) => {
-                                            setDescription(e.target.value)
-                                        }}>
-                                            {item.description}
-                                        </Textarea>
+                                        <Input placeHolder={"شماره موبایل"} type={"text"} change={(e) => {
+                                            setMobile(e.target.value)
+                                        }} value={mobile}/>
                                     </div>
                                 </div>
 
-                                <div className="sm:col-span-full">
-                                    <label htmlFor="last-name"
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        محتوا
+                                        کد ملی
                                     </label>
                                     <div className="mt-2">
-                                        <CKEditor
-                                            editor={ClassicEditor}
-                                            config={{
-                                                extraPlugins: [],
-                                                mediaEmbed: {
-                                                    extraProviders: [
-                                                        {
-                                                            previewsInData: true,
-                                                            name: "aparat",
-                                                            url: "https://www.aparat.com",
-                                                        },
-                                                    ],
-                                                },
-                                            }}
-                                            data={content}
-                                            onChange={(event, editor) => {
-                                                setContent(editor.getData());
-                                            }}
-                                        />
+                                        <Input placeHolder={"کد ملی"} type={"text"} change={(e) => {
+                                            setNationalCode(e.target.value)
+                                        }} value={nationalCode}/>
                                     </div>
                                 </div>
 
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        پسورد
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"پسورد"} type={"text"} change={(e) => {
+                                            setPassword(e.target.value)
+                                        }} value={password}/>
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        تاریخ ایجاد
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"تاریخ ایجاد"} type={"text"} change={(e) => {
+                                            setCreate_at(e.target.value)
+                                        }} value={create_at}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        نقش
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"نقش"} type={"text"} change={(e) => {
+                                            setRoles(e.target.value)
+                                        }} value={roles}/>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
 
                     </div>
 
-                    <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ویرایش"} click={submit}/>
-                        <CancelButton title={"انصراف"}  click={cancel}/>
-                    </div>
+                <div className="mt-6 flex items-center justify-center gap-x-6">
+                    <ConfirmButton title={"ویرایش"} click={submit}/>
+                    <CancelButton title={"انصراف"} click={cancel}/>
+                </div>
             </div>
 
         </>

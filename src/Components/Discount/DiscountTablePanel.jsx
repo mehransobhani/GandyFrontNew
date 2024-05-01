@@ -8,12 +8,9 @@ export const DiscountTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "تصویر" },
-                    { title: "عنوان" },
-                    { title: "توضیحات" },
-                    { title: "ادرس" },
-                    { title: "محتوا" },
-                    { title: "پیش نمایش محتوا" },
+                    { title: "تخفیف" },
+                    { title: "تاریخ ایجاد" },
+                    { title: "تاریخ انقضا" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

@@ -1,24 +1,23 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import Textarea from "../Form/Textarea";
-import {CKEditor} from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Uploader from "../Form/Uploader";
 import {insertAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
 
 export function AddressInsertPanel({reload}) {
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [content, setContent] = useState("");
-    const [url, setUrl] = useState("");
-    const [image, setImage] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+    const [address, setAddress] = useState("");
+    const [no, setNo] = useState("");
+    const [unit, setUnit] = useState("");
+    const [area, setArea] = useState("");
+    const [province, setProvince] = useState("");
+    const [city, setCity] = useState("");
+    const [users, setUsers] = useState("");
 
    async function submit() {
        try {
-        let response =await insertAddress(title,description,url,content,image)
+        let response =await insertAddress(postalCode, address, no, unit, area, province, city, users);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -27,6 +26,7 @@ export function AddressInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
+
 
     return (
         <>
@@ -41,18 +41,16 @@ export function AddressInsertPanel({reload}) {
 
                         <div className=" ">
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                <div className="sm:col-span-full">
-                                    <Uploader change={setImage}/>
-                                </div>
+
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        عنوان مقاله
+                                        کد پستی
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"عنوان مقاله"} type={"text"} change={(e) => {
-                                            setTitle(e.target.value)
-                                        }} value={title}/>
+                                        <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
+                                            setPostalCode(e.target.value)
+                                        }} value={postalCode}/>
                                     </div>
                                 </div>
 
@@ -63,64 +61,55 @@ export function AddressInsertPanel({reload}) {
                                     </label>
                                     <div className="mt-2">
                                         <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                            setUrl(e.target.value)
-                                        }} value={url}/>
+                                            setAddress(e.target.value)
+                                        }} value={address}/>
 
                                     </div>
                                 </div>
-                                <div className="sm:col-span-full">
+
+                                <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        توضیحات
+                                        طبقه
                                     </label>
                                     <div className="mt-2">
-                                        <Textarea change={(e) => {
-                                            setDescription(e.target.value)
-                                        }}>
-                                            {description}
-                                        </Textarea>
+                                        <Input placeHolder={"طبقه"} type={"text"} change={(e) => {
+                                            setUnit(e.target.value)
+                                        }} value={unit}/>
                                     </div>
                                 </div>
 
-                                <div className="sm:col-span-full">
-                                    <label htmlFor="last-name"
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        محتوا
+                                        پلاک
                                     </label>
                                     <div className="mt-2">
-                                        <CKEditor
-                                            editor={ClassicEditor}
-                                            
-                                            config={{
-                                                direction: 'rtl',
-                                                extraPlugins: [],
-                                                mediaEmbed: {
-                                                    extraProviders: [
-                                                        {
-                                                            previewsInData: true,
-                                                            name: "aparat",
-                                                            url: "https://www.aparat.com",
-                                                        },
-                                                    ],
-                                                },
-                                            }}
-                                            data={content}
-                                            onChange={(event, editor) => {
-                                                setContent(editor.getData());
-                                            }}
-                                        />
+                                        <Input placeHolder={"پلاک"} type={"text"} change={(e) => {
+                                            setNo(e.target.value)
+                                        }} value={no}/>
                                     </div>
                                 </div>
-
-
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        محله
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"محله"} type={"text"} change={(e) => {
+                                            setArea(e.target.value)
+                                        }} value={area}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div className="mt-6 flex items-center justify-center gap-x-6">
-                        <ConfirmButton title={"ثبت"} click={submit}/>
-                    </div>
+                <div className="mt-6 flex items-center justify-center gap-x-6">
+                    <ConfirmButton title={"ثبت"} click={submit}/>
+                </div>
 
             </div>
 

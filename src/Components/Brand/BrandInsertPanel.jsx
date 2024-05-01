@@ -33,9 +33,7 @@ export function BrandInsertPanel({reload}) {
                 <div className="space-y-12">
                     <div className=" ">
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-full">
-                                <Uploader change={setImage}/>
-                            </div>
+
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">

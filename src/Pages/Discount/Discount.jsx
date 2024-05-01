@@ -50,9 +50,6 @@ export const Discount  = withAuth( () => {
                 <div className={"mb-10"}>
                     <SearchBox searchSubmit={searchDiscountHandler} change={setSearch}/>
                 </div>
-                {
-                    console.log("ITEM IS ",item)
-                }
                 <div className={"mb-10"}>
                     <DiscountTablePanel
                         editMode={() => {
@@ -64,7 +61,7 @@ export const Discount  = withAuth( () => {
                     />
                 </div>
                 <div className={"mb-10"}>
-                                <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
+                  <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
 
                 </div>
             </AdminLayout>
