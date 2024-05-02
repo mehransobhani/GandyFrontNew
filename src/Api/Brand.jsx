@@ -35,6 +35,9 @@ export async function getBrand(page) {
                     name:name                   
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -63,6 +66,9 @@ export async function getBrand(page) {
                    id:id
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -126,7 +132,7 @@ export async function getBrandByWords(name) {
             window.location.href="/login";
         }
         else {
-            getBrandListByMobile(mobile);
+            getBrandByWords(name);
         }
     }
     return response;

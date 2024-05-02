@@ -17,6 +17,7 @@ import {Article} from "./Pages/Article/Article";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Address } from './Pages/Address/Address';
+import { Brand } from './Pages/Brand/Brand';
 function App() {
     return (
         <>
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
 
                         <Route path="/address" element={<Address/>}/>
+                        <Route path="/brand" element={<Brand/>}/>
 
 
                         <Route path="/article" element={<Article/>}/>

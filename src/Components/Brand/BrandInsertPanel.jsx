@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import CancelButton from "../Button/CancelButton";
 
 export function BrandInsertPanel({reload}) {
-    const [name,setName]=useState(item.name);
+    const [name,setName]=useState("");
 
    async function submit() {
        try {
@@ -40,7 +40,7 @@ export function BrandInsertPanel({reload}) {
                                     نام برند
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"عنوان مقاله"} type={"text"} change={(e) => {
+                                    <Input placeHolder={"نام برند"} type={"text"} change={(e) => {
                                         setName(e.target.value)
                                     }} value={name}/>
                                 </div>
@@ -50,8 +50,7 @@ export function BrandInsertPanel({reload}) {
                 </div>
                 <div className="mt-6 flex items-center justify-center gap-x-6">
                     <ConfirmButton title={"افزودن"} click={submit}/>
-                    <CancelButton title={"انصراف"}  click={cancel}/>
-                </div>
+                 </div>
             </div>
 
         </>
