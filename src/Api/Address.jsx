@@ -43,6 +43,9 @@ export async function getAddress(page) {
 
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -78,6 +81,9 @@ export async function getAddress(page) {
                    id:id
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -97,7 +103,7 @@ export async function getAddress(page) {
 export async function removeAddress(id) {
     const response = await fetch(BaseUrl + "address/deleteAddress/"+id,
         {
-            method: 'POST',
+            method: 'DELETE',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
@@ -140,7 +146,7 @@ export async function getAddressListByMobile(mobile) {
             getAddressListByMobile(mobile);
         }
     }
-    return response;
+    return response.json();
 }
 
 

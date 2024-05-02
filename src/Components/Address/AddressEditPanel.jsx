@@ -1,5 +1,5 @@
 import Input from "../Form/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import { editAddress, getCity, getProvince, getUserByMobile } from "../../Api/Address";
@@ -25,7 +25,7 @@ export function AddressEditPanel({ item, cancel, reload }) {
 
     async function submit() {
         try {
-            let response = await editAddress(postalCode, address, no, unit, area, province, city, users, id);
+            let response = await editAddress(postalCode, address, no, unit, area, province.id, city.id, users.id, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -34,13 +34,21 @@ export function AddressEditPanel({ item, cancel, reload }) {
         }
     }
 
+    useEffect(()=>{
+        getAllProvince();
+        getDefualtCity();
+     
+    },[])
+    async function getDefualtCity(){
+        let response = await  getCity(item.province.id);
+        setAllCity(response);
+    }
 
     async function getAllProvince() {
         let response = await getProvince();
         setAllProvince(response);
     }
-    async function getCitys(e) {
-        setProvince(e.target.value)
+    async function getCitys(e) { 
         let response = await getCity(e.target.value);
         setAllCity(response);
     }
@@ -136,8 +144,8 @@ export function AddressEditPanel({ item, cancel, reload }) {
                                     <Select change={getCitys}>
                                         <option value={null}>انتخاب کنید</option>
                                         {
-                                            allProvince.map((item) => (<>
-                                                <option value={item.id}>{item.name}</option>
+                                            allProvince.map((list) => (<>
+                                                <option onClick={()=>{setProvince(list)}} selected={list.id==item.province.id} value={list.id}>{list.name}</option>
                                             </>))
                                         }
                                     </Select>
@@ -151,11 +159,11 @@ export function AddressEditPanel({ item, cancel, reload }) {
                                     شهر
                                 </label>
                                 <div className="mt-2">
-                                    <Select>
+                                       <Select >
                                         <option value={null}>انتخاب کنید</option>
                                         {
-                                            allCity && allCity.map((item) => (<>
-                                                <option>{item.name}</option>
+                                            allCity && allCity.map((list) => (<>
+                                                <option value={list.id} selected={list.id==item.city.id} onClick={()=>{setCity(list)}}>{list.name}</option>
                                             </>))
                                         }
                                     </Select>

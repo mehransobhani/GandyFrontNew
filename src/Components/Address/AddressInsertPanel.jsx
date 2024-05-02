@@ -4,6 +4,7 @@ import ConfirmButton from "../Button/ConfirmButton";
 import {getCity, getProvince, getUserByMobile, insertAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
 import { Select } from "../Form/Select";
+import Select2 from "../Form/Select2";
 
 export function AddressInsertPanel({reload}) {
 
@@ -21,8 +22,8 @@ export function AddressInsertPanel({reload}) {
     const [userSearch, setUserSearch] = useState("");
 
    async function submit() {
-       try {
-        let response =await insertAddress(postalCode, address, no, unit, area, province, city, users);
+       try { 
+        let response =await insertAddress(postalCode, address, no, unit, area, province.id, city.id, users.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -39,7 +40,7 @@ export function AddressInsertPanel({reload}) {
         setAllProvince(response);
     }
     async function getCitys(e){
-        setProvince(e.target.value)
+        setProvince(e.target.value) 
         let response = await getCity(e.target.value);
         setAllCity(response);
     }
@@ -124,39 +125,49 @@ export function AddressInsertPanel({reload}) {
                                 </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        استان
-                                    </label>
-                                    <div className="mt-2">
-                                       <Select change={getCitys}>
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    استان
+                                </label>
+                                <div className="mt-2">
+                                    <Select change={getCitys}>
                                         <option value={null}>انتخاب کنید</option>
                                         {
-                                            allProvince.map((item)=>(<>
-                                            <option value={item.id}>{item.name}</option>
+                                            allProvince.map((list) => (<>
+                                                <option onClick={()=>{setProvince(list)}}  value={list.id}>{list.name}</option>
                                             </>))
                                         }
-                                       </Select>
-                                    </div>
+                                    </Select>
                                 </div>
+                            </div>
 
+
+                            <div className="sm:col-span-3">
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    شهر
+                                </label>
+                                <div className="mt-2">
+                                       <Select >
+                                        <option value={null}>انتخاب کنید</option>
+                                        {
+                                            allCity && allCity.map((list) => (<>
+                                                <option value={list.id}  onClick={()=>{setCity(list)}}>{list.name}</option>
+                                            </>))
+                                        }
+                                    </Select>
+                                </div>
+                            </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        شهر
-                                    </label>
-                                    <div className="mt-2">
-                                       <Select>
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                          allCity &&  allCity.map((item)=>(<>
-                                            <option>{item.name}</option>
-                                            </>))
-                                        }
-                                       </Select>
-                                    </div>
-                                </div>
+                                <label htmlFor="first-name"
+                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                    کاربر
+                                </label>
+                                <div className="mt-2">
+                                <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
+                                   </div>
+                            </div>
                             </div>
                         </div>
 

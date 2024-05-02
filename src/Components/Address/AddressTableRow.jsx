@@ -48,7 +48,7 @@ export function AddressTableRow({ editMode, editItem, reload, item }) {
             </tr>
             <Tr>
                 <Td>{item.id}</Td> 
-                <Td>{item?.user?.name}</Td>
+                <Td>{item?.users?.name}</Td>
                 <Td>{item.postalCode}</Td>
                 <Td>{item.address}</Td>
                 <Td>{item.area}</Td>
