@@ -1,19 +1,20 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {insertSubCategory} from "../../Api/SubCategory";
+import {getCategoryByWords, insertSubCategory} from "../../Api/SubCategory";
 import {toast} from "react-toastify";
+import Select2 from "../Form/Select2";
 
 export function SubCategoryInsertPanel({reload}) {
 
     const [subId,setSubId]=useState("");
-
     const [parentId,setParentId]=useState("");
 
 
+    const [subSearch,setSubSearch]=useState();
+    const [parentSearch,setParentSearch]=useState();
     async function submit() {
        try {
-        let response =await insertSubCategory(subId,parentId)
+        let response =await insertSubCategory(subId.id,parentId.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -22,7 +23,14 @@ export function SubCategoryInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
-
+    async function getParents(e){
+        let response = await getCategoryByWords(e.target.value);
+        setParentSearch(response);
+    }
+    async function getSubs(e){
+        let response = await getCategoryByWords(e.target.value);
+        setSubSearch(response);
+    }
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -41,9 +49,8 @@ export function SubCategoryInsertPanel({reload}) {
                                         دسته بندی
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"دسته بندی"} type={"text"} change={(e) => {
-                                            setSubId(e.target.value)
-                                        }} value={subId}/>
+                                    <Select2 value={subId?.name} change={getSubs} options={subSearch} click={setSubId} />
+
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
@@ -52,9 +59,8 @@ export function SubCategoryInsertPanel({reload}) {
                                         دسته بندی والد
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"دسته بندی والد"} type={"text"} change={(e) => {
-                                            setParentId(e.target.value)
-                                        }} value={parentId}/>
+                                    <Select2 value={parentId?.name} change={getParents} options={parentSearch} click={setParentId} />
+
                                     </div>
                                 </div>
                             </div>

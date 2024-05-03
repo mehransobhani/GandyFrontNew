@@ -37,6 +37,9 @@ export async function getSubCategory(page) {
 
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -67,6 +70,9 @@ export async function getSubCategory(page) {
 
                 }
             ),
+            headers: {
+                "Content-Type": "application/json",
+            }
 
         }
     )
@@ -131,8 +137,8 @@ export async function getCategoryByWords(name) {
             window.location.href="/login";
         }
         else {
-            getSubCategoryListByMobile(mobile);
+            getCategoryByWords(name);
         }
     }
-    return response;
+    return response.json();
 }

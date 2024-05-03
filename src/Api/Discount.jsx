@@ -52,7 +52,7 @@ export async function getDiscount(page) {
         }
     }
     return response;
-}export async function editDiscount(discount,create_at,expire_at) {
+}export async function editDiscount(discount,create_at,expire_at,id) {
   
 
     const response = await fetch(BaseUrl + "article/add",
@@ -61,7 +61,9 @@ export async function getDiscount(page) {
             credentials: 'include', 
             body: JSON.stringify(
                 {
-                   name:name,
+                    discount:discount,
+                    create_at:create_at,
+                    expire_at:expire_at,
                    id:id
                 }
             ),

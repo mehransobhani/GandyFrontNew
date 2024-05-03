@@ -1,12 +1,12 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
-import AdminLayout from "../../Layout/AdminLayout";
-import {SubCategoryEditPanel} from "../../Components/SubCategory/SubCategoryEditPanel";
-import {SubCategoryInsertPanel} from "../../Components/SubCategory/SubCategoryInsertPanel";
+import AdminLayout from "../../Layout/AdminLayout"; 
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {SubCategoryTablePanel} from "../../Components/SubCategory/SubCategoryTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getSubCategory, getSubCategoryByWords} from "../../Api/SubCategory";
+import {getCategoryByWords, getSubCategory} from "../../Api/SubCategory";
+import { SubCategoryEditPanel } from "../../Components/SubCategory/SubCategoryEditPanel";
+import { SubCategoryInsertPanel } from "../../Components/SubCategory/SubCategoryInsertPanel";
 
 export const SubCategory  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ export const SubCategory  = withAuth( () => {
             getData();
         }
         else{
-        let data =await  getSubCategoryByWords(search);
+        let data =await  getCategoryByWords(search);
         setItem(data);
     }
 }

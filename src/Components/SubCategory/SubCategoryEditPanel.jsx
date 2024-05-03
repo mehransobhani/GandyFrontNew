@@ -1,10 +1,9 @@
-import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {editSubCategory, getCategoryByWords} from "../../Api/SubCategory";
 import {toast} from "react-toastify";
-import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
+import Select2 from "../Form/Select2";
 
 export function SubCategoryEditPanel({item , cancel ,reload}) {
     const [subId,setSubId]=useState(item.subId);
@@ -16,7 +15,7 @@ export function SubCategoryEditPanel({item , cancel ,reload}) {
 
     async  function submit() {
         try {
-            let response = await editSubCategory(subId,parentId, id)
+            let response = await editSubCategory(subId.id,parentId.id, id)
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -52,9 +51,7 @@ export function SubCategoryEditPanel({item , cancel ,reload}) {
                                     دسته بندی
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"دسته بندی"} type={"text"} change={(e) => {
-                                        setSubId(e.target.value)
-                                    }} value={subId}/>
+                                <Select2 value={subId?.name} change={getSubs} options={subSearch} click={setSubId} />
                                 </div>
                             </div>
                             <div className="sm:col-span-3">
@@ -63,9 +60,8 @@ export function SubCategoryEditPanel({item , cancel ,reload}) {
                                     دسته بندی والد
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"دسته بندی والد"} type={"text"} change={(e) => {
-                                        setParentId(e.target.value)
-                                    }} value={parentId}/>
+                                <Select2 value={parentId?.name} change={getParents} options={parentSearch} click={setParentId} />
+                                 
                                 </div>
                             </div>
                         </div>

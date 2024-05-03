@@ -8,7 +8,7 @@ import { useState } from "react";
 import { removeDiscount } from "../../Api/Discount";
 import { toast } from "react-toastify";
 
-export function DiscountTableRow({ editMode, editItem, reload, item }) {
+export function SubCategoryTableRow({ editMode, editItem, reload, item }) {
     const [deleteModal, setDeleteModal] = useState(false);
     const [previewModal, setPreviewModal] = useState(false);
 
@@ -48,21 +48,10 @@ export function DiscountTableRow({ editMode, editItem, reload, item }) {
             </tr>
             <Tr>
                 <Td>{item.id}</Td>
-                <Td>
-                    <img src={"" + item.image} className={"w-24 h-24 mx-auto"} />
-                </Td>
-                <Td>{item.title}</Td>
-                <Td>{item.description}</Td>
-                <Td>{item.url}</Td>
-                <Td>
-                    <div className={"  whitespace-normal overflow-hidden line-clamp-1"}>
-                        <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    </div>
-                </Td>
-                <Td><EyeIcon onClick={() => {
-                    setPreviewModal(true)
-                }}
-                    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
+               
+                <Td>{item.subId?.name}</Td>
+                <Td>{item.parentId?.name}</Td>
+             
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>

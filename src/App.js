@@ -18,6 +18,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Address } from './Pages/Address/Address';
 import { Brand } from './Pages/Brand/Brand';
+import { SubCategory } from './Pages/SubCategory/SubCategory';
 function App() {
     return (
         <>
@@ -29,6 +30,7 @@ function App() {
 
                         <Route path="/address" element={<Address/>}/>
                         <Route path="/brand" element={<Brand/>}/>
+                        <Route path="/sub-category" element={<SubCategory/>}/>
 
 
                         <Route path="/article" element={<Article/>}/>
