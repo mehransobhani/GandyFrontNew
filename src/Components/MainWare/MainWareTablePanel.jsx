@@ -8,14 +8,9 @@ export const MainWareTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "کاربر" },
-                    { title: "کد پسیتی" },
-                    { title: "ادرس" },
-                    { title: "محله" },
-                    { title: "طبقه" },
-                    { title: "پلاک" },
-                    { title: "استان" },
-                    { title: "شهر" },
+                    { title: "نام" },
+                    { title: "آدرس" },
+                    { title: "نوع محصول" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

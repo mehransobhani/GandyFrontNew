@@ -8,6 +8,8 @@ export const ProductBoxTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
+                    { title: "boxNum" },
+                    { title: "محصول" },
 
                     { title: "ویرایش" },
                     { title: "حذف" },

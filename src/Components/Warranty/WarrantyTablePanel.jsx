@@ -8,6 +8,8 @@ export const WarrantyTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
+                    { title: "گارانتی" },
+                    { title: "محصول" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

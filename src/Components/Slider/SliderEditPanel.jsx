@@ -52,7 +52,7 @@ export function SliderEditPanel({ item, cancel, reload }) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش اسلایدر
                     </h2>
                 </div>
                 <hr />

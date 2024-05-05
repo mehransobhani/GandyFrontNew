@@ -8,8 +8,13 @@ export const CoverTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "کاربر" },
+                    { title: "position" },
+                    { title: "col" },
                     { title: "ادرس" },
+                    { title: "مقدار" },
+                    { title: "نوع محصول" },
+                    { title: "تگ محصول" },
+                    { title: "ویژگی محصول" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

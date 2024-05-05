@@ -39,6 +39,13 @@ export function CoverTableRow({ editMode, editItem, reload, item }) {
 
             <Tr>
                 <Td>{item.id}</Td>
+                <Td>{item.position}</Td>
+                <Td>{item.col}</Td>
+                <Td>{item.url}</Td>
+                <Td>{item.amount}</Td>
+                <Td>{item.productType?.name}</Td>
+                <Td>{item.productTag?.name}</Td>
+                <Td>{item.attributeOption?.attributeType}</Td>
 
                 <Td><PencilSquareIcon
                     onClick={setEditMode}

@@ -39,6 +39,8 @@ export function WarrantyTableRow({ editMode, editItem, reload, item }) {
 
             <Tr>
                 <Td>{item.id}</Td>
+                <Td>{item?.regWarranty?.companyName}</Td>
+                <Td>{item?.product?.name}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>

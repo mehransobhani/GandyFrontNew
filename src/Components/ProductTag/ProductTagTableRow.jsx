@@ -39,8 +39,9 @@ export function ProductTagTableRow({ editMode, editItem, reload, item }) {
             </tr>
             <Tr>
                 <Td>{item.id}</Td>
-                <Td>{item?.tag?.tag}</Td>
                 <Td>{item?.product?.name}</Td>
+                <Td>{item?.tag?.tag}</Td>
+
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
