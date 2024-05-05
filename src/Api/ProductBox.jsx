@@ -1,7 +1,7 @@
 import {BaseUrl} from '../env';
 import {refreshToken, signout} from "./Auth";
 export async function getProductBox(page) {
-    const response = await fetch(BaseUrl + "pbox/getAll/"+page,
+    const response = await fetch(BaseUrl + "pbox/getAll",
         {
             method: 'POST',
             credentials: 'include',
@@ -137,6 +137,6 @@ export async function getProductByWords(name) {
             getProductByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 

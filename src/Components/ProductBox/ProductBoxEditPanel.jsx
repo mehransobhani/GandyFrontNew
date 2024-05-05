@@ -5,6 +5,7 @@ import CancelButton from "../Button/CancelButton";
 import {editProductBox, getProductByWords} from "../../Api/ProductBox";
 import { toast } from "react-toastify";
 import Select2 from "../Form/Select2";
+import Select2ProductCount from "../Form/Select2ProductCount";
 
 export function ProductBoxEditPanel({ item, cancel, reload }) {
     const [boxNum, setBoxNum] = useState(item.boxNum);
@@ -25,7 +26,7 @@ export function ProductBoxEditPanel({ item, cancel, reload }) {
     }
     async function changeProductCountSearchHandle(e) {
         let response = await getProductByWords(e.target.value);
-        setProductCountSearch(response);
+        setProductCountSearch(response?.productCountResponses);
 
     }
 
@@ -58,7 +59,7 @@ export function ProductBoxEditPanel({ item, cancel, reload }) {
                                     انتخاب کالا
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productCount?.name} change={changeProductCountSearchHandle}
+                                    <Select2ProductCount value={productCount?.product?.name} change={changeProductCountSearchHandle}
                                              options={productCountSearch} click={setProductCount}/>
                                 </div>
                             </div>

@@ -135,7 +135,7 @@ export async function getProductTagByWords(name) {
             getProductTagByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getProductByWords(name) {
     const response = await fetch(BaseUrl + "product/getProductByWords",
@@ -163,7 +163,7 @@ export async function getProductByWords(name) {
             getProductByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getTagByWords(name) {
     const response = await fetch(BaseUrl + "tag/getTagByWords",
@@ -191,6 +191,6 @@ export async function getTagByWords(name) {
             getTagByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 

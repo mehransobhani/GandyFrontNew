@@ -44,10 +44,7 @@ export async function insertCover(position,col,image,url,amount,productType,prod
     const response = await fetch(BaseUrl + "cover/add",
         {
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
+            credentials: 'include', 
             body:formdata,
         }
     )

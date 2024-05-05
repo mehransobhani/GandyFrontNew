@@ -39,7 +39,7 @@ export function ProductBoxTableRow({ editMode, editItem, reload, item }) {
             <Tr>
                 <Td>{item.id}</Td>
                 <Td>{item.boxNum}</Td>
-                <Td>{item.product?.name}</Td>
+                <Td>{item.productCount?.product?.name}</Td>
 
                 <Td><PencilSquareIcon
                     onClick={setEditMode}

@@ -4,6 +4,7 @@ import ConfirmButton from "../Button/ConfirmButton";
 import {getProductByWords , insertProductBox} from "../../Api/ProductBox";
 import {toast} from "react-toastify";
 import Select2 from "../Form/Select2";
+import Select2ProductCount from "../Form/Select2ProductCount";
 
 export function ProductBoxInsertPanel({reload}) {
     const [boxNum, setBoxNum] = useState("");
@@ -24,7 +25,7 @@ export function ProductBoxInsertPanel({reload}) {
     }
     async function changeProductCountSearchHandle(e) {
         let response = await getProductByWords(e.target.value);
-        setProductCountSearch(response);
+        setProductCountSearch(response?.productCountResponses);
 
     }
     return (
@@ -56,7 +57,7 @@ export function ProductBoxInsertPanel({reload}) {
                                         انتخاب کالا
                                     </label>
                                     <div className="mt-2">
-                                        <Select2 value={productCount?.name} change={changeProductCountSearchHandle}
+                                        <Select2ProductCount value={productCount?.name} change={changeProductCountSearchHandle}
                                                  options={productCountSearch} click={setProductCount}/>
                                     </div>
                                 </div>

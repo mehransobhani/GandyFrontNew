@@ -135,6 +135,6 @@ export async function getTagByWords(name) {
             getTagByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 

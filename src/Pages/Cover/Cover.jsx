@@ -28,7 +28,7 @@ export const Cover  = withAuth( () => {
             getData();
         }
         else{
-            let data =await  getCoverByWords(search);
+            let data =await  getCover(1);
             setItem(data);
         }
     }

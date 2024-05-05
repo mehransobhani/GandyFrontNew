@@ -21,6 +21,11 @@ import { Brand } from './Pages/Brand/Brand';
 import { SubCategory } from './Pages/SubCategory/SubCategory';
 import {Category} from "./Pages/Category/Category";
 import {Discount} from "./Pages/Discount/Discount";
+import {Cover} from "./Pages/Cover/Cover";
+import {Tag} from "./Pages/Tag/Tag";
+import {WebInfo} from "./Pages/WebInfo/WebInfo";
+import {ProductBox} from "./Pages/ProductBox/ProductBox";
+import {ProductTag} from "./Pages/ProductTag/ProductTag";
 import {User} from "./Pages/User/User";
 function App() {
     return (
@@ -37,6 +42,11 @@ function App() {
                         <Route path="/discount" element={<Discount/>}/>
                         <Route path="/category" element={<Category/>}/>
                         <Route path="/sub-category" element={<SubCategory/>}/>
+                        <Route path="/cover" element={<Cover/>}/>
+                        <Route path="/tag" element={<Tag/>}/>
+                        <Route path="/web-info" element={<WebInfo/>}/>
+                        <Route path="/product-box" element={<ProductBox/>}/>
+                        <Route path="/product-tag" element={<ProductTag/>}/>
 
 
                         <Route path="/article" element={<Article/>}/>

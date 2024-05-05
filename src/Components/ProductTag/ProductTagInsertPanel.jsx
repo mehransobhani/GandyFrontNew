@@ -1,10 +1,11 @@
 import Input from "../Form/Input";
 import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {getProductByWords, getProductTagByWords, insertProductTag} from "../../Api/ProductTag";
+import {getProductByWords, getTagByWords, insertProductTag} from "../../Api/ProductTag";
 import {toast} from "react-toastify";
 import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
+import Select2Tag from "../Form/Select2Tag";
 
 export function ProductTagInsertPanel({reload}) {
     const [product, setProduct] = useState("");
@@ -29,8 +30,8 @@ export function ProductTagInsertPanel({reload}) {
         setProductSearch(response);
     }
     async function changeTagSearchHandle(e) {
-        let response = await getProductTagByWords(e.target.value);
-        setProductSearch(response);
+        let response = await getTagByWords(e.target.value);
+        setTagSearch(response);
     }
     return (
         <>
@@ -52,7 +53,7 @@ export function ProductTagInsertPanel({reload}) {
                                         محصول
                                     </label>
                                     <div className="mt-2">
-                                        <Select2 value={product?.name} change={changeProductSearchHandle()}
+                                        <Select2 value={product?.name} change={changeProductSearchHandle}
                                                  options={productSearch} click={setProduct}/>
                                     </div>
                                 </div>
@@ -63,7 +64,7 @@ export function ProductTagInsertPanel({reload}) {
                                         تگ
                                     </label>
                                     <div className="mt-2">
-                                        <Select2 value={tag?.name} change={changeTagSearchHandle}
+                                        <Select2Tag value={tag?.name} change={changeTagSearchHandle}
                                                  options={tagSearch} click={setTag}/>
                                     </div>
                                 </div>

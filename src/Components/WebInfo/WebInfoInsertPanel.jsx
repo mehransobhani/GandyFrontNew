@@ -139,8 +139,8 @@ export function WebInfoInsertPanel({reload}) {
                                     </label>
                                     <div className="mt-2">
                                         <Input placeHolder={"آدرس "} type={"text"} change={(e) => {
-                                            setPostalCode(e.target.value)
-                                        }} value={postalCode}/>
+                                            setAddress(e.target.value)
+                                        }} value={address}/>
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">

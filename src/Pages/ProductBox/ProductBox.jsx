@@ -28,7 +28,7 @@ export const ProductBox  = withAuth( () => {
             getData();
         }
         else{
-            let data =await  getProductBoxByWords(search);
+            let data =await  getProductBox(1);
             setItem(data);
         }
     }
