@@ -1,14 +1,10 @@
 import Input from "../Form/Input";
 import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import Textarea from "../Form/Textarea";
-import {CKEditor} from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
 import {getProductTypeByWords, getTagByWords, insertCategory ,getAttributeTypeByWords} from "../../Api/Category";
 import {toast} from "react-toastify";
 import Select2 from "../Form/Select2";
-import Select2AttributeOption from "../Form/Select2AttributeOption";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function CategoryInsertPanel({reload}) {

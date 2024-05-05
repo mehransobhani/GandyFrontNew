@@ -5,25 +5,24 @@ import {getCity, getProvince, getUserByMobile, insertSlider} from "../../Api/Sli
 import {toast} from "react-toastify";
 import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
+import {getAttributeTypeByWords, getProductTypeByWords, getTagByWords} from "../../Api/Cover";
 
 export function SliderInsertPanel({reload}) {
+    const [image,setImage]=useState("");
+    const [amount,setAmount]=useState("");
+    const [url,setUrl]=useState("");
+    const [productType,setProductType]=useState("");
+    const [productTag,setProductTag]=useState("");
+    const [attributeOption,setAttributeOption]=useState("");
 
-    const [postalCode, setPostalCode] = useState("");
-    const [Slider, setSlider] = useState("");
-    const [no, setNo] = useState("");
-    const [unit, setUnit] = useState("");
-    const [area, setArea] = useState("");
-    const [province, setProvince] = useState("");
-    const [city, setCity] = useState("");
-    const [users, setUsers] = useState("");
+    const [productTypeSearch,setProductTypeSearch]=useState("");
+    const [productTagSearch,setProductTagSearch]=useState("");
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
 
-    const [allProvince, setAllProvince] = useState([]);
-    const [allCity, setAllCity] = useState([]);
-    const [userSearch, setUserSearch] = useState("");
 
    async function submit() {
        try {
-        let response =await insertSlider(postalCode, Slider, no, unit, area, province.id, city.id, users.id);
+        let response =await insertSlider(image,url,productType.id,productTag.id,attributeOption.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -32,23 +31,24 @@ export function SliderInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
-    useEffect(()=>{
-        getAllProvince();
-    },[])
-    async function  getAllProvince(){
-        let response = await getProvince();
-        setAllProvince(response);
-    }
-    async function getCitys(e){
-        setProvince(e.target.value)
-        let response = await getCity(e.target.value);
-        setAllCity(response);
-    }
-    async function changeUserSearchHandle(e) {
-        let response = await getUserByMobile(e.target.value);
-        setUserSearch(response);
+
+
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeOptionSearch(response);
 
     }
+    async function changeProductTypeSearchSearchHandle(e) {
+        let response = await getProductTypeByWords(e.target.value);
+        setProductTypeSearch(response);
+
+    }
+    async function changeTagSearchHandle(e) {
+        let response = await getTagByWords(e.target.value);
+        setProductTagSearch(response);
+
+    }
+
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>

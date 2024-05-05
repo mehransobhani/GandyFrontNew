@@ -1,6 +1,6 @@
 import Tr from "../Table/Tr";
 import Td from "../Table/Td";
-import { EyeIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {  PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Modal from "../Modal/Modal";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 
 export function ProductBoxTableRow({ editMode, editItem, reload, item }) {
     const [deleteModal, setDeleteModal] = useState(false);
-    const [previewModal, setPreviewModal] = useState(false);
 
 
     function setEditMode() {
@@ -37,25 +36,8 @@ export function ProductBoxTableRow({ editMode, editItem, reload, item }) {
                     </div>
                 </Modal>
             </tr>
-            <tr className={"text-right"}>
-                <Modal isOpen={previewModal} title={"پیش نمایش"} onClose={() => setPreviewModal(false)}>
-                    <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    <hr />
-                    <div className={"flex flex-row gap-2"}>
-                        <CancelButton title={" بستن"} click={() => setPreviewModal(false)} />
-                    </div>
-                </Modal>
-            </tr>
             <Tr>
                 <Td>{item.id}</Td>
-                <Td>{item?.users?.name}</Td>
-                <Td>{item.postalCode}</Td>
-                <Td>{item.ProductBox}</Td>
-                <Td>{item.area}</Td>
-                <Td>{item.unit}</Td>
-                <Td>{item.no}</Td>
-                <Td>{item?.province?.name}</Td>
-                <Td>{item?.city?.name}</Td>
 
                 <Td><PencilSquareIcon
                     onClick={setEditMode}

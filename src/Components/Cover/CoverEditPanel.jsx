@@ -1,27 +1,28 @@
 import Input from "../Form/Input";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import { editCover, getCity, getProvince, getUserByMobile } from "../../Api/Cover";
+import {editCover, getAttributeTypeByWords, getProductTypeByWords, getTagByWords} from "../../Api/Cover";
 import { toast } from "react-toastify";
-import { getTagByWords } from "../../Api/Category";
 import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
+import Uploader from "../Form/Uploader";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function CoverEditPanel({ item, cancel, reload }) {
-    const [postalCode, setPostalCode] = useState(item.postalCode);
-    const [Cover, setCover] = useState(item.Cover);
-    const [no, setNo] = useState(item.no);
-    const [unit, setUnit] = useState(item.unit);
-    const [area, setArea] = useState(item.area);
-    const [province, setProvince] = useState(item.province);
-    const [city, setCity] = useState(item.city);
-    const [users, setUsers] = useState(item.users);
-    const [id, setId] = useState(item.id);
+    const [position,setPosition]=useState(item.position);
+    const [col,setCol]=useState(item.col);
+    const [image,setImage]=useState(item.image);
+    const [amount,setAmount]=useState(item.amount);
+    const [url,setUrl]=useState(item.url);
+    const [productType,setProductType]=useState(item.productType);
+    const [productTag,setProductTag]=useState(item.productTag);
+    const [attributeOption,setAttributeOption]=useState(item.attributeOption);
+    const [id,setId]=useState("");
 
-    const [allProvince, setAllProvince] = useState([]);
-    const [allCity, setAllCity] = useState([]);
-    const [userSearch, setUserSearch] = useState("");
+    const [productTypeSearch,setProductTypeSearch]=useState("");
+    const [productTagSearch,setProductTagSearch]=useState("");
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
 
     async function submit() {
         try {
@@ -33,29 +34,19 @@ export function CoverEditPanel({ item, cancel, reload }) {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
     }
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeOptionSearch(response);
 
-    useEffect(()=>{
-        getAllProvince();
-        getDefualtCity();
-
-    },[])
-    async function getDefualtCity(){
-        let response = await  getCity(item.province.id);
-        setAllCity(response);
     }
+    async function changeProductTypeSearchSearchHandle(e) {
+        let response = await getProductTypeByWords(e.target.value);
+        setProductTypeSearch(response);
 
-    async function getAllProvince() {
-        let response = await getProvince();
-        setAllProvince(response);
     }
-    async function getCitys(e) {
-        let response = await getCity(e.target.value);
-        setAllCity(response);
-    }
-
-    async function changeUserSearchHandle(e) {
-        let response = await getUserByMobile(e.target.value);
-        setUserSearch(response);
+    async function changeTagSearchHandle(e) {
+        let response = await getTagByWords(e.target.value);
+        setProductTagSearch(response);
 
     }
 
@@ -64,121 +55,134 @@ export function CoverEditPanel({ item, cancel, reload }) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش کاور
                     </h2>
                 </div>
                 <hr />
                 <div className="space-y-12">
-
                     <div className=" ">
                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
+                            <div className="sm:col-span-full">
+                                <Uploader change={setImage}/>
+                            </div>
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    کد پستی
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    position
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
-                                        setPostalCode(e.target.value)
-                                    }} value={postalCode} />
+                                    <Input placeHolder={"position"} type={"text"} change={(e) => {
+                                        setPosition(e.target.value)
+                                    }} value={position}/>
                                 </div>
                             </div>
 
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     آدرس
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                        setCover(e.target.value)
-                                    }} value={Cover} />
+                                        setUrl(e.target.value)
+                                    }} value={url}/>
 
                                 </div>
                             </div>
-
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    طبقه
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    مقدار
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"طبقه"} type={"text"} change={(e) => {
-                                        setUnit(e.target.value)
-                                    }} value={unit} />
-                                </div>
-                            </div>
+                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                        setAmount(e.target.value)
+                                    }} value={amount}/>
 
-
-                            <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    پلاک
-                                </label>
-                                <div className="mt-2">
-                                    <Input placeHolder={"پلاک"} type={"text"} change={(e) => {
-                                        setNo(e.target.value)
-                                    }} value={no} />
                                 </div>
                             </div>
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    محله
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    col
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"محله"} type={"text"} change={(e) => {
-                                        setArea(e.target.value)
-                                    }} value={area} />
+                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                        setCol(e.target.value)
+                                    }} value={col}/>
+
                                 </div>
                             </div>
-
-
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    استان
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    productType
                                 </label>
                                 <div className="mt-2">
-                                    <Select change={getCitys}>
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allProvince.map((list) => (<>
-                                                <option onClick={()=>{setProvince(list)}} selected={list.id==item.province.id} value={list.id}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
+                                    <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}
+                                             options={productTypeSearch} click={setProductType}/>
+
+
                                 </div>
                             </div>
-
-
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    شهر
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    productTag
                                 </label>
                                 <div className="mt-2">
-                                       <Select >
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allCity && allCity.map((list) => (<>
-                                                <option value={list.id} selected={list.id==item.city.id} onClick={()=>{setCity(list)}}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
+                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                             options={productTagSearch} click={setProductTag}/>
+
+
                                 </div>
                             </div>
-
-
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    کاربر
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    attributeOption
                                 </label>
                                 <div className="mt-2">
-                                <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
-                                   </div>
+                                    <Select2AttributeSelect value={attributeOption?.name}
+                                                            change={changeAttributeOptionSearchHandle}
+                                                            options={attributeOptionSearch} click={setAttributeOption}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    اصلی
+                                </label>
+                                <div className="mt-2">
+                                    <label className="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" className="sr-only peer"
+                                               checked={isMain} onChange={(e) => {
+                                            setIsMain(e.target.checked)
+                                        }}/>
+                                        <div
+                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    فعال
+                                </label>
+                                <div className="mt-2">
+                                    <label className="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" className="sr-only peer"
+                                               checked={isActive} onChange={(e) => {
+                                            setIsActive(e.target.checked)
+                                        }}/>
+                                        <div
+                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+
+                                    </label>
+                                </div>
                             </div>
 
                         </div>
@@ -187,8 +191,8 @@ export function CoverEditPanel({ item, cancel, reload }) {
                 </div>
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
-                    <ConfirmButton title={"ویرایش"} click={submit} />
-                    <CancelButton title={"انصراف"} click={cancel} />
+                    <ConfirmButton title={"ویرایش"} click={submit}/>
+                    <CancelButton title={"انصراف"} click={cancel}/>
                 </div>
             </div>
 

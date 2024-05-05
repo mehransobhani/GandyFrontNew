@@ -1,29 +1,21 @@
 import Input from "../Form/Input";
 import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {getCity, getProvince, getUserByMobile, insertProductTag} from "../../Api/ProductTag";
+import {getProductByWords, getProductTagByWords, insertProductTag} from "../../Api/ProductTag";
 import {toast} from "react-toastify";
 import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
 
 export function ProductTagInsertPanel({reload}) {
+    const [product, setProduct] = useState("");
+    const [tag, setTag] = useState("");
 
-    const [postalCode, setPostalCode] = useState("");
-    const [ProductTag, setProductTag] = useState("");
-    const [no, setNo] = useState("");
-    const [unit, setUnit] = useState("");
-    const [area, setArea] = useState("");
-    const [province, setProvince] = useState("");
-    const [city, setCity] = useState("");
-    const [users, setUsers] = useState("");
-
-    const [allProvince, setAllProvince] = useState([]);
-    const [allCity, setAllCity] = useState([]);
-    const [userSearch, setUserSearch] = useState("");
+    const [productSearch, setProductSearch] = useState("");
+    const [tagSearch, setTagSearch] = useState("");
 
    async function submit() {
        try {
-        let response =await insertProductTag(postalCode, ProductTag, no, unit, area, province.id, city.id, users.id);
+        let response =await insertProductTag(product.id,tag.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -32,22 +24,13 @@ export function ProductTagInsertPanel({reload}) {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
     }
-    useEffect(()=>{
-        getAllProvince();
-    },[])
-    async function  getAllProvince(){
-        let response = await getProvince();
-        setAllProvince(response);
+    async function changeProductSearchHandle(e) {
+        let response = await getProductByWords(e.target.value);
+        setProductSearch(response);
     }
-    async function getCitys(e){
-        setProvince(e.target.value)
-        let response = await getCity(e.target.value);
-        setAllCity(response);
-    }
-    async function changeUserSearchHandle(e) {
-        let response = await getUserByMobile(e.target.value);
-        setUserSearch(response);
-
+    async function changeTagSearchHandle(e) {
+        let response = await getProductTagByWords(e.target.value);
+        setProductSearch(response);
     }
     return (
         <>
@@ -66,108 +49,25 @@ export function ProductTagInsertPanel({reload}) {
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        کد پستی
+                                        محصول
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
-                                            setPostalCode(e.target.value)
-                                        }} value={postalCode}/>
+                                        <Select2 value={product?.name} change={changeProductSearchHandle()}
+                                                 options={productSearch} click={setProduct}/>
                                     </div>
                                 </div>
 
                                 <div className="sm:col-span-3">
                                     <label htmlFor="last-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        آدرس
+                                        تگ
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                            setProductTag(e.target.value)
-                                        }} value={ProductTag}/>
-
+                                        <Select2 value={tag?.name} change={changeTagSearchHandle}
+                                                 options={tagSearch} click={setTag}/>
                                     </div>
                                 </div>
 
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        طبقه
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"طبقه"} type={"text"} change={(e) => {
-                                            setUnit(e.target.value)
-                                        }} value={unit}/>
-                                    </div>
-                                </div>
-
-
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        پلاک
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"پلاک"} type={"text"} change={(e) => {
-                                            setNo(e.target.value)
-                                        }} value={no}/>
-                                    </div>
-                                </div>
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        محله
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"محله"} type={"text"} change={(e) => {
-                                            setArea(e.target.value)
-                                        }} value={area}/>
-                                    </div>
-                                </div>
-
-                                <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    استان
-                                </label>
-                                <div className="mt-2">
-                                    <Select change={getCitys}>
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allProvince.map((list) => (<>
-                                                <option onClick={()=>{setProvince(list)}}  value={list.id}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
-
-
-                            <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    شهر
-                                </label>
-                                <div className="mt-2">
-                                       <Select >
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allCity && allCity.map((list) => (<>
-                                                <option value={list.id}  onClick={()=>{setCity(list)}}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
-
-                                <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    کاربر
-                                </label>
-                                <div className="mt-2">
-                                <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
-                                   </div>
-                            </div>
                             </div>
                         </div>
 

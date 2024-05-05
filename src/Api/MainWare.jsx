@@ -140,6 +140,6 @@ export async function getProductTypeByWords(name) {
             getTagByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 

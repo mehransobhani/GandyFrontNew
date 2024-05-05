@@ -155,7 +155,7 @@ export async function getTagByWords(name) {
             getTagByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getProductTypeByWords(name) {
     const response = await fetch(BaseUrl + "ptype/getProductTypeByWords",
@@ -183,7 +183,7 @@ export async function getProductTypeByWords(name) {
             getProductTypeByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getAttributeTypeByWords(name) {
     const response = await fetch(BaseUrl + "attributeType/getAttributeTypeByWords",
@@ -211,7 +211,7 @@ export async function getAttributeTypeByWords(name) {
             getAttributeTypeByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getAttributeOptionByAT(id) {
     const response = await fetch(BaseUrl + "attributeOption/getAttributeOptionByAT/"+id,

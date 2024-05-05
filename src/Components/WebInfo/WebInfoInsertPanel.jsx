@@ -1,29 +1,26 @@
 import Input from "../Form/Input";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {getCity, getProvince, getUserByMobile, insertWebInfo} from "../../Api/WebInfo";
+import { insertWebInfo} from "../../Api/WebInfo";
 import {toast} from "react-toastify";
-import { Select } from "../Form/Select";
-import Select2 from "../Form/Select2";
+import Uploader from "../Form/Uploader";
 
 export function WebInfoInsertPanel({reload}) {
-
-    const [postalCode, setPostalCode] = useState("");
-    const [WebInfo, setWebInfo] = useState("");
-    const [no, setNo] = useState("");
-    const [unit, setUnit] = useState("");
-    const [area, setArea] = useState("");
-    const [province, setProvince] = useState("");
-    const [city, setCity] = useState("");
-    const [users, setUsers] = useState("");
-
-    const [allProvince, setAllProvince] = useState([]);
-    const [allCity, setAllCity] = useState([]);
-    const [userSearch, setUserSearch] = useState("");
+    const [name, setName] = useState("");
+    const [logo, setLogo] = useState("");
+    const [tell, setTell] = useState("");
+    const [mobile, setMobile] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [whatsApp, setWhatsApp] = useState("");
+    const [telegram, setTelegram] = useState("");
+    const [email, setEmail] = useState("");
+    const [workTime, setWorkTime] = useState("");
+    const [address, setAddress] = useState("");
+    const [aboutUs, setAboutUs] = useState("");
 
    async function submit() {
        try {
-        let response =await insertWebInfo(postalCode, WebInfo, no, unit, area, province.id, city.id, users.id);
+        let response =await insertWebInfo(name, logo, tell, mobile, instagram, whatsApp, telegram, email, workTime, address, aboutUs);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -31,23 +28,6 @@ export function WebInfoInsertPanel({reload}) {
        {
            toast.error("متاسفانه عملیات با شکست روبرو شد")
        }
-    }
-    useEffect(()=>{
-        getAllProvince();
-    },[])
-    async function  getAllProvince(){
-        let response = await getProvince();
-        setAllProvince(response);
-    }
-    async function getCitys(e){
-        setProvince(e.target.value)
-        let response = await getCity(e.target.value);
-        setAllCity(response);
-    }
-    async function changeUserSearchHandle(e) {
-        let response = await getUserByMobile(e.target.value);
-        setUserSearch(response);
-
     }
     return (
         <>
@@ -59,115 +39,121 @@ export function WebInfoInsertPanel({reload}) {
                 </div>
                 <hr/>
                     <div className="space-y-12">
-
                         <div className=" ">
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
+                                <div className="sm:col-span-full">
+                                    <Uploader change={setLogo()}/>
+                                </div>
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        کد پستی
+                                       نام
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
+                                        <Input placeHolder={"نام"} type={"text"} change={(e) => {
+                                            setName(e.target.value)
+                                        }} value={name}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       تلفن
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"تلفن"} type={"text"} change={(e) => {
+                                            setTell(e.target.value)
+                                        }} value={tell}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       موبایل
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"موبایل"} type={"text"} change={(e) => {
+                                            setMobile(e.target.value)
+                                        }} value={mobile}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       اینستاگرام
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"اینستاگرام"} type={"text"} change={(e) => {
+                                            setInstagram(e.target.value)
+                                        }} value={instagram}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       واتساپ
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"واتساپ"} type={"text"} change={(e) => {
+                                            setWhatsApp(e.target.value)
+                                        }} value={whatsApp}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       تلگرام
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"تلگرام"} type={"text"} change={(e) => {
+                                            setTelegram(e.target.value)
+                                        }} value={telegram}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       ایمیل
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"ایمیل"} type={"text"} change={(e) => {
+                                            setEmail(e.target.value)
+                                        }} value={email}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       ساعت کاری
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"ساعت کاری"} type={"text"} change={(e) => {
+                                            setWorkTime(e.target.value)
+                                        }} value={workTime}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="first-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                       آدرس
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"آدرس "} type={"text"} change={(e) => {
                                             setPostalCode(e.target.value)
                                         }} value={postalCode}/>
                                     </div>
                                 </div>
-
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="last-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        آدرس
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                            setWebInfo(e.target.value)
-                                        }} value={WebInfo}/>
-
-                                    </div>
-                                </div>
-
                                 <div className="sm:col-span-3">
                                     <label htmlFor="first-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        طبقه
+                                       درباره ما
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"طبقه"} type={"text"} change={(e) => {
-                                            setUnit(e.target.value)
-                                        }} value={unit}/>
+                                        <Input placeHolder={"درباره ما "} type={"text"} change={(e) => {
+                                            setAboutUs(e.target.value)
+                                        }} value={aboutUs}/>
                                     </div>
                                 </div>
-
-
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        پلاک
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"پلاک"} type={"text"} change={(e) => {
-                                            setNo(e.target.value)
-                                        }} value={no}/>
-                                    </div>
-                                </div>
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
-                                           className="block text-sm font-medium leading-6 text-gray-900">
-                                        محله
-                                    </label>
-                                    <div className="mt-2">
-                                        <Input placeHolder={"محله"} type={"text"} change={(e) => {
-                                            setArea(e.target.value)
-                                        }} value={area}/>
-                                    </div>
-                                </div>
-
-                                <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    استان
-                                </label>
-                                <div className="mt-2">
-                                    <Select change={getCitys}>
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allProvince.map((list) => (<>
-                                                <option onClick={()=>{setProvince(list)}}  value={list.id}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
-
-
-                            <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    شهر
-                                </label>
-                                <div className="mt-2">
-                                       <Select >
-                                        <option value={null}>انتخاب کنید</option>
-                                        {
-                                            allCity && allCity.map((list) => (<>
-                                                <option value={list.id}  onClick={()=>{setCity(list)}}>{list.name}</option>
-                                            </>))
-                                        }
-                                    </Select>
-                                </div>
-                            </div>
-
-                                <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
-                                    className="block text-sm font-medium leading-6 text-gray-900">
-                                    کاربر
-                                </label>
-                                <div className="mt-2">
-                                <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
-                                   </div>
-                            </div>
                             </div>
                         </div>
 
