@@ -93,10 +93,10 @@ export function CategoryInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    مقدار
+                                    قیمت
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                    <Input placeHolder={"قیمت"} type={"text"} change={(e) => {
                                         setAmount(e.target.value)
                                     }} value={amount}/>
 
@@ -105,7 +105,8 @@ export function CategoryInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productType
+                                    نوع کالا
+
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}
@@ -117,7 +118,7 @@ export function CategoryInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productTag
+                                    تگ
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productTag?.name} change={changeTagSearchHandle}
@@ -129,7 +130,7 @@ export function CategoryInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    attributeOption
+                                    ویژگی کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2AttributeSelect value={attributeOption?.name}

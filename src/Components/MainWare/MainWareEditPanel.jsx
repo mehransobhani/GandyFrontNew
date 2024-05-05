@@ -39,7 +39,7 @@ export function MainWareEditPanel({ item, cancel, reload }) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش کالای اصلی
                     </h2>
                 </div>
                 <hr />
@@ -78,7 +78,7 @@ export function MainWareEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    نوع محصول
+                                    نوع کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}

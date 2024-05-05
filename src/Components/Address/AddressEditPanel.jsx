@@ -37,7 +37,7 @@ export function AddressEditPanel({ item, cancel, reload }) {
     useEffect(()=>{
         getAllProvince();
         getDefualtCity();
-     
+
     },[])
     async function getDefualtCity(){
         let response = await  getCity(item.province.id);
@@ -48,7 +48,7 @@ export function AddressEditPanel({ item, cancel, reload }) {
         let response = await getProvince();
         setAllProvince(response);
     }
-    async function getCitys(e) { 
+    async function getCitys(e) {
         let response = await getCity(e.target.value);
         setAllCity(response);
     }
@@ -64,7 +64,7 @@ export function AddressEditPanel({ item, cancel, reload }) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش مقاله
+                        ویرایش آدرس
                     </h2>
                 </div>
                 <hr />
@@ -180,7 +180,7 @@ export function AddressEditPanel({ item, cancel, reload }) {
                                 <Select2 value={users?.name} change={changeUserSearchHandle} options={userSearch} click={setUsers} />
                                    </div>
                             </div>
-                            
+
                         </div>
                     </div>
 

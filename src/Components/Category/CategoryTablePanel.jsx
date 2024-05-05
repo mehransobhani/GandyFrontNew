@@ -10,7 +10,7 @@ export const CategoryTablePanel = ({ editMode, editItem, reload, data }) => {
                     { title: "شناسه" },
                     { title: "نام" },
                     { title: "آدرس" },
-                    { title: "مقدار" },
+                    { title: "قیمت" },
                     { title: "فعال" },
                     { title: "اصلی" },
                     { title: "نوع محصول" },

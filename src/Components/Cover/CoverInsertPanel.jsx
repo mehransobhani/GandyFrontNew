@@ -26,7 +26,7 @@ export function CoverInsertPanel({reload}) {
 
    async function submit() {
        try {
-        let response =await insertCover(postalCode, Cover, no, unit, area, province.id, city.id, users.id);
+        let response =await insertCover(position,col,image,url,amount,productType?.id,productTag?.id,attributeOption?.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -58,7 +58,7 @@ export function CoverInsertPanel({reload}) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ثبت مقاله جدید
+                        ثبت کاور جدید
                     </h2>
                 </div>
                 <hr/>

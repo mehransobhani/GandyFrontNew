@@ -26,7 +26,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
 
     async function submit() {
         try {
-            let response = await editCover(postalCode, Cover, no, unit, area, province.id, city.id, users.id, id);
+            let response = await editCover(position,col,image,url,amount,productType?.id,productTag?.id,attributeOption?.id, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -68,7 +68,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    position
+                                    موقعیت
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"position"} type={"text"} change={(e) => {
@@ -92,10 +92,10 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    مقدار
+                                    قیمت
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                    <Input placeHolder={"قیمت"} type={"text"} change={(e) => {
                                         setAmount(e.target.value)
                                     }} value={amount}/>
 
@@ -104,10 +104,10 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    col
+                                    ستون
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                    <Input placeHolder={"ستون"} type={"text"} change={(e) => {
                                         setCol(e.target.value)
                                     }} value={col}/>
 
@@ -116,7 +116,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productType
+                                    نوع کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}
@@ -128,7 +128,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productTag
+                                    تگ
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productTag?.name} change={changeTagSearchHandle}
@@ -140,7 +140,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    attributeOption
+                                    ویژگی کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2AttributeSelect value={attributeOption?.name}
@@ -148,40 +148,6 @@ export function CoverEditPanel({ item, cancel, reload }) {
                                                             options={attributeOptionSearch} click={setAttributeOption}/>
 
 
-                                </div>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="last-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
-                                    اصلی
-                                </label>
-                                <div className="mt-2">
-                                    <label className="inline-flex items-center me-5 cursor-pointer">
-                                        <input type="checkbox" value="" className="sr-only peer"
-                                               checked={isMain} onChange={(e) => {
-                                            setIsMain(e.target.checked)
-                                        }}/>
-                                        <div
-                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
-
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="last-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
-                                    فعال
-                                </label>
-                                <div className="mt-2">
-                                    <label className="inline-flex items-center me-5 cursor-pointer">
-                                        <input type="checkbox" value="" className="sr-only peer"
-                                               checked={isActive} onChange={(e) => {
-                                            setIsActive(e.target.checked)
-                                        }}/>
-                                        <div
-                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
-
-                                    </label>
                                 </div>
                             </div>
 

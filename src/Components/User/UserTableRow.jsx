@@ -43,8 +43,7 @@ export function UserTableRow({ editMode, editItem, reload, item }) {
                 <Td>{item.family}</Td>
                 <Td>{item.mobile}</Td>
                 <Td>{item.nationalCode}</Td>
-                <Td>{item.password}</Td>
-                <Td>{item.create_at}</Td>
+                 <Td>{item.create_at}</Td>
                 <Td>{item.roles[0]?.name}</Td>
                 <Td>{item.active?"بله":"خیر"}</Td>
                 <Td><PencilSquareIcon

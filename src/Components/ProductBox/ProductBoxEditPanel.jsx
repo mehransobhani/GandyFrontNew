@@ -34,7 +34,7 @@ export function ProductBoxEditPanel({ item, cancel, reload }) {
             <div className={"bg-white md:mx-20 mx-5"}>
                 <div className="flex">
                     <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
-                        ویرایش بسته محصول
+                        ویرایش باکس کالا
                     </h2>
                 </div>
                 <hr/>
@@ -44,7 +44,7 @@ export function ProductBoxEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    box number
+                                    شماره باکس
                                 </label>
                                 <div className="mt-2">
                                     <Input placeHolder={"کد پستی"} type={"text"} change={(e) => {
@@ -55,7 +55,7 @@ export function ProductBoxEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productCount
+                                    انتخاب کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productCount?.name} change={changeProductCountSearchHandle}

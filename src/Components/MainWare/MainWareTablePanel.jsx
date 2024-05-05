@@ -10,7 +10,7 @@ export const MainWareTablePanel = ({ editMode, editItem, reload, data }) => {
                     { title: "شناسه" },
                     { title: "نام" },
                     { title: "آدرس" },
-                    { title: "نوع محصول" },
+                    { title: "نوع کالا" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 
