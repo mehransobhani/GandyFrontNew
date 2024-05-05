@@ -8,22 +8,24 @@ export const CategoryTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "تصویر" },
-                    { title: "عنوان" },
-                    { title: "توضیحات" },
-                    { title: "ادرس" },
-                    { title: "محتوا" },
-                    { title: "پیش نمایش محتوا" },
+                    { title: "نام" },
+                    { title: "آدرس" },
+                    { title: "مقدار" },
+                    { title: "فعال" },
+                    { title: "اصلی" },
+                    { title: "نوع محصول" },
+                    { title: "تگ محصول" },
+                    { title: "ویژگی محصول" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 
                 ]} />
                 <tbody>
-                    {
-                        data && data.map((item, index) => (
-                            <CategoryTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
-                        ))
-                    }
+                {
+                    data && data.map((item, index) => (
+                        <CategoryTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
+                    ))
+                }
                 </tbody>
             </Table>
         </>

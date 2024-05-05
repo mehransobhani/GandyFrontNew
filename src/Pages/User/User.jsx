@@ -1,12 +1,12 @@
 import withAuth from "../../AuthMiddleware";
 import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
-import {UserEditPanel} from "../../Components/User/UserEditPanel";
-import {UserInsertPanel} from "../../Components/User/UserInsertPanel";
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {UserTablePanel} from "../../Components/User/UserTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getUser, getUserByWords} from "../../Api/User";
+import {getUser, getUserByMobile} from "../../Api/User";
+import {UserEditPanel} from "../../Components/User/UserEditPanel";
+import {UserInsertPanel} from "../../Components/User/UserInsertPanel";
 
 export const User  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ export const User  = withAuth( () => {
             getData();
         }
         else{
-        let data =await  getUserByWords(search);
+        let data =await  getUserByMobile(search);
         setItem(data);
     }
 }
@@ -42,7 +42,11 @@ export const User  = withAuth( () => {
                 <div className={"mb-10"}>
                     {edit ? <UserEditPanel item={editItem} reload={getData} cancel={() => {
                         setEdit(false)
-                    }}/> : <UserInsertPanel reload={getData}/>}
+                    }}/> : <div className="flex">
+                        <h2 className={"text-indigo-800 font-bold text-3xl mx-auto mb-5"}>
+                              کاربران
+                        </h2>
+                    </div>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
@@ -50,9 +54,6 @@ export const User  = withAuth( () => {
                 <div className={"mb-10"}>
                     <SearchBox searchSubmit={searchUserHandler} change={setSearch}/>
                 </div>
-                {
-                    console.log("ITEM IS ",item)
-                }
                 <div className={"mb-10"}>
                     <UserTablePanel
                         editMode={() => {

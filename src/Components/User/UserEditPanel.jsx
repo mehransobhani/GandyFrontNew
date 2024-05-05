@@ -9,8 +9,9 @@ import Uploader from "../Form/Uploader";
 import {editAddress} from "../../Api/Address";
 import {toast} from "react-toastify";
 import {editUser} from "../../Api/User";
+import DatePicker from "react-datepicker2";
 
-export function AddressEditPanel({item , cancel ,reload}) {
+export function UserEditPanel({item , cancel ,reload}) {
      const [id,setId]=useState(item.id);
     const [name, setName] = useState(item.name);
     const [family, setFamily] = useState(item.family);
@@ -18,11 +19,12 @@ export function AddressEditPanel({item , cancel ,reload}) {
     const [password, setPassword] = useState(item.password);
     const [nationalCode, setNationalCode] = useState(item.nationalCode);
     const [create_at, setCreate_at] = useState(item.create_at);
-    const [roles, setRoles] = useState(item.roles);
+    const [roles, setRoles] = useState(item.roles[0]);
+    const [active,setActive]=useState(true);
 
     async  function submit() {
         try {
-            let response = await editUser(name, family, mobile, password, nationalCode, create_at, roles, id);
+            let response = await editUser( name, family, mobile, password, nationalCode, create_at, roles.id,roles.name,active, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -30,6 +32,9 @@ export function AddressEditPanel({item , cancel ,reload}) {
         {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
+    }
+    function changeCreateDate(e){
+        setCreate_at(e.format('YYYY-MM-DD HH:mm:ss'));
     }
     return (
         <>
@@ -109,9 +114,14 @@ export function AddressEditPanel({item , cancel ,reload}) {
                                         تاریخ ایجاد
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"تاریخ ایجاد"} type={"text"} change={(e) => {
-                                            setCreate_at(e.target.value)
-                                        }} value={create_at}/>
+                                        <DatePicker
+                                            onChange={changeCreateDate}
+                                            persianDigits={true}
+                                            timePicker={true}
+                                            inputFormat={"Y-m-d"}
+                                            className={"text-center block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base   focus:border-indigo-500 focus:outline-0"}
+                                            isGregorian={false}
+                                        />
                                     </div>
                                 </div>
                                 <div className="sm:col-span-3">
@@ -122,7 +132,24 @@ export function AddressEditPanel({item , cancel ,reload}) {
                                     <div className="mt-2">
                                         <Input placeHolder={"نقش"} type={"text"} change={(e) => {
                                             setRoles(e.target.value)
-                                        }} value={roles}/>
+                                        }} value={roles.name}/>
+                                    </div>
+                                </div>
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="last-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        فعال
+                                    </label>
+                                    <div className="mt-2">
+                                        <label className="inline-flex items-center me-5 cursor-pointer">
+                                            <input type="checkbox" value="" className="sr-only peer"
+                                                   checked={active} onChange={(e) => {
+                                                setActive(e.target.checked)
+                                            }}/>
+                                            <div
+                                                className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
+
+                                        </label>
                                     </div>
                                 </div>
 

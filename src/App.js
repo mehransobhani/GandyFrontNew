@@ -19,6 +19,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Address } from './Pages/Address/Address';
 import { Brand } from './Pages/Brand/Brand';
 import { SubCategory } from './Pages/SubCategory/SubCategory';
+import {Category} from "./Pages/Category/Category";
+import {Discount} from "./Pages/Discount/Discount";
+import {User} from "./Pages/User/User";
 function App() {
     return (
         <>
@@ -30,6 +33,9 @@ function App() {
 
                         <Route path="/address" element={<Address/>}/>
                         <Route path="/brand" element={<Brand/>}/>
+                        <Route path="/user" element={<User/>}/>
+                        <Route path="/discount" element={<Discount/>}/>
+                        <Route path="/category" element={<Category/>}/>
                         <Route path="/sub-category" element={<SubCategory/>}/>
 
 

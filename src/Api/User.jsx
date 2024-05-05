@@ -48,13 +48,16 @@ export async function findUserByMobile(mobile) {
 
     return response.json();
 }
-export async function editUser(name,family,mobile,password,nationalCode,create_at,roleId,roleName,active) {
+export async function editUser(name,family,mobile,password,nationalCode,create_at,roleId,roleName,active,id) {
 
-   
+
     const response = await fetch(BaseUrl + "auth/updateUser",
         {
             method: 'POST',
             credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(
                 {
                     name :         name ,
@@ -67,8 +70,9 @@ export async function editUser(name,family,mobile,password,nationalCode,create_a
                         id:roleId,
                         name:roleName
                     }]     ,
-                    
-                    active :       active               
+
+                    active :       active,
+                    id :       id,
                 }
             ),
 
@@ -86,7 +90,7 @@ export async function editUser(name,family,mobile,password,nationalCode,create_a
         }
     }
     return response;
-} 
+}
 export async function removeUser(id) {
     const response = await fetch(BaseUrl + "auth/deleteById/"+id,
         {
@@ -118,7 +122,7 @@ export async function getUserByMobile(mobile) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                    name:mobile, 
+                    name:mobile,
                 }
             ),
             headers: {
@@ -134,7 +138,7 @@ export async function getUserByMobile(mobile) {
             window.location.href="/login";
         }
         else {
-            getUserByMobile(name);
+            getUserByMobile(mobile);
         }
     }
     return response;

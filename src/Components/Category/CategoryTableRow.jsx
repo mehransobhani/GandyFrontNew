@@ -48,22 +48,15 @@ export function CategoryTableRow({ editMode, editItem, reload, item }) {
             </tr>
             <Tr>
                 <Td>{item.id}</Td>
-                <Td>
-                    <img src={"" + item.image} className={"w-24 h-24 mx-auto"} />
-                </Td>
-                <Td>{item.title}</Td>
-                <Td>{item.description}</Td>
+                <Td>{item.name}</Td>
                 <Td>{item.url}</Td>
-                <Td>
-                    <div className={"  whitespace-normal overflow-hidden line-clamp-1"}>
-                        <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    </div>
-                </Td>
-                <Td><EyeIcon onClick={() => {
-                    setPreviewModal(true)
-                }}
-                    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
-                <Td><PencilSquareIcon
+                <Td>{item.amount}</Td>
+                <Td>{item.isMain? "بله" : "خیر"}</Td>
+                <Td>{item.isActive? "بله" : "خیر"}</Td>
+                <Td>{item.productType?.name}</Td>
+                <Td>{item.productTag?.name}</Td>
+                <Td>{item.attributeOption?.attributeType}</Td>
+                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
                 <Td><TrashIcon onClick={() => {

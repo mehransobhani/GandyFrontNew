@@ -1,19 +1,21 @@
 import Thead from "../Table/Thead";
 import Table from "../Table/Table";
-import { AddressTableRow } from "./AddressTableRow";
+import { UserTableRow } from "./UserTableRow";
 
-export const AddressTablePanel = ({ editMode, editItem, reload, data }) => {
+export const UserTablePanel = ({ editMode, editItem, reload, data }) => {
     return (
         <>
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
-                    { title: "تصویر" },
-                    { title: "عنوان" },
-                    { title: "توضیحات" },
-                    { title: "ادرس" },
-                    { title: "محتوا" },
-                    { title: "پیش نمایش محتوا" },
+                    { title: "نام" },
+                    { title: "  نام خانوادگی" },
+                    { title: "  شماره موبایل" },
+                    { title: " کد ملی" },
+                    { title: "پسورد" },
+                    { title: "تاریخ ایجاد" },
+                    { title: "نقش" },
+                    { title: "فعال" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 
@@ -21,7 +23,7 @@ export const AddressTablePanel = ({ editMode, editItem, reload, data }) => {
                 <tbody>
                     {
                         data && data.map((item, index) => (
-                            <AddressTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
+                            <UserTableRow editMode={editMode} editItem={editItem} reload={reload} item={item} />
                         ))
                     }
                 </tbody>

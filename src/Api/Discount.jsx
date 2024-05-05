@@ -25,16 +25,19 @@ export async function getDiscount(page) {
     return response.json();
 }export async function insertDiscount(discount,create_at,expire_at) {
 
-   
+
     const response = await fetch(BaseUrl + "discount/add",
         {
             method: 'POST',
             credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(
                 {
-                    discount:discount,                   
-                    create_at:create_at,                   
-                    expire_at:expire_at,                   
+                    discount:discount,
+                    create_at:create_at,
+                    expire_at:expire_at,
                 }
             ),
 
@@ -53,12 +56,15 @@ export async function getDiscount(page) {
     }
     return response;
 }export async function editDiscount(discount,create_at,expire_at,id) {
-  
 
-    const response = await fetch(BaseUrl + "article/add",
+
+    const response = await fetch(BaseUrl + "discount/add",
         {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(
                 {
                     discount:discount,
@@ -114,7 +120,7 @@ export async function getDiscountByWords(name) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                   name:name, 
+                   name:name,
                 }
             ),
             headers: {

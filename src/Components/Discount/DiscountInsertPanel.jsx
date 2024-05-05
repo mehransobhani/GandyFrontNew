@@ -6,13 +6,13 @@ import { insertDiscount} from "../../Api/Discount";
 import {toast} from "react-toastify";
 import DatePicker from "react-datepicker2";
 
-export function DiscountInsertPanel({item , cancel ,reload}) {
-    const [discount, setDiscount] = useState(item.discount);
-    const [createdAt, setCreatedAt] = useState(item.create_at);
-    const [expireAt, setExpireAt] = useState(item.expire_at);
+export function DiscountInsertPanel({reload}) {
+    const [discount, setDiscount] = useState();
+    const [createdAt, setCreatedAt] = useState();
+    const [expireAt, setExpireAt] = useState();
     async  function submit() {
         try {
-            let response = await insertDiscount(discount,createdAt,expireAt,id)
+            let response = await insertDiscount(discount,createdAt,expireAt)
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -100,7 +100,6 @@ export function DiscountInsertPanel({item , cancel ,reload}) {
 
                 <div className="mt-6 flex items-center justify-center gap-x-6">
                     <ConfirmButton title={"افزودن"} click={submit}/>
-                    <CancelButton title={"انصراف"} click={cancel}/>
                 </div>
             </div>
 

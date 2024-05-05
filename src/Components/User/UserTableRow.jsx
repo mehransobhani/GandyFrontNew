@@ -37,32 +37,16 @@ export function UserTableRow({ editMode, editItem, reload, item }) {
                     </div>
                 </Modal>
             </tr>
-            <tr className={"text-right"}>
-                <Modal isOpen={previewModal} title={"پیش نمایش"} onClose={() => setPreviewModal(false)}>
-                    <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    <hr />
-                    <div className={"flex flex-row gap-2"}>
-                        <CancelButton title={" بستن"} click={() => setPreviewModal(false)} />
-                    </div>
-                </Modal>
-            </tr>
             <Tr>
                 <Td>{item.id}</Td>
-                <Td>
-                    <img src={"" + item.image} className={"w-24 h-24 mx-auto"} />
-                </Td>
-                <Td>{item.title}</Td>
-                <Td>{item.description}</Td>
-                <Td>{item.url}</Td>
-                <Td>
-                    <div className={"  whitespace-normal overflow-hidden line-clamp-1"}>
-                        <div dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                    </div>
-                </Td>
-                <Td><EyeIcon onClick={() => {
-                    setPreviewModal(true)
-                }}
-                    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
+                <Td>{item.name}</Td>
+                <Td>{item.family}</Td>
+                <Td>{item.mobile}</Td>
+                <Td>{item.nationalCode}</Td>
+                <Td>{item.password}</Td>
+                <Td>{item.create_at}</Td>
+                <Td>{item.roles[0]?.name}</Td>
+                <Td>{item.active?"بله":"خیر"}</Td>
                 <Td><PencilSquareIcon
                     onClick={setEditMode}
                     className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>

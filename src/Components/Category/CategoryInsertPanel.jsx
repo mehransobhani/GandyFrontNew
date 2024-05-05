@@ -5,9 +5,11 @@ import Textarea from "../Form/Textarea";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Uploader from "../Form/Uploader";
-import {getProductTypeByWords, getTagByWords, insertCategory} from "../../Api/Category";
+import {getProductTypeByWords, getTagByWords, insertCategory ,getAttributeTypeByWords} from "../../Api/Category";
 import {toast} from "react-toastify";
-import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
+import Select2 from "../Form/Select2";
+import Select2AttributeOption from "../Form/Select2AttributeOption";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function CategoryInsertPanel({reload}) {
 
@@ -28,7 +30,7 @@ export function CategoryInsertPanel({reload}) {
     const [id,setId]=useState("");
    async function submit() {
        try {
-        let response =await insertCategory( name, isMain, isActive, amount, url, image, productType, productTag, attributeOption )
+        let response =await insertCategory( name,isMain,image,url,isActive,amount,productType,productTag,attributeOption)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -95,13 +97,67 @@ export function CategoryInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
+                                    مقدار
+                                </label>
+                                <div className="mt-2">
+                                    <Input placeHolder={"مقدار"} type={"text"} change={(e) => {
+                                        setAmount(e.target.value)
+                                    }} value={amount}/>
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    productType
+                                </label>
+                                <div className="mt-2">
+                                    <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}
+                                             options={productTypeSearch} click={setProductType}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    productTag
+                                </label>
+                                <div className="mt-2">
+                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                             options={productTagSearch} click={setProductTag}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    attributeOption
+                                </label>
+                                <div className="mt-2">
+                                    <Select2AttributeSelect value={attributeOption?.name}
+                                                            change={changeAttributeOptionSearchHandle}
+                                                            options={attributeOptionSearch} click={setAttributeOption}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     اصلی
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                        setUrl(e.target.value)
-                                    }} value={url}/>
+                                    <label className="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" className="sr-only peer"
+                                               checked={isMain} onChange={(e) => {
+                                            setIsMain(e.target.checked)
+                                        }}/>
+                                        <div
+                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
 
+                                    </label>
                                 </div>
                             </div>
                             <div className="sm:col-span-3">
@@ -110,22 +166,15 @@ export function CategoryInsertPanel({reload}) {
                                     فعال
                                 </label>
                                 <div className="mt-2">
-                                    <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                        setUrl(e.target.value)
-                                    }} value={url}/>
+                                    <label className="inline-flex items-center me-5 cursor-pointer">
+                                        <input type="checkbox" value="" className="sr-only peer"
+                                               checked={isActive} onChange={(e) => {
+                                            setIsActive(e.target.checked)
+                                        }}/>
+                                        <div
+                                            className="relative w-11 h-6 bg-gray-200 rounded-full peer   peer-focus:ring-4 peer-focus:ring-purple-300   peer-checked:after:-translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500"></div>
 
-                                </div>
-                            </div>
-                            <div className="sm:col-span-3">
-                                <label htmlFor="last-name"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
-                                    مقدار
-                                </label>
-                                <div className="mt-2">
-                                    <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
-                                        setUrl(e.target.value)
-                                    }} value={url}/>
-
+                                    </label>
                                 </div>
                             </div>
 

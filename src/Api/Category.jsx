@@ -24,27 +24,30 @@ export async function getCategory(page) {
 
     return response.json();
 }
-export async function insertCategory(name,isMain,imgName,url,isActive,amount,productType,productTag,attributeOption) {
+export async function insertCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption) {
+    console.log("IMAGE ID ",image)
+    let body = JSON.stringify(
+        {
+            name:name,
+            isMain:isMain,
+            imgName:image.name,
+            url:url,
+            isActive:isActive,
+            amount:amount,
+            productType:{id:productType},
+            productTag:{id:productTag},
+            attributeOption:{id:attributeOption}
+        }
+    );
+    const formdata = new FormData();
+    formdata.append("file", image);
+    formdata.append("model", body);
 
-   
     const response = await fetch(BaseUrl + "category/add",
         {
             method: 'POST',
             credentials: 'include',
-            body: JSON.stringify(
-                {
-                    name:name,
-                    isMain:isMain,
-                    imgName:imgName,
-                    url:url,
-                    isActive:isActive,
-                    amount:amount,
-                    productType:{id:productType},
-                    productTag:{id:productTag},
-                    attributeOption:{id:attributeOption}
-                   
-                }
-            ),
+            body: formdata ,
 
         }
     )
@@ -56,33 +59,36 @@ export async function insertCategory(name,isMain,imgName,url,isActive,amount,pro
             window.location.href="/login";
         }
         else {
-            insertCategory(name,isMain,imgName,url,isActive,amount,productType,productTag,attributeOption);
+            insertCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption);
         }
     }
     return response;
 }
-export async function editCategory(name,isMain,imgName,url,isActive,amount,productType,productTag,attributeOption,id) {
+export async function editCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption,id) {
+    let body = JSON.stringify(
+        {
+            id:id,
+            name:name,
+            isMain:isMain,
+            imgName:image.name,
+            url:url,
+            isActive:isActive,
+            amount:amount,
+            productType:{id:productType},
+            productTag:{id:productTag},
+            attributeOption:{id:attributeOption}
 
-   
+        }
+    );
+    const formdata = new FormData();
+    formdata.append("file", image);
+    formdata.append("model", body);
+
     const response = await fetch(BaseUrl + "category/add",
         {
             method: 'POST',
             credentials: 'include',
-            body: JSON.stringify(
-                {
-                    id:id,
-                    name:name,
-                    isMain:isMain,
-                    imgName:imgName,
-                    url:url,
-                    isActive:isActive,
-                    amount:amount,
-                    productType:{id:productType},
-                    productTag:{id:productTag},
-                    attributeOption:{id:attributeOption}
-                   
-                }
-            ),
+            body: formdata ,
 
         }
     )
@@ -94,7 +100,7 @@ export async function editCategory(name,isMain,imgName,url,isActive,amount,produ
             window.location.href="/login";
         }
         else {
-            editCategory(name,isMain,imgName,url,isActive,amount,productType,productTag,attributeOption,id);
+            editCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption,id);
         }
     }
     return response;
@@ -131,8 +137,8 @@ export async function getCategoryByWords(name) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                    name:name, 
-                   
+                    name:name,
+
                 }
             ),
 
@@ -152,7 +158,7 @@ export async function getCategoryByWords(name) {
             getCategoryByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 
 
@@ -163,8 +169,8 @@ export async function getTagByWords(name) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                    name:name, 
-                   
+                    name:name,
+
                 }
             ),
             headers: {
@@ -183,7 +189,7 @@ export async function getTagByWords(name) {
             getTagByWords(name) ;
         }
     }
-    return response;
+    return response.json();
 }
 
 
@@ -194,8 +200,8 @@ export async function getProductTypeByWords(name) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                    name:name, 
-                   
+                    name:name,
+
                 }
             ),
             headers: {
@@ -214,7 +220,7 @@ export async function getProductTypeByWords(name) {
             getProductTypeByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 
 export async function getAttributeTypeByWords(name) {
@@ -243,7 +249,7 @@ export async function getAttributeTypeByWords(name) {
             getAttributeTypeByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 
 
@@ -251,7 +257,7 @@ export async function getAttributeOptionByAT(id) {
     const response = await fetch(BaseUrl + "attributeOption/getAttributeOptionByAT/"+id,
         {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
