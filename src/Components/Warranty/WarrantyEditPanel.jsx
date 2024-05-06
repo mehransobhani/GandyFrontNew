@@ -52,7 +52,7 @@ export function WarrantyEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    product
+                                    محصول
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={product?.name} change={changeProductSearchHandle}
@@ -64,7 +64,7 @@ export function WarrantyEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    regWarranty
+                                    گارانتی
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={regWarranty?.name} change={changeRegWarrantySearchHandle}
