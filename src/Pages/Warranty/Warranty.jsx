@@ -6,7 +6,7 @@ import {WarrantyInsertPanel} from "../../Components/Warranty/WarrantyInsertPanel
 import {SearchBox} from "../../Components/Form/SearchBox";
 import {WarrantyTablePanel} from "../../Components/Warranty/WarrantyTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getWarranty, getWarrantyByWords} from "../../Api/Warranty";
+import {getWarranty, findWarrantyByproductName} from "../../Api/Warranty";
 
 export const Warranty  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ export const Warranty  = withAuth( () => {
             getData();
         }
         else{
-            let data =await  getWarrantyByWords(search);
+            let data =await  findWarrantyByproductName(search);
             setItem(data);
         }
     }

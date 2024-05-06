@@ -3,10 +3,9 @@ import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
 import {MainWareEditPanel} from "../../Components/MainWare/MainWareEditPanel";
 import {MainWareInsertPanel} from "../../Components/MainWare/MainWareInsertPanel";
-import {SearchBox} from "../../Components/Form/SearchBox";
 import {MainWareTablePanel} from "../../Components/MainWare/MainWareTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getMainWare, getMainWareByWords} from "../../Api/MainWare";
+import {getMainWare} from "../../Api/MainWare";
 
 export const MainWare  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -21,17 +20,7 @@ export const MainWare  = withAuth( () => {
         setData(data);
         setItem(data?.content)
     }
-    async function searchMainWareHandler()
-    {
-        if(search=="")
-        {
-            getData();
-        }
-        else{
-            let data =await  getMainWareByWords(search);
-            setItem(data);
-        }
-    }
+
 
     useEffect(()=>{
         getData();
@@ -47,9 +36,7 @@ export const MainWare  = withAuth( () => {
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
-                <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchMainWareHandler} change={setSearch}/>
-                </div>
+
                 <div className={"mb-10"}>
                     <MainWareTablePanel
                         editMode={() => {

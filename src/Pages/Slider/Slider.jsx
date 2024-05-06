@@ -3,10 +3,9 @@ import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
 import {SliderEditPanel} from "../../Components/Slider/SliderEditPanel";
 import {SliderInsertPanel} from "../../Components/Slider/SliderInsertPanel";
-import {SearchBox} from "../../Components/Form/SearchBox";
 import {SliderTablePanel} from "../../Components/Slider/SliderTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getSlider, getSliderByWords} from "../../Api/Slider";
+import {getSlider} from "../../Api/Slider";
 
 export const Slider  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -21,17 +20,7 @@ export const Slider  = withAuth( () => {
         setData(data);
         setItem(data?.content)
     }
-    async function searchSliderHandler()
-    {
-        if(search=="")
-        {
-            getData();
-        }
-        else{
-            let data =await  getSliderByWords(search);
-            setItem(data);
-        }
-    }
+
 
     useEffect(()=>{
         getData();
@@ -47,9 +36,7 @@ export const Slider  = withAuth( () => {
                 <div className={"mb-10"}>
                     <hr/>
                 </div>
-                <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchSliderHandler} change={setSearch}/>
-                </div>
+
                 <div className={"mb-10"}>
                     <SliderTablePanel
                         editMode={() => {

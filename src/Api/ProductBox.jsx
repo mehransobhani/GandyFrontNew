@@ -1,6 +1,6 @@
 import {BaseUrl} from '../env';
 import {refreshToken, signout} from "./Auth";
-export async function getProductBox(page) {
+export async function getProductBox() {
     const response = await fetch(BaseUrl + "pbox/getAll",
         {
             method: 'POST',
@@ -18,7 +18,7 @@ export async function getProductBox(page) {
             window.location.href="/login";
         }
         else {
-            getProductBox(page);
+            getProductBox();
         }
     }
 

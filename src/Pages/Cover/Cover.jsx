@@ -3,10 +3,9 @@ import {useEffect, useState} from "react";
 import AdminLayout from "../../Layout/AdminLayout";
 import {CoverEditPanel} from "../../Components/Cover/CoverEditPanel";
 import {CoverInsertPanel} from "../../Components/Cover/CoverInsertPanel";
-import {SearchBox} from "../../Components/Form/SearchBox";
 import {CoverTablePanel} from "../../Components/Cover/CoverTablePanel";
 import Pagination from "../../Components/Pagination";
-import {getCover, getCoverByWords} from "../../Api/Cover";
+import {getCover} from "../../Api/Cover";
 
 export const Cover  = withAuth( () => {
     const [search, setSearch] = useState("");
@@ -20,17 +19,6 @@ export const Cover  = withAuth( () => {
         let data =await  getCover(page);
         setData(data);
         setItem(data?.content)
-    }
-    async function searchCoverHandler()
-    {
-        if(search=="")
-        {
-            getData();
-        }
-        else{
-            let data =await  getCover(1);
-            setItem(data);
-        }
     }
 
     useEffect(()=>{
@@ -48,9 +36,6 @@ export const Cover  = withAuth( () => {
                     <hr/>
                 </div>
                 <div className={"mb-10"}>
-                    <SearchBox searchSubmit={searchCoverHandler} change={setSearch}/>
-                </div>
-                <div className={"mb-10"}>
                     <CoverTablePanel
                         editMode={() => {
                             setEdit(true)
@@ -62,7 +47,6 @@ export const Cover  = withAuth( () => {
                 </div>
                 <div className={"mb-10"}>
                     <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
-
                 </div>
             </AdminLayout>
         </>
