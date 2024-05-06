@@ -1,9 +1,7 @@
-import Input from "../Form/Input";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {insertWarranty} from "../../Api/Warranty";
 import {toast} from "react-toastify";
-import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
 import {getTagByWords} from "../../Api/Cover";
 
