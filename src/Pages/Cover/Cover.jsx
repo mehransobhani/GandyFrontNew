@@ -8,7 +8,6 @@ import Pagination from "../../Components/Pagination";
 import {getCover} from "../../Api/Cover";
 
 export const Cover  = withAuth( () => {
-    const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
