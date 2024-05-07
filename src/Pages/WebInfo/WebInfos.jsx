@@ -4,22 +4,22 @@ import AdminLayout from "../../Layout/AdminLayout";
 import {WebInfoEditPanel} from "../../Components/WebInfo/WebInfoEditPanel";
 import {WebInfoInsertPanel} from "../../Components/WebInfo/WebInfoInsertPanel";
 import {WebInfoTablePanel} from "../../Components/WebInfo/WebInfoTablePanel";
+import Pagination from "../../Components/Pagination";
 import {getWebInfo} from "../../Api/WebInfo";
 
-export const WebInfo  = withAuth( () => {
+export const WebInfos  = withAuth( () => {
     const [search, setSearch] = useState("");
     const [edit, setEdit] = useState(false);
     const [editItem, setEditItem] = useState(undefined);
     const [data, setData] = useState(undefined);
     const [item, setItem] = useState(undefined);
 
-    async function getData(page=0)
+    async function getData()
     {
-        let data =await  getWebInfo(page);
+        let data =await  getWebInfo();
         setData(data);
-        setItem(data?.content)
+        setItem(data)
     }
- 
 
     useEffect(()=>{
         getData();
@@ -34,7 +34,8 @@ export const WebInfo  = withAuth( () => {
                 </div>
                 <div className={"mb-10"}>
                     <hr/>
-                </div> 
+                </div>
+
                 <div className={"mb-10"}>
                     <WebInfoTablePanel
                         editMode={() => {
@@ -44,7 +45,11 @@ export const WebInfo  = withAuth( () => {
                         reload={getData}
                         data={item}
                     />
-                </div> 
+                </div>
+                <div className={"mb-10"}>
+                    <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
+
+                </div>
             </AdminLayout>
         </>
     )

@@ -49,9 +49,6 @@ export async function insertWebInfo(name, logo, tell, mobile, instagram, whatsAp
         {
             method: 'POST',
             credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
             body:formdata,
         }
     )
@@ -93,9 +90,6 @@ export async function editWebInfo(name, logo, tell, mobile, instagram, whatsApp,
         {
             method: 'POST',
             credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
             body:formdata,
         }
     )
@@ -131,4 +125,4 @@ export async function removeWebInfo(id) {
     }
     return response;
 }
- 
+

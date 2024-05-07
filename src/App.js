@@ -23,13 +23,13 @@ import {Category} from "./Pages/Category/Category";
 import {Discount} from "./Pages/Discount/Discount";
 import {Cover} from "./Pages/Cover/Cover";
 import {Tag} from "./Pages/Tag/Tag";
-import {WebInfo} from "./Pages/WebInfo/WebInfo";
 import {ProductBox} from "./Pages/ProductBox/ProductBox";
 import {ProductTag} from "./Pages/ProductTag/ProductTag";
 import {MainWare} from "./Pages/MainWare/MainWare";
 import {User} from "./Pages/User/User";
 import {Slider} from "./Pages/Slider/Slider";
 import {Warranty} from "./Pages/Warranty/Warranty";
+import {WebInfos} from "./Pages/WebInfo/WebInfos";
 function App() {
     return (
         <>
@@ -49,11 +49,11 @@ function App() {
                         <Route path="/tag" element={<Tag/>}/>  {/** OK */}
                         <Route path="/product-tag" element={<ProductTag/>}/>   {/** OK */}
                         <Route path="/warranty" element={<Warranty/>}/>{/** OK */}
+                        <Route path="/webinfo" element={<WebInfos/>}/>{/** OK */}
                         <Route path="/cover" element={<Cover/>}/>
                         <Route path="/product-box" element={<ProductBox/>}/>
                         <Route path="/minware" element={<MainWare/>}/>
                         <Route path="/slider" element={<Slider/>}/>
-                        <Route path="/web-info" element={<WebInfo/>}/>
 
                         <Route path="/article" element={<Article/>}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>
