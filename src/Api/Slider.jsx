@@ -42,9 +42,6 @@ export async function insertSlider(image,url,productType,productTag,attributeOpt
         {
             method: 'POST',
             credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
             body:formdata,
         }
     )
@@ -80,9 +77,6 @@ export async function editSlider(image,url,productType,productTag,attributeOptio
         {
             method: 'POST',
             credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
             body:formdata,
         }
     )

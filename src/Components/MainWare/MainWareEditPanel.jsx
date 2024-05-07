@@ -19,11 +19,12 @@ export function MainWareEditPanel({ item, cancel, reload }) {
 
     async function submit() {
         try {
-            let response = await editMainWare(name,image,url,productType.id);
+            let response = await editMainWare(name,image,url,productType.id , id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
         catch (e) {
+            console.log(e)
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
     }
@@ -70,7 +71,7 @@ export function MainWareEditPanel({ item, cancel, reload }) {
                                 <div className="mt-2">
                                     <Input placeHolder={"آدرس"} type={"text"} change={(e) => {
                                         setUrl(e.target.value)
-                                    }} value={setUrl}/>
+                                    }} value={url}/>
 
                                 </div>
                             </div>

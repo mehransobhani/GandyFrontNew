@@ -1,9 +1,9 @@
 import { useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {insertWarranty} from "../../Api/Warranty";
+import {findRegWarrantyByWords, getProductByWords, insertWarranty} from "../../Api/Warranty";
 import {toast} from "react-toastify";
 import Select2 from "../Form/Select2";
-import {getTagByWords} from "../../Api/Cover";
+import Select2Warranty from "../Form/Select2Warranty";
 
 export function WarrantyInsertPanel({reload}) {
 
@@ -14,12 +14,12 @@ export function WarrantyInsertPanel({reload}) {
     const [productSearch, setProductSearch] = useState("");
 
     async function changeProductSearchHandle(e) {
-        let response = await getTagByWords(e.target.value);
+        let response = await getProductByWords(e.target.value);
         setProductSearch(response);
 
     }
     async function changeRegWarrantySearchHandle(e) {
-        let response = await getTagByWords(e.target.value);
+        let response = await findRegWarrantyByWords(e.target.value);
         setRegWarrantySearch(response);
 
     }
@@ -65,7 +65,7 @@ export function WarrantyInsertPanel({reload}) {
                                         گارانتی
                                     </label>
                                     <div className="mt-2">
-                                        <Select2 value={regWarranty?.name} change={changeRegWarrantySearchHandle}
+                                        <Select2Warranty value={regWarranty?.name} change={changeRegWarrantySearchHandle}
                                                  options={regWarrantySearch} click={setRegWarranty}/>
 
 

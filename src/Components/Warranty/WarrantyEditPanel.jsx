@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import { editWarranty } from "../../Api/Warranty";
+import {editWarranty, findRegWarrantyByWords, getProductByWords} from "../../Api/Warranty";
 import { toast } from "react-toastify";
-import { getTagByWords } from "../../Api/Category";
 import Select2 from "../Form/Select2";
+import Select2Warranty from "../Form/Select2Warranty";
 
 export function WarrantyEditPanel({ item, cancel, reload }) {
     const [regWarranty, setRegWarranty] = useState(item.regWarranty);
@@ -15,12 +15,12 @@ export function WarrantyEditPanel({ item, cancel, reload }) {
     const [productSearch, setProductSearch] = useState("");
 
     async function changeProductSearchHandle(e) {
-        let response = await getTagByWords(e.target.value);
+        let response = await getProductByWords(e.target.value);
         setProductSearch(response);
 
     }
     async function changeRegWarrantySearchHandle(e) {
-        let response = await getTagByWords(e.target.value);
+        let response = await findRegWarrantyByWords(e.target.value);
         setRegWarrantySearch(response);
 
     }
@@ -67,7 +67,7 @@ export function WarrantyEditPanel({ item, cancel, reload }) {
                                     گارانتی
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={regWarranty?.name} change={changeRegWarrantySearchHandle}
+                                    <Select2Warranty value={regWarranty?.companyName} change={changeRegWarrantySearchHandle}
                                              options={regWarrantySearch} click={setRegWarranty}/>
 
 

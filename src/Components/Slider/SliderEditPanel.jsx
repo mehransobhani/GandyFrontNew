@@ -8,6 +8,7 @@ import { getTagByWords } from "../../Api/Category";
 import Select2 from "../Form/Select2";
 import Uploader from "../Form/Uploader";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import Select2Tag from "../Form/Select2Tag";
 
 export function SliderEditPanel({ item, cancel, reload }) {
     const [image,setImage]=useState(item.image);
@@ -79,7 +80,7 @@ export function SliderEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productType
+                                    نوع کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2 value={productType?.name} change={changeProductTypeSearchSearchHandle}
@@ -91,10 +92,10 @@ export function SliderEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    productTag
+                                    تگ
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                    <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
                                              options={productTagSearch} click={setProductTag}/>
 
 
@@ -103,7 +104,7 @@ export function SliderEditPanel({ item, cancel, reload }) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                    attributeOption
+                                    ویژگی کالا
                                 </label>
                                 <div className="mt-2">
                                     <Select2AttributeSelect value={attributeOption?.name}

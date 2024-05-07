@@ -41,9 +41,6 @@ export async function insertMainWare(name, img, url, productType) {
         {
             method: 'POST',
             credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
             body:formdata,
         }
     )
@@ -75,10 +72,7 @@ export async function editMainWare(name, img, url, productType,id) {
     const response = await fetch(BaseUrl + "mainWare/add",
         {
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json",
-            },
+            credentials: 'include', 
             body:formdata,
         }
     )
@@ -137,7 +131,7 @@ export async function getProductTypeByWords(name) {
             window.location.href="/login";
         }
         else {
-            getTagByWords(name);
+            getProductTypeByWords(name);
         }
     }
     return response.json();

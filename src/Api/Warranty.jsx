@@ -139,7 +139,7 @@ export async function findWarrantyByproductName(name) {
             findWarrantyByproductName(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function findRegWarrantyByWords(name) {
     const response = await fetch(BaseUrl + "regWarranty/findRegWarrantyByWords",
@@ -167,7 +167,7 @@ export async function findRegWarrantyByWords(name) {
             findRegWarrantyByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
 export async function getProductByWords(name) {
     const response = await fetch(BaseUrl + "product/getProductByWords",
@@ -195,5 +195,5 @@ export async function getProductByWords(name) {
             getProductByWords(name);
         }
     }
-    return response;
+    return response.json();
 }
