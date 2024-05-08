@@ -44,7 +44,7 @@ export async function insertSlider(image,url,productType,productTag,attributeOpt
                 url: url,
                 productType: {id: productType},
                 productTag: {id: productTag},
-                attributeOption: {id: attributeOption}
+                attributeOption: null
             }
         );
     }
@@ -93,7 +93,7 @@ export async function editSlider(image,url,productType,productTag,attributeOptio
                 url:url,
                 productType:{id:productType},
                 productTag:{id:productTag},
-                attributeOption:{id:attributeOption}
+                attributeOption:null
             }
         );
     const formdata = new FormData();
