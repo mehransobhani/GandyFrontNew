@@ -29,9 +29,10 @@ export const Slider  = withAuth( () => {
         <>
             <AdminLayout>
                 <div className={"mb-10"}>
-                    {edit ? <SliderEditPanel item={editItem} reload={getData} cancel={() => {
-                        setEdit(false)
-                    }}/> : <SliderInsertPanel reload={getData}/>}
+                    {/*{edit ? <SliderEditPanel item={editItem} reload={getData} cancel={() => {*/}
+                    {/*    setEdit(false)*/}
+                    {/*}}/> : <SliderInsertPanel reload={getData}/>}*/}
+                    {<SliderInsertPanel reload={getData}/>}
                 </div>
                 <div className={"mb-10"}>
                     <hr/>

@@ -52,9 +52,8 @@ function App() {
                         <Route path="/webinfo" element={<WebInfos/>}/>{/** OK */}
                         <Route path="/mainware" element={<MainWare/>}/>{/** OK */}
                         <Route path="/product-box" element={<ProductBox/>}/>{/** OK */}
-
-                        <Route path="/cover" element={<Cover/>}/>
-                        <Route path="/slider" element={<Slider/>}/>
+                        <Route path="/cover" element={<Cover/>}/>{/** OK */}
+                        <Route path="/slider" element={<Slider/>}/>{/** OK */}
 
                         <Route path="/article" element={<Article/>}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>

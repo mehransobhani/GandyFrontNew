@@ -13,8 +13,7 @@ export const SliderTablePanel = ({ editMode, editItem, reload, data }) => {
                     { title: "نوع محصول" },
                     { title: "تگ محصول" },
                     { title: "ویژگی محصول" },
-                    { title: "ویرایش" },
-                    { title: "حذف" },
+                     { title: "حذف" },
 
                 ]} />
                 <tbody>

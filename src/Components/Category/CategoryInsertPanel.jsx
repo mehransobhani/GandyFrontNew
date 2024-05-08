@@ -6,6 +6,8 @@ import {getProductTypeByWords, getTagByWords, insertCategory ,getAttributeTypeBy
 import {toast} from "react-toastify";
 import Select2 from "../Form/Select2";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import Select2Tag from "../Form/Select2Tag";
+import {getAttributeOptionByAT} from "../../Api/Cover";
 
 export function CategoryInsertPanel({reload}) {
 
@@ -26,7 +28,8 @@ export function CategoryInsertPanel({reload}) {
     const [id,setId]=useState("");
    async function submit() {
        try {
-        let response =await insertCategory( name,isMain,image,url,isActive,amount,productType,productTag,attributeOption)
+           let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
+           let response =await insertCategory( name,isMain,image,url,isActive,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -121,7 +124,7 @@ export function CategoryInsertPanel({reload}) {
                                     تگ
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                    <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
                                              options={productTagSearch} click={setProductTag}/>
 
 

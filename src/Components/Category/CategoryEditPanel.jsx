@@ -8,6 +8,8 @@ import {toast} from "react-toastify";
 import {getAttributeTypeByWords} from "../../Api/AttributeSelect";
 import Select2 from "../Form/Select2";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import Select2Tag from "../Form/Select2Tag";
+import {getAttributeOptionByAT} from "../../Api/Cover";
 
 export function CategoryEditPanel({item , cancel ,reload}) {
     const [id,setId]=useState(item.id);
@@ -27,7 +29,9 @@ export function CategoryEditPanel({item , cancel ,reload}) {
 
     async  function submit() {
         try {
-            let response = await editCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption,id )
+            let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
+
+            let response = await editCategory(name,isMain,image,url,isActive,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id,id )
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -121,7 +125,7 @@ export function CategoryEditPanel({item , cancel ,reload}) {
                                     تگ
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                    <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
                                              options={productTagSearch} click={setProductTag}/>
 
 

@@ -123,7 +123,7 @@ export async function editSlider(image,url,productType,productTag,attributeOptio
 export async function removeSlider(id) {
     const response = await fetch(BaseUrl + "slider/deleteById/"+id,
         {
-            method: 'DELETE',
+            method: 'POST',
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",

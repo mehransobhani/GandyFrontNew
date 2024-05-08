@@ -46,9 +46,9 @@ export function SliderTableRow({ editMode, editItem, reload, item }) {
                 <Td>{item.productTag?.name}</Td>
                 <Td>{item.attributeOption?.attributeType}</Td>
 
-                <Td><PencilSquareIcon
-                    onClick={setEditMode}
-                    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
+                {/*<Td><PencilSquareIcon*/}
+                {/*    onClick={setEditMode}*/}
+                {/*    className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>*/}
                 <Td><TrashIcon onClick={() => {
                     setDeleteModal(true)
                 }} className="h-6 w-6 text-indigo-500 hover:text-indigo-600 mx-auto cursor-pointer" /></Td>
