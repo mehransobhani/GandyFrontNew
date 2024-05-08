@@ -25,14 +25,14 @@ export async function getBrand(page) {
     return response.json();
 }export async function insertBrand(name) {
 
-   
+
     const response = await fetch(BaseUrl + "brand/add",
         {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(
                 {
-                    name:name                   
+                    name:name
                 }
             ),
             headers: {
@@ -54,12 +54,12 @@ export async function getBrand(page) {
     }
     return response;
 }export async function editBrand(name,id) {
-  
 
-    const response = await fetch(BaseUrl + "article/add",
+
+    const response = await fetch(BaseUrl + "brand/add",
         {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
             body: JSON.stringify(
                 {
                    name:name,
@@ -116,7 +116,7 @@ export async function getBrandByWords(name) {
             credentials: 'include',
             body: JSON.stringify(
                 {
-                   name:name, 
+                   name:name,
                 }
             ),
             headers: {

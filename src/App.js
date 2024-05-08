@@ -39,13 +39,12 @@ function App() {
                     <Routes>
                         <Route path="/login" element={<Login/>}/>
 
-                        <Route path="/address" element={<Address/>}/>
-                        <Route path="/brand" element={<Brand/>}/>
-                        <Route path="/user" element={<User/>}/>
-                        <Route path="/discount" element={<Discount/>}/>
-                        <Route path="/category" element={<Category/>}/>
-                        <Route path="/sub-category" element={<SubCategory/>}/>
-
+                        <Route path="/address" element={<Address/>}/> {/** OK */}
+                        <Route path="/brand" element={<Brand/>}/> {/** OK */}
+                        <Route path="/user" element={<User/>}/>{/** OK */}
+                        <Route path="/discount" element={<Discount/>}/>{/** OK */}
+                        <Route path="/category" element={<Category/>}/>{/** OK */}
+                        <Route path="/sub-category" element={<SubCategory/>}/>{/** OK */}
                         <Route path="/tag" element={<Tag/>}/>  {/** OK */}
                         <Route path="/product-tag" element={<ProductTag/>}/>   {/** OK */}
                         <Route path="/warranty" element={<Warranty/>}/>{/** OK */}
