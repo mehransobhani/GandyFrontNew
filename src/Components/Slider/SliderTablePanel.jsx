@@ -8,6 +8,11 @@ export const SliderTablePanel = ({ editMode, editItem, reload, data }) => {
             <Table>
                 <Thead heads={[
                     { title: "شناسه" },
+                    { title: "آدرس" },
+                    { title: "قیمت" },
+                    { title: "نوع محصول" },
+                    { title: "تگ محصول" },
+                    { title: "ویژگی محصول" },
                     { title: "ویرایش" },
                     { title: "حذف" },
 

@@ -1,9 +1,8 @@
 import Input from "../Form/Input";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import {getCity, getProvince, getUserByMobile, insertSlider} from "../../Api/Slider";
+import {getAttributeOptionByAT, insertSlider} from "../../Api/Slider";
 import {toast} from "react-toastify";
-import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
 import {getAttributeTypeByWords, getProductTypeByWords, getTagByWords} from "../../Api/Cover";
 import Uploader from "../Form/Uploader";
@@ -25,7 +24,8 @@ export function SliderInsertPanel({reload}) {
 
    async function submit() {
        try {
-        let response =await insertSlider(image,url,productType.id,productTag.id,attributeOption.id);
+           let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
+         let response =await insertSlider(image,url,productType.id,productTag.id,getAttributeOptionBy?.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }

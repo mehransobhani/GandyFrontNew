@@ -29,7 +29,7 @@ export async function insertMainWare(name, img, url, productType) {
     let body = JSON.stringify(
         {
             name: name,
-            logo: img.name,
+            img: img.name,
             url: url,
             productType: {id:productType}
         }
@@ -61,7 +61,7 @@ export async function editMainWare(name, img, url, productType,id) {
         {
             id: id,
             name: name,
-            logo: img.name,
+            img: img.name,
             url: url,
             productType: {id:productType}
         }
@@ -72,7 +72,7 @@ export async function editMainWare(name, img, url, productType,id) {
     const response = await fetch(BaseUrl + "mainWare/add",
         {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
             body:formdata,
         }
     )

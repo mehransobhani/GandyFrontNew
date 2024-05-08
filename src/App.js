@@ -50,9 +50,10 @@ function App() {
                         <Route path="/product-tag" element={<ProductTag/>}/>   {/** OK */}
                         <Route path="/warranty" element={<Warranty/>}/>{/** OK */}
                         <Route path="/webinfo" element={<WebInfos/>}/>{/** OK */}
+                        <Route path="/mainware" element={<MainWare/>}/>{/** OK */}
+                        <Route path="/product-box" element={<ProductBox/>}/>{/** OK */}
+
                         <Route path="/cover" element={<Cover/>}/>
-                        <Route path="/product-box" element={<ProductBox/>}/>
-                        <Route path="/minware" element={<MainWare/>}/>
                         <Route path="/slider" element={<Slider/>}/>
 
                         <Route path="/article" element={<Article/>}/>

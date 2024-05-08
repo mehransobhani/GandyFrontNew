@@ -2,12 +2,18 @@ import Input from "../Form/Input";
 import {useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import {editCover, getAttributeTypeByWords, getProductTypeByWords, getTagByWords} from "../../Api/Cover";
+import {
+    editCover,
+    getAttributeOptionByAT,
+    getAttributeTypeByWords,
+    getProductTypeByWords,
+    getTagByWords
+} from "../../Api/Cover";
 import { toast } from "react-toastify";
-import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
 import Uploader from "../Form/Uploader";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import Select2Tag from "../Form/Select2Tag";
 
 export function CoverEditPanel({ item, cancel, reload }) {
     const [position,setPosition]=useState(item.position);
@@ -26,12 +32,15 @@ export function CoverEditPanel({ item, cancel, reload }) {
 
     async function submit() {
         try {
-            let response = await editCover(position,col,image,url,amount,productType?.id,productTag?.id,attributeOption?.id, id);
+            let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
+
+            let response = await editCover(position,col,image,url,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
         catch (e) {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
+            console.log(e)
         }
     }
     async function changeAttributeOptionSearchHandle(e) {
@@ -131,7 +140,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
                                     تگ
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                    <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
                                              options={productTagSearch} click={setProductTag}/>
 
 

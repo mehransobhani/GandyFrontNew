@@ -2,7 +2,7 @@ import Input from "../Form/Input";
 import { useEffect, useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
-import { editSlider, getAttributeTypeByWords, getProductTypeByWords } from "../../Api/Slider";
+import {editSlider, getAttributeOptionByAT, getAttributeTypeByWords, getProductTypeByWords} from "../../Api/Slider";
 import { toast } from "react-toastify";
 import { getTagByWords } from "../../Api/Category";
 import Select2 from "../Form/Select2";
@@ -24,7 +24,8 @@ export function SliderEditPanel({ item, cancel, reload }) {
 
     async function submit() {
         try {
-            let response = await editSlider(image,url,productType.id,productTag.id,attributeOption.id, id);
+            let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
+            let response = await editSlider(image,url,productType.id,productTag.id,getAttributeOptionBy?.id, id);
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }

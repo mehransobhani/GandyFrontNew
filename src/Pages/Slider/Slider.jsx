@@ -14,11 +14,11 @@ export const Slider  = withAuth( () => {
     const [data, setData] = useState(undefined);
     const [item, setItem] = useState(undefined);
 
-    async function getData(page=0)
+    async function getData()
     {
-        let data =await  getSlider(page);
+        let data =await  getSlider();
         setData(data);
-        setItem(data?.content)
+        setItem(data)
     }
 
 
@@ -47,10 +47,7 @@ export const Slider  = withAuth( () => {
                         data={item}
                     />
                 </div>
-                <div className={"mb-10"}>
-                    <Pagination currentPage={(data?.pageable?.pageNumber==0?1:data?.pageable?.pageNumber)} totalPage={data?.totalPages} click={getData} />
 
-                </div>
             </AdminLayout>
         </>
     )

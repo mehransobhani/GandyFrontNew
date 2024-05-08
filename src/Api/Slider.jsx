@@ -1,7 +1,7 @@
 import {BaseUrl} from '../env';
 import {refreshToken, signout} from "./Auth";
 export async function getSlider(page) {
-    const response = await fetch(BaseUrl + "slider/getAll/"+page,
+    const response = await fetch(BaseUrl + "slider/getAll",
         {
             method: 'POST',
             credentials: 'include',
@@ -25,15 +25,29 @@ export async function getSlider(page) {
     return response.json();
 }
 export async function insertSlider(image,url,productType,productTag,attributeOption) {
-    let body=JSON.stringify(
-        {
-            image:image.name,
-            url:url,
-            productType:{id:productType},
-            productTag:{id:productTag},
-            attributeOption:{id:attributeOption}
-        }
-    );
+    let body;
+    if(attributeOption) {
+        body = JSON.stringify(
+            {
+                image: image.name,
+                url: url,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: {id: attributeOption}
+            }
+        );
+    }
+   else {
+        body = JSON.stringify(
+            {
+                image: image.name,
+                url: url,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: {id: attributeOption}
+            }
+        );
+    }
     const formdata = new FormData();
     formdata.append("file", image);
     formdata.append("model", body);
@@ -59,16 +73,27 @@ export async function insertSlider(image,url,productType,productTag,attributeOpt
     return response;
 }
 export async function editSlider(image,url,productType,productTag,attributeOption,id) {
-    let body=JSON.stringify(
-        {
-            image:image.name,
-            url:url,
-            productType:{id:productType},
-            productTag:{id:productTag},
-            attributeOption:{id:attributeOption},
-            id:id
-        }
-    );
+    let body
+    if(attributeOption)
+        body=JSON.stringify(
+            {
+                image:image.name,
+                url:url,
+                productType:{id:productType},
+                productTag:{id:productTag},
+                attributeOption:{id:attributeOption}
+            }
+        );
+    else
+        body=JSON.stringify(
+            {
+                image:image.name,
+                url:url,
+                productType:{id:productType},
+                productTag:{id:productTag},
+                attributeOption:{id:attributeOption}
+            }
+        );
     const formdata = new FormData();
     formdata.append("file", image);
     formdata.append("model", body);
@@ -223,6 +248,6 @@ export async function getAttributeOptionByAT(id) {
             getAttributeOptionByAT(id);
         }
     }
-    return response;
+    return response.json();
 }
 

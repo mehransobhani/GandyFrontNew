@@ -1,13 +1,18 @@
 import Input from "../Form/Input";
 import {useState } from "react";
 import ConfirmButton from "../Button/ConfirmButton";
-import CancelButton from "../Button/CancelButton";
-import {insertCover, getAttributeTypeByWords, getProductTypeByWords, getTagByWords} from "../../Api/Cover";
+import {
+    insertCover,
+    getAttributeTypeByWords,
+    getProductTypeByWords,
+    getTagByWords,
+    getAttributeOptionByAT
+} from "../../Api/Cover";
 import { toast } from "react-toastify";
-import { Select } from "../Form/Select";
 import Select2 from "../Form/Select2";
 import Uploader from "../Form/Uploader";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import Select2Tag from "../Form/Select2Tag";
 
 export function CoverInsertPanel({reload}) {
 
@@ -26,7 +31,8 @@ export function CoverInsertPanel({reload}) {
 
    async function submit() {
        try {
-        let response =await insertCover(position,col,image,url,amount,productType?.id,productTag?.id,attributeOption?.id);
+           let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption.id);
+         let response =await insertCover(position,col,image,url,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -134,7 +140,7 @@ export function CoverInsertPanel({reload}) {
                                     تگ
                                 </label>
                                 <div className="mt-2">
-                                    <Select2 value={productTag?.name} change={changeTagSearchHandle}
+                                    <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
                                              options={productTagSearch} click={setProductTag}/>
 
 
@@ -153,7 +159,7 @@ export function CoverInsertPanel({reload}) {
 
                                 </div>
                             </div>
-                         
+
                         </div>
                     </div>
 
