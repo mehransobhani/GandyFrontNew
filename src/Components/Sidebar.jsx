@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {
+    ArrowLeftEndOnRectangleIcon,
     Bars3Icon,
     Cog6ToothIcon,
     CogIcon,
@@ -237,10 +238,11 @@ export default function Sidebar() {
                 </div>
 
                 <div className="flex items-center px-4">
-                    <button className="text-gray-500 focus:outline-none focus:text-gray-700" onClick={() => {
+                    <button className="text-gray-500 focus:outline-none focus:text-gray-700 flex" onClick={() => {
                         signOut();
                     }} aria-label={"button"}>
-                        خروج از حساب کاربری
+                        <ArrowLeftEndOnRectangleIcon className="h-5 w-5 text-gray-500 focus:text-gray-700" />
+                        خروج
 
                     </button>
                 </div>
