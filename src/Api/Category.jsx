@@ -25,20 +25,37 @@ export async function getCategory(page) {
     return response.json();
 }
 export async function insertCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption) {
-    console.log("IMAGE ID ",image)
-    let body = JSON.stringify(
-        {
-            name:name,
-            isMain:isMain,
-            imgName:image.name,
-            url:url,
-            isActive:isActive,
-            amount:amount,
-            productType:{id:productType},
-            productTag:{id:productTag},
-            attributeOption:{id:attributeOption}
-        }
-    );
+    let body ;
+    if(attributeOption) {
+        body = JSON.stringify(
+            {
+                name: name,
+                isMain: isMain,
+                imgName: image.name,
+                url: url,
+                isActive: isActive,
+                amount: amount,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: {id: attributeOption}
+            }
+        );
+    }
+    else{
+        body = JSON.stringify(
+            {
+                name: name,
+                isMain: isMain,
+                imgName: image.name,
+                url: url,
+                isActive: isActive,
+                amount: amount,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: null
+            }
+        );
+    }
     const formdata = new FormData();
     formdata.append("file", image);
     formdata.append("model", body);
@@ -65,21 +82,39 @@ export async function insertCategory(name,isMain,image,url,isActive,amount,produ
     return response;
 }
 export async function editCategory(name,isMain,image,url,isActive,amount,productType,productTag,attributeOption,id) {
-    let body = JSON.stringify(
-        {
-            id:id,
-            name:name,
-            isMain:isMain,
-            imgName:image.name,
-            url:url,
-            isActive:isActive,
-            amount:amount,
-            productType:{id:productType},
-            productTag:{id:productTag},
-            attributeOption:{id:attributeOption}
-
-        }
-    );
+    let body ;
+    if(attributeOption) {
+        body = JSON.stringify(
+            {
+                id: id,
+                name: name,
+                isMain: isMain,
+                imgName: image.name,
+                url: url,
+                isActive: isActive,
+                amount: amount,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: {id: attributeOption}
+            }
+        );
+    }
+    else{
+        body = JSON.stringify(
+            {
+                id: id,
+                name: name,
+                isMain: isMain,
+                imgName: image.name,
+                url: url,
+                isActive: isActive,
+                amount: amount,
+                productType: {id: productType},
+                productTag: {id: productTag},
+                attributeOption: null
+            }
+        );
+    }
     const formdata = new FormData();
     formdata.append("file", image);
     formdata.append("model", body);

@@ -77,6 +77,7 @@ export async function editSlider(image,url,productType,productTag,attributeOptio
     if(attributeOption)
         body=JSON.stringify(
             {
+                id:id,
                 image:image.name,
                 url:url,
                 productType:{id:productType},
@@ -87,6 +88,7 @@ export async function editSlider(image,url,productType,productTag,attributeOptio
     else
         body=JSON.stringify(
             {
+                id:id,
                 image:image.name,
                 url:url,
                 productType:{id:productType},
