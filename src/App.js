@@ -42,11 +42,11 @@ function App() {
                         <Route path="/address" element={<Address/>}/> {/** OK */}
                         <Route path="/brand" element={<Brand/>}/> {/** OK */}
                         <Route path="/user" element={<User/>}/>{/** OK */}
-                        <Route path="/discount" element={<Discount/>}/>{/** OK */}
+                        <Route path="/Product/discount" element={<Discount/>}/>{/** OK */}
                         <Route path="/category" element={<Category/>}/>{/** OK */}
                         <Route path="/sub-category" element={<SubCategory/>}/>{/** OK */}
                         <Route path="/tag" element={<Tag/>}/>  {/** OK */}
-                        <Route path="/product-tag" element={<ProductTag/>}/>   {/** OK */}
+                        <Route path="/Product/product-tag" element={<ProductTag/>}/>   {/** OK */}
                         <Route path="/warranty" element={<Warranty/>}/>{/** OK */}
                         <Route path="/webinfo" element={<WebInfos/>}/>{/** OK */}
                         <Route path="/mainware" element={<MainWare/>}/>{/** OK */}
