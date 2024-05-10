@@ -139,5 +139,5 @@ export async function getDiscountByWords(name) {
             getDiscountByWords(name);
         }
     }
-    return response;
+    return response.json();
 }

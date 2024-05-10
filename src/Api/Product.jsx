@@ -57,7 +57,7 @@ export async function searchProduct(name) {
     }
     return response.json();
 }
-export async function insertProduct(name,  description,  amazingOffer,  productType, brand) {
+export async function insertProduct(name,  description,  amazingOffer,  productType, brand,intro) {
     const response = await fetch(BaseUrl + "product/add",
         {
             method: 'POST',
@@ -72,7 +72,8 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
                     },
                     brand:{
                         id:brand.id
-                    }
+                    },
+                    intro:intro
                 }
             ),
             credentials: 'include',
@@ -94,7 +95,7 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
         }
     }
     return response;
-}export async function editProduct(name,  description,  amazingOffer,  productType, brand ,id) {
+}export async function editProduct(name,  description,  amazingOffer,  productType, brand ,intro,id) {
     const response = await fetch(BaseUrl + "product/add",
         {
             method: 'POST',
@@ -110,6 +111,7 @@ export async function insertProduct(name,  description,  amazingOffer,  productT
                     brand:{
                         id:brand.id
                     }
+                    ,intro:intro
                 }
             ),
             credentials: 'include',

@@ -10,6 +10,7 @@ export const ProductTablePanel = ({ editMode, editItem, reload, data }) => {
                     { title: "شناسه" },
                     { title: "نام محصول" },
                     { title: "توضیحات" },
+                    { title: "معرفی" },
                     { title: " نوع کالا" },
                     { title: "برند" },
                     { title: "پیشنهاد ویژه" },

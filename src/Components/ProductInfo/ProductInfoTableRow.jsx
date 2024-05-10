@@ -40,7 +40,7 @@ export function ProductInfoTableRow({ editMode, editItem, reload, item }) {
                 <Td>{item.price}</Td>
                 <Td>{item.color}</Td>
                 <Td>{item.colorHex}</Td>
-                <Td>{item.discount}</Td>
+                <Td>{item.discount?.discount}</Td>
                 <Td>{item.product.name}</Td>
                 <Td>{item.productImage?.img}</Td>
                 <Td>{item.main ? "بله" : "خیر"}</Td>

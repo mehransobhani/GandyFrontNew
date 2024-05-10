@@ -40,6 +40,7 @@ export function ProductTableRow({ editMode, editItem, reload, item }) {
                 <Td>{item.id}</Td>
                 <Td>{item.name}</Td>
                 <Td>{item.description}</Td>
+                <Td>{item.intro}</Td>
                 <Td>{item.productType.name}</Td>
                 <Td>{item.brand.name}</Td>
                 <Td>{item.amazingOffer ? "بله" : "خیر"}</Td>

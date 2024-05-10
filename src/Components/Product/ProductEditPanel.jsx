@@ -14,6 +14,7 @@ export function ProductEditPanel({item , cancel ,reload}) {
     const [amazingOffer,setAmazingOffer]=useState(item.amazingOffer);
     const [productType,setProductType]=useState(item.productType);
     const [brand,setBrand]=useState(item.brand);
+    const [intro,setIntro]=useState(item.intro);
 
     const [productTypeSearch,setProductTypeSearch]=useState(undefined);
     const [brandSearch,setBrandSearch]=useState(undefined);
@@ -24,7 +25,9 @@ export function ProductEditPanel({item , cancel ,reload}) {
             description,
             amazingOffer?1:0,
             productType,
-            brand,id)
+            brand,
+            intro
+            ,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         }
@@ -81,6 +84,19 @@ export function ProductEditPanel({item , cancel ,reload}) {
                                         <Input placeHolder={"توضیحات"} type={"text"} change={(e) => {
                                             setDescription(e.target.value)
                                         }} value={description}/>
+
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="last-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        معرفی
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"معرفی"} type={"text"} change={(e) => {
+                                            setIntro(e.target.value)
+                                        }} value={intro}/>
 
                                     </div>
                                 </div>

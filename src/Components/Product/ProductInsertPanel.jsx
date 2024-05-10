@@ -12,6 +12,7 @@ export function ProductInsertPanel({ reload }) {
     const [amazingOffer, setAmazingOffer] = useState("");
     const [productType, setProductType] = useState("");
     const [brand, setBrand] = useState("");
+    const [intro, setIntro] = useState("");
 
     const [productTypeSearch, setProductTypeSearch] = useState(undefined);
     const [brandSearch, setBrandSearch] = useState(undefined);
@@ -22,7 +23,7 @@ export function ProductInsertPanel({ reload }) {
             description,
             amazingOffer?1:0,
             productType,
-            brand)
+            brand,intro)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         }
@@ -83,6 +84,18 @@ export function ProductInsertPanel({ reload }) {
 
                                 </div>
                             </div>
+                            <div className="sm:col-span-3">
+                                    <label htmlFor="last-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        معرفی
+                                    </label>
+                                    <div className="mt-2">
+                                        <Input placeHolder={"معرفی"} type={"text"} change={(e) => {
+                                            setIntro(e.target.value)
+                                        }} value={intro}/>
+
+                                    </div>
+                                </div>
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                     className="block text-sm font-medium leading-6 text-gray-900">

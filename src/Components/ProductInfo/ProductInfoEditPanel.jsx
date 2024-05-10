@@ -7,6 +7,8 @@ import {editProductInfo, getProductImageByWords} from "../../Api/ProductInfo";
 import { searchProduct } from "../../Api/Product";
 import Select2ProductImage from "../Form/Select2ProductImage";
 import Select2 from "../Form/Select2";
+import Select2Discount from "../Form/Select2Discount";
+import { getDiscountByWords } from "../../Api/Discount";
 
 export function ProductInfoEditPanel({item , cancel ,reload}) {
 
@@ -22,10 +24,11 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
 
     const [productSearch,setProductSearch]=useState("");
     const [productImageSearch,setProductImageSearch]=useState("");
+    const [discountSearch,setDiscountSearch]=useState("");
 
     async function submit() {
         try {
-        let response =await editProductInfo(price,color,hexColor,count,discount,product.id,productImage.id,main?1:0,id)
+        let response =await editProductInfo(price,color,hexColor,count,discount?.id,product.id,productImage.id,main?1:0,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         }
@@ -41,6 +44,10 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
     async function changeProductImageSearchHandle(e) {
         let response = await getProductImageByWords(e.target.value);
         setProductImageSearch(response);
+    }
+    async function changeDiscountSearchHandle(e) {
+        let response = await getDiscountByWords(e.target.value);
+        setDiscountSearch(response);
     }
     return (
         <>
@@ -115,9 +122,8 @@ export function ProductInfoEditPanel({item , cancel ,reload}) {
                                         تخفیف محصول
                                     </label>
                                     <div className="mt-2">
-                                        <Input placeHolder={"تخفیف محصول"} type={"text"} change={(e) => {
-                                            setDiscount(e.target.value)
-                                        }} value={discount}/>
+                                    <Select2Discount value={discount?.discount} change={changeDiscountSearchHandle} options={discountSearch} click={setDiscount} />
+
                                     </div>
                                 </div>
 
