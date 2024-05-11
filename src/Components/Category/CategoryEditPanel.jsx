@@ -1,5 +1,5 @@
 import Input from "../Form/Input";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import Uploader from "../Form/Uploader";
@@ -10,6 +10,7 @@ import Select2 from "../Form/Select2";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 import Select2Tag from "../Form/Select2Tag";
 import {getAttributeOptionByAT} from "../../Api/Cover";
+import {Select} from "../Form/Select";
 
 export function CategoryEditPanel({item , cancel ,reload}) {
     const [id,setId]=useState(item.id);
@@ -21,10 +22,13 @@ export function CategoryEditPanel({item , cancel ,reload}) {
     const [image,setImage]=useState("");
     const [productType,setProductType]=useState(item.productType);
     const [productTag,setProductTag]=useState(item.productTag);
-    const [attributeOption,setAttributeOption]=useState(item.attributeOption);
+    const [attributeOption,setAttributeOption]=useState("");
+    const [attributeType,setAttributeType]=useState("");
 
     const [productTypeSearch,setProductTypeSearch]=useState("");
     const [productTagSearch,setProductTagSearch]=useState("");
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
+
     const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
 
     async  function submit() {
@@ -43,7 +47,7 @@ export function CategoryEditPanel({item , cancel ,reload}) {
 
     async function changeAttributeOptionSearchHandle(e) {
         let response = await getAttributeTypeByWords(e.target.value);
-        setAttributeOptionSearch(response);
+        setAttributeTypeSearch(response);
 
     }
     async function changeProductTypeSearchSearchHandle(e) {
@@ -56,6 +60,14 @@ export function CategoryEditPanel({item , cancel ,reload}) {
         setProductTagSearch(response);
 
     }
+    async function changeAttributeSearchHandle(id) {
+        let response = await getAttributeOptionByAT(id);
+        setProductTagSearch(response);
+
+    }
+    useEffect(() => {
+        changeAttributeSearchHandle(attributeType.id)
+    }, [attributeType]);
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -134,12 +146,33 @@ export function CategoryEditPanel({item , cancel ,reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
+                                   کلید ویژگی
+                                </label>
+                                <div className="mt-2">
+                                    <Select2AttributeSelect value={attributeType?.name}
+                                                            change={changeAttributeOptionSearchHandle}
+                                                            options={attributeTypeSearch} click={setAttributeType}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
                                     ویژگی کالا
                                 </label>
                                 <div className="mt-2">
-                                    <Select2AttributeSelect value={attributeOption?.name}
-                                                            change={changeAttributeOptionSearchHandle}
-                                                            options={attributeOptionSearch} click={setAttributeOption}/>
+                                   <Select change={setAttributeOption}>
+                                       {
+                                           attributeOptionSearch &&  attributeOptionSearch.map((item)=>(<>
+                                               <option value={attributeOption.id}>
+                                                   {
+                                                       attributeOption?.attributeOption
+                                                   }
+                                               </option>
+                                           </>))
+                                       }
+                                   </Select>
 
 
                                 </div>

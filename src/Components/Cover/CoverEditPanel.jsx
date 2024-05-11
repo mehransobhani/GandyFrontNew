@@ -1,5 +1,5 @@
 import Input from "../Form/Input";
-import {useState } from "react";
+import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {
@@ -14,6 +14,7 @@ import Select2 from "../Form/Select2";
 import Uploader from "../Form/Uploader";
 import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 import Select2Tag from "../Form/Select2Tag";
+import {Select} from "../Form/Select";
 
 export function CoverEditPanel({ item, cancel, reload }) {
     const [position,setPosition]=useState(item.position);
@@ -25,6 +26,9 @@ export function CoverEditPanel({ item, cancel, reload }) {
     const [productTag,setProductTag]=useState(item.productTag);
     const [attributeOption,setAttributeOption]=useState(item.attributeOption);
     const [id,setId]=useState("");
+    const [attributeType,setAttributeType]=useState("");
+
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
 
     const [productTypeSearch,setProductTypeSearch]=useState("");
     const [productTagSearch,setProductTagSearch]=useState("");
@@ -45,7 +49,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
     }
     async function changeAttributeOptionSearchHandle(e) {
         let response = await getAttributeTypeByWords(e.target.value);
-        setAttributeOptionSearch(response);
+        setAttributeTypeSearch(response);
 
     }
     async function changeProductTypeSearchSearchHandle(e) {
@@ -58,6 +62,14 @@ export function CoverEditPanel({ item, cancel, reload }) {
         setProductTagSearch(response);
 
     }
+    async function changeAttributeSearchHandle(id) {
+        let response = await getAttributeOptionByAT(id);
+        setProductTagSearch(response);
+
+    }
+    useEffect(() => {
+        changeAttributeSearchHandle(attributeType.id)
+    }, [attributeType]);
 
     return (
         <>
@@ -141,7 +153,20 @@ export function CoverEditPanel({ item, cancel, reload }) {
                                 </label>
                                 <div className="mt-2">
                                     <Select2Tag value={productTag?.tag} change={changeTagSearchHandle}
-                                             options={productTagSearch} click={setProductTag}/>
+                                                options={productTagSearch} click={setProductTag}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    کلید ویژگی
+                                </label>
+                                <div className="mt-2">
+                                    <Select2AttributeSelect value={attributeType?.name}
+                                                            change={changeAttributeOptionSearchHandle}
+                                                            options={attributeTypeSearch} click={setAttributeType}/>
 
 
                                 </div>
@@ -152,9 +177,17 @@ export function CoverEditPanel({ item, cancel, reload }) {
                                     ویژگی کالا
                                 </label>
                                 <div className="mt-2">
-                                    <Select2AttributeSelect value={attributeOption?.name}
-                                                            change={changeAttributeOptionSearchHandle}
-                                                            options={attributeOptionSearch} click={setAttributeOption}/>
+                                    <Select change={setAttributeOption}>
+                                        {
+                                            attributeOptionSearch && attributeOptionSearch.map((item) => (<>
+                                                <option value={attributeOption.id}>
+                                                    {
+                                                        attributeOption?.attributeOption
+                                                    }
+                                                </option>
+                                            </>))
+                                        }
+                                    </Select>
 
 
                                 </div>

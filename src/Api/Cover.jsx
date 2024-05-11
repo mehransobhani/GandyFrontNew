@@ -264,6 +264,6 @@ export async function getAttributeOptionByAT(id) {
             getAttributeOptionByAT(id);
         }
     }
-    return response;
+    return response.json();
 }
 
