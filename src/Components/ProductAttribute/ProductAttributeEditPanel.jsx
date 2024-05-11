@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import CancelButton from "../Button/CancelButton";
 import {Select} from "../Form/Select";
@@ -7,12 +7,23 @@ import {editProductAttribute, searchAttributeOption} from "../../Api/ProductAttr
 import {searchProduct} from "../../Api/Product";
 import Select2 from "../Form/Select2";
 import Select2AttributeOption from "../Form/Select2AttributeOption";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
+import {getAttributeOptionByAT, getAttributeTypeByWords} from "../../Api/Cover";
 
 export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
     const [id,setId]=useState(item.id);
     const [product,setProduct]=useState(item.product);
     const [productSearch,setProductSearch]=useState("");
+
+    const [attributeOption,setAttributeOption]=useState(item.attributeOption);
+
+    const [attributeType,setAttributeType]=useState("");
+
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
+
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
+
 
     const [option,setOption]=useState(item.attributeOption);
     const [optionSearch,setOptionSearch]=useState("");
@@ -27,7 +38,7 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
     async function submit() {
         try {
-        let response =await editProductAttribute(option.id,product.id,id)
+        let response =await editProductAttribute(attributeOption?.id,product.id,id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         }
@@ -36,6 +47,19 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
     }
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeTypeSearch(response);
+
+    }
+    async function changeAttributeSearchHandle(id) {
+        let response = await getAttributeOptionByAT(id);
+        setAttributeOptionSearch(response);
+
+    }
+    useEffect(() => {
+        changeAttributeSearchHandle(attributeType.id)
+    }, [attributeType]);
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -54,15 +78,46 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
                                            className="block text-sm font-medium leading-6 text-gray-900">
                                         محصول
                                     </label>
-                                    <Select2 value={product?.name} change={changeProductSearchHandle} options={productSearch} click={setProduct} />
+                                    <Select2 value={product?.name} change={changeProductSearchHandle}
+                                             options={productSearch} click={setProduct}/>
+                                </div>
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="last-name"
+                                           className="block text-sm font-medium leading-6 text-gray-900">
+                                        کلید ویژگی
+                                    </label>
+                                    <div className="mt-2">
+                                        <Select2AttributeSelect value={attributeType?.name}
+                                                                change={changeAttributeOptionSearchHandle}
+                                                                options={attributeTypeSearch} click={setAttributeType}/>
+
+
+                                    </div>
                                 </div>
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="first-name"
+                                    <label htmlFor="last-name"
                                            className="block text-sm font-medium leading-6 text-gray-900">
-                                        ویژگی
+                                        ویژگی کالا
                                     </label>
-                                    <Select2AttributeOption value={option?.attributeOption} change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
+                                    <div className="mt-2">
+                                        <Select change={setAttributeOption}>
+                                            {
+                                                attributeOptionSearch && attributeOptionSearch.map((item) => (<>
+                                                    <option value={attributeOption.id}>
+                                                        {
+                                                            attributeOption?.attributeOption
+                                                        }
+                                                    </option>
+                                                </>))
+                                            }
+                                        </Select>
+
+
+                                    </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

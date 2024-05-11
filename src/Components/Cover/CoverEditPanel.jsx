@@ -64,7 +64,7 @@ export function CoverEditPanel({ item, cancel, reload }) {
     }
     async function changeAttributeSearchHandle(id) {
         let response = await getAttributeOptionByAT(id);
-        setProductTagSearch(response);
+        setAttributeOptionSearch(response);
 
     }
     useEffect(() => {

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ConfirmButton from "../Button/ConfirmButton";
 import {Select} from "../Form/Select";
 import {toast} from "react-toastify";
@@ -6,6 +6,8 @@ import {insertProductAttribute, searchAttributeOption, searchPConfigByPName} fro
 import {searchProduct} from "../../Api/Product";
 import Select2 from "../Form/Select2";
 import Select2AttributeOption from "../Form/Select2AttributeOption";
+import {getAttributeOptionByAT, getAttributeTypeByWords} from "../../Api/Cover";
+import Select2AttributeSelect from "../Form/Select2AttributeSelect";
 
 export function ProductAttributeInsertPanel({reload}) {
 
@@ -14,6 +16,14 @@ export function ProductAttributeInsertPanel({reload}) {
 
     const [option,setOption]=useState("");
     const [optionSearch,setOptionSearch]=useState("");
+    const [attributeOption,setAttributeOption]=useState("");
+
+    const [attributeType,setAttributeType]=useState("");
+
+    const [attributeTypeSearch,setAttributeTypeSearch]=useState("");
+
+    const [attributeOptionSearch,setAttributeOptionSearch]=useState("");
+
     async function changeProductSearchHandle(e) {
         let response = await searchProduct(e.target.value);
         setProductSearch(response);
@@ -25,7 +35,7 @@ export function ProductAttributeInsertPanel({reload}) {
 
     async function submit() {
         try {
-        let response =await insertProductAttribute(option.id,product.id)
+        let response =await insertProductAttribute(attributeOption?.id,product.id)
         reload();
         toast.success("عملیات با موفقیت انجام شد")
         }
@@ -34,6 +44,19 @@ export function ProductAttributeInsertPanel({reload}) {
             toast.error("متاسفانه عملیات با شکست روبرو شد")
         }
     }
+    async function changeAttributeOptionSearchHandle(e) {
+        let response = await getAttributeTypeByWords(e.target.value);
+        setAttributeTypeSearch(response);
+
+    }
+    async function changeAttributeSearchHandle(id) {
+        let response = await getAttributeOptionByAT(id);
+        setAttributeOptionSearch(response);
+
+    }
+    useEffect(() => {
+        changeAttributeSearchHandle(attributeType.id)
+    }, [attributeType]);
     return (
         <>
             <div className={"bg-white md:mx-20 mx-5"}>
@@ -49,16 +72,43 @@ export function ProductAttributeInsertPanel({reload}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="first-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                   محصول
+                                    محصول
                                 </label>
-                                <Select2 change={changeProductSearchHandle} options={productSearch} click={setProduct} />
+                                <Select2 change={changeProductSearchHandle} options={productSearch} click={setProduct}/>
                             </div>
                             <div className="sm:col-span-3">
-                                <label htmlFor="first-name"
+                                <label htmlFor="last-name"
                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                      ویژگی
+                                    کلید ویژگی
                                 </label>
-                                <Select2AttributeOption change={changeOptionSearchHandle} options={optionSearch} click={setOption} />
+                                <div className="mt-2">
+                                    <Select2AttributeSelect value={attributeType?.name}
+                                                            change={changeAttributeOptionSearchHandle}
+                                                            options={attributeTypeSearch} click={setAttributeType}/>
+
+
+                                </div>
+                            </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="last-name"
+                                       className="block text-sm font-medium leading-6 text-gray-900">
+                                    ویژگی کالا
+                                </label>
+                                <div className="mt-2">
+                                    <Select change={setAttributeOption}>
+                                        {
+                                            attributeOptionSearch && attributeOptionSearch.map((item) => (<>
+                                                <option value={attributeOption.id}>
+                                                    {
+                                                        attributeOption?.attributeOption
+                                                    }
+                                                </option>
+                                            </>))
+                                        }
+                                    </Select>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>

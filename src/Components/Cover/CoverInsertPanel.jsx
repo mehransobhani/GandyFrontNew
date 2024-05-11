@@ -63,7 +63,7 @@ export function CoverInsertPanel({reload}) {
     }
     async function changeAttributeSearchHandle(id) {
         let response = await getAttributeOptionByAT(id);
-        setProductTagSearch(response);
+        setAttributeOptionSearch(response);
 
     }
     useEffect(() => {
