@@ -1,15 +1,24 @@
 import {useState} from "react";
 import {
     ArrowLeftEndOnRectangleIcon,
+    BanknotesIcon,
     Bars3Icon,
+    BookmarkIcon,
     Cog6ToothIcon,
+    Cog8ToothIcon,
     CogIcon,
     CubeIcon,
+    CubeTransparentIcon,
     DevicePhoneMobileIcon,
-    InformationCircleIcon, PencilIcon,
+    DocumentChartBarIcon,
+    GiftIcon,
+    InformationCircleIcon, MapPinIcon, PencilIcon,
     PencilSquareIcon,
     PhotoIcon,
     QueueListIcon,
+    SparklesIcon,
+    TagIcon,
+    UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import {Squares2X2Icon} from "@heroicons/react/20/solid";
 import {Link, useLocation} from 'react-router-dom';
@@ -42,73 +51,73 @@ export default function Sidebar() {
           {
             title: "آدرس ها",
             href: "/address",
-            icon: <Squares2X2Icon
+            icon: <MapPinIcon
                 className={["h-6 w-6 ", pathName == "/address" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/address"
         },   {
             title: "برند ها",
             href: "/brand",
-            icon: <Squares2X2Icon
+            icon: <BookmarkIcon
                 className={["h-6 w-6 ", pathName == "/brand" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/brand"
         }, {
             title: "کاربران",
             href: "/user",
-            icon: <Squares2X2Icon
+            icon: <UserCircleIcon
                 className={["h-6 w-6 ", pathName == "/user" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/user"
         }, {
             title: "دسته بندی ها",
             href: "/category",
-            icon: <Squares2X2Icon
+            icon: <CubeIcon
                 className={["h-6 w-6 ", pathName == "/category" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/category"
         },{
             title: "زیر دسته ها",
             href: "/sub-category",
-            icon: <Squares2X2Icon
+            icon: <CubeTransparentIcon
                 className={["h-6 w-6 ", pathName == "/sub-category" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/sub-category"
         }, {
             title: "تگ ها",
             href: "/tag",
-            icon: <Squares2X2Icon
+            icon: <TagIcon
                 className={["h-6 w-6 ", pathName == "/tag" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/tag"
         },{
             title: "گارانتی ها",
             href: "/warranty",
-            icon: <Squares2X2Icon
+            icon: <Cog8ToothIcon
                 className={["h-6 w-6 ", pathName == "/warranty" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/warranty"
         }, {
             title: "اطلاعات سایت",
             href: "/webinfo",
-            icon: <Squares2X2Icon
+            icon: <DocumentChartBarIcon
                 className={["h-6 w-6 ", pathName == "/webinfo" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/webinfo"
         }, {
             title: "محصولات اصلی",
             href: "/mainware",
-            icon: <Squares2X2Icon
+            icon: <SparklesIcon
                 className={["h-6 w-6 ", pathName == "/mainware" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/mainware"
         },  {
             title: "باکس کالا",
             href: "/product-box",
-            icon: <Squares2X2Icon
+            icon: <GiftIcon
                 className={["h-6 w-6 ", pathName == "/product-box" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/product-box"
         },{
             title: "کاور ",
             href: "/cover",
-            icon: <Squares2X2Icon
+            icon: <PhotoIcon
                 className={["h-6 w-6 ", pathName == "/cover" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/cover"
         },{
             title: "اسلایدر ",
             href: "/slider",
-            icon: <Squares2X2Icon
+            icon: <PhotoIcon
                 className={["h-6 w-6 ", pathName == "/slider" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
             current: pathName == "/slider"
         }, {
@@ -151,6 +160,21 @@ export default function Sidebar() {
                     icon: <QueueListIcon
                         className={["h-6 w-6 ", pathName == "/product/type" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
 
+                }
+                , {
+                    title: "تخفیف",
+                    href: "/Product/discount/",
+                    current: pathName == "/product/discount/",
+                    icon: <BanknotesIcon
+                        className={["h-6 w-6 ", pathName == "/Product/discount/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
+
+                }, {
+                    title: "تگ محصول",
+                    href: "/Product/product-tag/",
+                    current: pathName == "/Product/product-tag/",
+                    icon: <TagIcon
+                        className={["h-6 w-6 ", pathName == "/Product/product-tag/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
+
                 },
                 {
                     title: "ثبت ویژگی",
@@ -179,21 +203,7 @@ export default function Sidebar() {
                             icon: <CogIcon
                                 className={["h-6 w-6 ", pathName == "/product/attribute/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
 
-                        }, {
-                            title: "تخفیف",
-                            href: "/Product/discount/",
-                            current: pathName == "/product/discount/",
-                            icon: <CogIcon
-                                className={["h-6 w-6 ", pathName == "/Product/discount/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
-
-                        }, {
-                            title: "تگ محصول",
-                            href: "/Product/product-tag/",
-                            current: pathName == "/Product/product-tag/",
-                            icon: <CogIcon
-                                className={["h-6 w-6 ", pathName == "/Product/product-tag/" ? "text-indigo-500" : "text-gray-500"].join(" ")}/>,
-
-                        },
+                        }
                     ]
                 },
             ]
