@@ -53,6 +53,8 @@ export function ProductAttributeEditPanel({item , cancel ,reload}) {
 
     }
     async function changeAttributeSearchHandle(id) {
+        if(!id)
+        return;
         let response = await getAttributeOptionByAT(id);
         setAttributeOptionSearch(response);
 

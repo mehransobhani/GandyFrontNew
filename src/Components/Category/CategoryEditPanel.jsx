@@ -33,9 +33,8 @@ export function CategoryEditPanel({item , cancel ,reload}) {
 
     async  function submit() {
         try {
-            let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
-
-            let response = await editCategory(name,isMain,image,url,isActive,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id,id )
+ 
+            let response = await editCategory(name,isMain,image,url,isActive,amount,productType?.id,productTag?.id,attributeType?.id,id )
             reload();
             toast.success("عملیات با موفقیت انجام شد")
         }
@@ -61,6 +60,8 @@ export function CategoryEditPanel({item , cancel ,reload}) {
 
     }
     async function changeAttributeSearchHandle(id) {
+        if(!id)
+        return;
         let response = await getAttributeOptionByAT(id);
         setAttributeOptionSearch(response);
 

@@ -35,8 +35,7 @@ export function CoverInsertPanel({reload}) {
 
    async function submit() {
        try {
-           let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption.id);
-         let response =await insertCover(position,col,image,url,amount,productType?.id,productTag?.id,getAttributeOptionBy?.id);
+          let response =await insertCover(position,col,image,url,amount,productType?.id,productTag?.id,attributeType?.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -62,6 +61,8 @@ export function CoverInsertPanel({reload}) {
 
     }
     async function changeAttributeSearchHandle(id) {
+        if(!id)
+        return;
         let response = await getAttributeOptionByAT(id);
         setAttributeOptionSearch(response);
 

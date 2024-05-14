@@ -28,8 +28,7 @@ export function SliderInsertPanel({reload}) {
 
    async function submit() {
        try {
-           let getAttributeOptionBy = await getAttributeOptionByAT(attributeOption?.id);
-         let response =await insertSlider(image,url,productType.id,productTag.id,getAttributeOptionBy?.id);
+          let response =await insertSlider(image,url,productType.id,productTag.id,attributeType?.id);
         reload();
         toast.success("عملیات با موفقیت انجام شد")
        }
@@ -56,6 +55,8 @@ export function SliderInsertPanel({reload}) {
 
     }
     async function changeAttributeSearchHandle(id) {
+        if(!id)
+        return;
         let response = await getAttributeOptionByAT(id);
         setAttributeOptionSearch(response);
 
